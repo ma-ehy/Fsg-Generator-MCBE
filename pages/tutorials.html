@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tutorials - MCBE</title>
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+  <style>
+    .help-content {
+      max-width: 800px;
+      width: 90vw;
+      background: #2C2C2C;
+      border: 8px solid var(--minecraft-dark-gray);
+      padding: 40px;
+      text-align: left;
+      position: relative;
+      box-shadow: 
+        inset 4px 4px 8px rgba(0,0,0,0.5),
+        inset -4px -4px 8px rgba(255,255,255,0.1),
+        0 12px 24px rgba(0,0,0,0.6);
+      image-rendering: pixelated;
+      margin: 0 auto;
+    }
+
+    .help-content::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--minecraft-dark-gray) 0px,
+        var(--minecraft-dark-gray) 4px,
+        var(--minecraft-black) 4px,
+        var(--minecraft-black) 8px
+      );
+      z-index: -1;
+    }
+
+    .help-content p {
+      font-family: 'VT323', monospace;
+      font-size: 1.6rem;
+      color: #E0E0E0;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      letter-spacing: 1px;
+    }
+
+    .help-content a {
+      color: #4CAF50;
+      font-weight: bold;
+      text-decoration: underline;
+      transition: color 0.2s;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+
+    .help-content a:hover {
+      color: #81C784;
+    }
+
+    .help-content ul {
+      list-style: none;
+      padding-left: 20px;
+      margin: 20px 0;
+    }
+
+    .help-content li {
+      font-family: 'VT323', monospace;
+      font-size: 1.6rem;
+      color: #E0E0E0;
+      margin-bottom: 15px;
+      line-height: 1.4;
+      padding-left: 30px;
+      position: relative;
+    }
+
+    .help-content li:before {
+      content: '-';
+      position: absolute;
+      left: 0;
+      color: #4CAF50;
+      font-weight: bold;
+    }
+
+    .help-content h2 {
+      font-family: 'VT323', monospace;
+      font-size: 2rem;
+      color: #4CAF50;
+      margin: 0;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .tutorial-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 15px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      background: transparent;
+      border: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    .tutorial-toggle:hover h2 {
+      color: #81C784;
+    }
+
+    .tutorial-arrow {
+      transition: transform 0.3s ease;
+      font-size: 2rem;
+      color: #4CAF50;
+      font-family: 'VT323', monospace;
+      font-weight: bold;
+    }
+
+    .tutorial-toggle.active .tutorial-arrow {
+      transform: rotate(90deg);
+    }
+
+    .tutorial-content {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.4s ease, opacity 0.3s ease, margin-bottom 0.4s ease;
+      padding-left: 35px;
+    }
+
+    .tutorial-content.show {
+      max-height: 5000px;
+      opacity: 1;
+      margin-bottom: 30px;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin-bottom: 20px;
+      margin-top: 10px;
+      border: 4px solid var(--minecraft-dark-gray);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .tutorial-section {
+      margin-bottom: 25px;
+    }
+
+    .video-caption {
+      font-size: 1.8rem;
+      color: #B0B0B0;
+      font-style: italic;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    .nested-toggle {
+      font-size: 1.5rem;
+      color: #4CAF50;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: none;
+      padding: 0;
+      font-family: 'VT323', monospace;
+      letter-spacing: 1px;
+    }
+
+    .nested-toggle:hover {
+      color: #81C784;
+    }
+    
+    .nested-toggle-text {
+      text-decoration: underline;
+    }
+
+    .nested-arrow {
+      transition: transform 0.3s ease;
+      font-size: 1.6rem;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .nested-toggle.active .nested-arrow {
+      transform: rotate(90deg);
+    }
+
+    .nested-content {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.5s ease, opacity 0.3s ease;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      padding-left: 20px;
+    }
+
+    .nested-content.show {
+      max-height: 3000px;
+      opacity: 1;
+    }
+
+    .section-title {
+      font-weight: bold;
+      color: #81C784;
+      margin-top: 15px;
+      margin-bottom: 8px;
+      font-size: 1.8rem;
+    }
+
+    .nested-content ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 10px 0;
+    }
+
+    .nested-content li {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .nested-content li:before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #4CAF50;
+    }
+
+    .navigation-buttons {
+      display: flex;
+      gap: 20px;
+      margin-top: 50px;
+      justify-content: center;
+      width: 100%;
+      padding-top: 30px;
+      border-top: 4px solid var(--minecraft-dark-gray);
+    }
+
+    .back-btn {
+      font-size: 2rem;
+      padding: 15px 30px;
+      background: linear-gradient(45deg, 
+        var(--minecraft-brown), 
+        var(--minecraft-dark-brown));
+      border-color: var(--minecraft-dark-brown);
+      margin: 0;
+    }
+
+    .back-btn:hover:not([disabled]) {
+      background: linear-gradient(45deg, 
+        var(--minecraft-dark-brown), 
+        var(--minecraft-brown));
+    }
+
+    @media (max-width: 768px) {
+      .help-content {
+        padding: 20px 15px;
+      }
+
+      .help-content p, .help-content li {
+        font-size: 1.8rem;
+      }
+
+      .help-content h2 {
+        font-size: 2.2rem;
+      }
+
+      .back-btn {
+        font-size: 1.2rem;
+        padding: 8px 15px;
+      }
+
+      .tutorial-content {
+        padding-left: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .help-content p, .help-content li {
+        font-size: 1.6rem;
+      }
+
+      .help-content h2 {
+        font-size: 2rem;
+      }
+
+      .back-btn {
+        font-size: 1rem;
+        padding: 6px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <img src="tut.png" alt="Bedrock 1.16 FSG Generator" class="title-image">
+    
+    <div class="help-content">
+      <p>Welcome to Minecraft Bedrock Edition speedrunning! Here are comprehensive guides to help you get started and improve your runs.</p>
+      
+      <!-- Getting Started Section -->
+      <div class="tutorial-section">
+        <button class="tutorial-toggle" onclick="toggleSection('gettingStarted', this)">
+          <span class="tutorial-arrow">▶</span>
+          <h2>Getting Started</h2>
+        </button>
+        
+        <div id="gettingStarted" class="tutorial-content">
+          <ul>
+            <li>
+              <button class="nested-toggle" onclick="toggleNested('introText', event)">
+                <span class="nested-arrow">▶</span>
+                <span class="nested-toggle-text">Introduction to speedrunning</span>
+              </button>
+              <div id="introText" class="nested-content">
+                <p>Speedrunning means completing a game as fast as possible. In Minecraft: Bedrock Edition, you beat the game by killing the Ender Dragon. You can do it on a random seed (RSG), a set seed (SSG) or a filtered seed (FSG). You can play on multiple versions, the best for RSG and FSG being 1.16.1.</p>
+              </div>
+            </li>
+            <li>
+              Setup video
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/ZmYLPMXG78E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p class="video-caption">Watch this video to learn the complete setup for speedrunning Minecraft Bedrock Edition for PC and mobile.</p>
+            </li>
+            <li><a href="https://bedrocklauncher.github.io/" target="_blank">How to Downgrade and manage versions</a></li>
+            <li><a href="https://github.com/l0l869/Multi-Resets" target="_blank">Multi Instance</a></li>
+            <li><a href="https://share.google/UMaWaBII1OYU0G03O" target="_blank">Aurora Store</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Overworld Section -->
+      <div class="tutorial-section">
+        <button class="tutorial-toggle" onclick="toggleSection('overworld', this)">
+          <span class="tutorial-arrow">▶</span>
+          <h2>Overworld</h2>
+        </button>
+        
+        <div id="overworld" class="tutorial-content">
+          <ul>
+            <li><a href="https://www.youtube.com/watch?v=82Edi8ISiGI&list=PLUsJ33X2NbX07_6J7X8ZBflh5O_AZYrlC&index=2" target="_blank">How to loot villages</a></li>
+            <li><a href="https://www.youtube.com/playlist?list=PLyDxVGuWeXOXJEAIy-ZP4xk6iY44LIG8X" target="_blank">Sprinkz Strat</a> (always dig into a stronghold)</li>
+            <li>
+              <button class="nested-toggle" onclick="toggleNested('strongholdNav', event)">
+                <span class="nested-arrow">▶</span>
+                <span class="nested-toggle-text">Stronghold navigation tips</span>
+              </button>
+              <div id="strongholdNav" class="nested-content">
+                <p class="section-title">Good rooms</p>
+                <ul>
+                  <li>stairs are good, go down when you can, just not too far down</li>
+                  <li>4 ways are good</li>
+                  <li>5/6 ways are good</li>
+                  <li>long hallways (such as the jail rooms) are good</li>
+                </ul>
+                
+                <p class="section-title">Bad rooms</p>
+                <ul>
+                  <li>small rooms like corners are bad</li>
+                </ul>
+                
+                <p class="section-title">Tips</p>
+                <ul>
+                  <li>go about 8-10 rooms deep in each direction</li>
+                  <li>if starter has multiple directions, try to go the most isolated way</li>
+                  <li>if all ways seem equally isolated and there are no stairs, go down mid bc it lowers at least a couple blocks</li>
+                  <li>2 directions off the same wall in starter are almost always bad, and often instant dead ends</li>
+                  <li>if there are 4 directions off starter, the one isolated on it's own wall is best</li>
+                </ul>
+              </div>
+            </li>
+            
+            <li>
+              How to build nether portal
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/8kxGrxXm-TI" title="Nether Portal Tutorial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Nether Section -->
+      <div class="tutorial-section">
+        <button class="tutorial-toggle" onclick="toggleSection('nether', this)">
+          <span class="tutorial-arrow">▶</span>
+          <h2>Nether</h2>
+        </button>
+        
+        <div id="nether" class="tutorial-content">
+          <ul>
+            <li>
+              Nether navigation
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/BctoHt7iT3w" title="Nether Terrain" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </li>
+            <li>
+              Bastion routes (1.16)
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/fVKeNVLXvu8" title="1.16 Bastion Routes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </li>
+            <li><a href="https://youtube.com/playlist?list=PLGBrWpXuQPk8PqIKPAaMxN4ubnfCNFJKq&si=fBzCrqT2-M_aOS3t" target="_blank">Bastion Routes (1.18+)</a></li>
+            <li>
+              Fortress navigation
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/QDsZZbN2TlM" title="Fortress Tutorial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- End Section -->
+      <div class="tutorial-section">
+        <button class="tutorial-toggle" onclick="toggleSection('end', this)">
+          <span class="tutorial-arrow">▶</span>
+          <h2>End</h2>
+        </button>
+        
+        <div id="end" class="tutorial-content">
+          <ul>
+            <li>Dragon behavior: <a href="https://youtu.be/_658wh9_yE8?si=HRF-0K6XbtFfY6qt" target="_blank">1.18+</a> | <a href="https://youtu.be/ZB-woZUvmbQ?si=4sHiq5PZbvA1b4jF" target="_blank">1.16</a>
+            <li>
+              One cycle tutorial
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/tqHYjEGC29g" title="One Cycle Tutorial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- More Section -->
+      <div class="tutorial-section">
+        <button class="tutorial-toggle" onclick="toggleSection('more', this)">
+          <span class="tutorial-arrow">▶</span>
+          <h2>More</h2>
+        </button>
+        
+        <div id="more" class="tutorial-content">
+          <ul>
+            <li>
+              All achievements speedrun
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/1an3IF2L9X0" title="All Achievements" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </li>
+            <li><a href="https://docs.google.com/document/d/1cOCFuveIcJtDyydTCs33HRvk9e-ZlHgfrfTk8Ao82Ck/edit?usp=sharing" target="_blank">RSG Manifesto</a></li>
+            <li><a href="https://docs.google.com/spreadsheets/d/1fkdKPOZW-yeP1R0rSzqSvdzquAaNfiqdRlpCCIRHXOY/edit?usp=sharing" target="_blank">Village Grid 1.16</a></li>
+            <li><a href="https://youtube.com/playlist?list=PLGBrWpXuQPk9oNIyUGr72mToubz9arJ45&si=WmA9j0gJLg4zZJka" target="_blank">Other tutorials playlist</a></li>
+            <li><a href="https://mcbe.wtf" target="_blank">mcbe.wtf</a> - Comprehensive Bedrock speedrunning resource</li>
+          </ul>
+        </div>
+      </div>
+
+      <p style="margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--minecraft-dark-gray); font-style: italic; color: #888;">
+        Keep practicing and don't get discouraged! Every speedrunner started as a beginner.
+      </p>
+      
+      <div class="navigation-buttons">
+        <button class="blocky-btn back-btn" onclick="window.location.href='../index.html'">← Back to Home</button>
+      </div>
+    </div>
+  </div>
+<!-- Feedback Popup -->
+<div class="feedback-popup" id="feedbackPopup">
+  <div class="feedback-content">
+    <p>Have any feedback or stuff you'd like to be added? Join the discord or contact me at maehy56@gmail.com!</p>
+    <button class="feedback-close" onclick="closeFeedback()">✕</button>
+  </div>
+</div>
+  <script>
+let feedbackTimer;
+let timeOnPage = 0;
+let feedbackClosed = sessionStorage.getItem('feedbackClosed') === 'true';
+
+function showFeedbackPopup() {
+  if (!feedbackClosed) {
+    document.getElementById('feedbackPopup').classList.add('show');
+    setTimeout(() => {
+      if (document.getElementById('feedbackPopup').classList.contains('show')) {
+        closeFeedback();
+      }
+    }, 7000);
+  }
+}
+
+function closeFeedback() {
+  document.getElementById('feedbackPopup').classList.remove('show');
+  feedbackClosed = true;
+  sessionStorage.setItem('feedbackClosed', 'true');
+  clearInterval(feedbackTimer);
+}
+
+// Close on page click
+document.addEventListener('click', (e) => {
+  const popup = document.getElementById('feedbackPopup');
+  if (popup.classList.contains('show') && !e.target.closest('.feedback-content')) {
+    closeFeedback();
+  }
+});
+
+// Start timer
+if (!feedbackClosed) {
+  feedbackTimer = setInterval(() => {
+    timeOnPage++;
+    if (timeOnPage % 15 === 0) {
+      const chance = Math.random();
+      if (chance < 0.05) {
+        showFeedbackPopup();
+      }
+    }
+  }, 1000);
+}
+  </script>
+  <script>
+    function toggleSection(sectionId, button) {
+      const content = document.getElementById(sectionId);
+      content.classList.toggle('show');
+      button.classList.toggle('active');
+    }
+
+    function toggleNested(nestedId, event) {
+      event.preventDefault();
+      event.stopPropagation();
+      const content = document.getElementById(nestedId);
+      const button = event.currentTarget;
+      content.classList.toggle('show');
+      button.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

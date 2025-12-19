@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Desert Temple Generator</title>
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+  <style>
+    body::before {
+      background-image: url('../styles/images/dt.png');
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <img src="dt.png" alt="Bedrock 1.16 FSG Generator" class="title-image">
+    <div class="container">
+      <button class="blocky-btn" id="desertTempleSeedBtn">Generate Seed</button>
+      <div class="download-box" id="downloadBox">
+        <a href="../vilFSG.mcpack" download class="blocky-btn filter-btn">Download Desert Temple Pack</a>
+        <button class="info-icon-btn" id="packInfoBtn">ⓘ</button>
+      </div>
+      <div class="seed-box" id="desertTempleSeedBox"></div>
+      <div class="button-row" id="copyBtnRow" style="display: none;">
+        <button class="blocky-btn copy-btn" id="copyBtn">Copy Seed</button>
+      </div>
+      <div class="cooldown-container" id="cooldownContainer" style="display: none;">
+        <div class="cooldown-bar" id="cooldownBar"></div>
+      </div>
+      <div class="navigation-buttons">
+        <button class="blocky-btn back-btn" onclick="window.location.href='../index.html'">← Back</button>
+        <button class="blocky-btn help-btn" onclick="window.location.href='help.html'">Help</button>
+      </div>
+    </div>
+    <!-- Pack Info Modal -->
+    <div class="modal-overlay" id="packInfoModal">
+      <div class="sign-modal">
+        <h2>Desert Temple Pack</h2>
+        <p>The Village, Desert Temple and Structureless pack forces many lava pools to generate near spawn and guarantees iron from desert temple, making entering the nether possible in all seeds. EXPERIMENTAL GAMEPLAY IS REQUIRED TO BE TURNED ON DURING WORLD CREATION!</p>
+        <button class="blocky-btn close-btn" onclick="closePackInfo()">Close</button>
+      </div>
+    </div>
+  </div>
+<!-- Feedback Popup -->
+<div class="feedback-popup" id="feedbackPopup">
+  <div class="feedback-content">
+    <p>Have any feedback or stuff you'd like to be added? Join the discord or contact me at maehy56@gmail.com!</p>
+    <button class="feedback-close" onclick="closeFeedback()">✕</button>
+  </div>
+</div>
+
+  <script>
+let feedbackTimer;
+let timeOnPage = 0;
+let feedbackClosed = sessionStorage.getItem('feedbackClosed') === 'true';
+
+function showFeedbackPopup() {
+  if (!feedbackClosed) {
+    document.getElementById('feedbackPopup').classList.add('show');
+    setTimeout(() => {
+      if (document.getElementById('feedbackPopup').classList.contains('show')) {
+        closeFeedback();
+      }
+    }, 7000);
+  }
+}
+
+function closeFeedback() {
+  document.getElementById('feedbackPopup').classList.remove('show');
+  feedbackClosed = true;
+  sessionStorage.setItem('feedbackClosed', 'true');
+  clearInterval(feedbackTimer);
+}
+
+// Close on page click
+document.addEventListener('click', (e) => {
+  const popup = document.getElementById('feedbackPopup');
+  if (popup.classList.contains('show') && !e.target.closest('.feedback-content')) {
+    closeFeedback();
+  }
+});
+
+// Start timer
+if (!feedbackClosed) {
+  feedbackTimer = setInterval(() => {
+    timeOnPage++;
+    if (timeOnPage % 15 === 0) {
+      const chance = Math.random();
+      if (chance < 0.05) {
+        showFeedbackPopup();
+      }
+    }
+  }, 1000);
+}
+  </script>
+  <script>
+    let dtSeeds = [];
+    const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxMxZ9zStBmy6ERJk1ne6_-zH8eOEce5ISf_wcWYmq2tHYhrwKmNSaYZ_LzDYEHQn3mIQ/exec';
+    let cooldownActive = false;
+    let cooldownTime = 10;
+
+    async function logToGoogleSheet(seed, filterType) {
+      try {
+        const timestamp = new Date().toISOString();
+        const data = {
+          seed: seed,
+          filterType: filterType,
+          timestamp: timestamp,
+          userAgent: navigator.userAgent,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+        };
+
+        await fetch(GOOGLE_SHEET_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      } catch (error) {
+        console.error('Error logging to Google Sheets:', error);
+      }
+    }
+
+    async function loadSeeds() {
+      try {
+        const response = await fetch("../dt.json");
+        dtSeeds = await response.json();
+        document.getElementById("desertTempleSeedBtn").disabled = false;
+      } catch (err) {
+        console.error("Error loading seeds:", err);
+      }
+    }
+
+    function getRandomSeed(seedArray) {
+      const idx = Math.floor(Math.random() * seedArray.length);
+      return seedArray[idx];
+    }
+
+    function startCooldown() {
+      cooldownActive = true;
+      let timeLeft = cooldownTime;
+      const btn = document.getElementById('desertTempleSeedBtn');
+      const container = document.getElementById('cooldownContainer');
+      const bar = document.getElementById('cooldownBar');
+
+      btn.disabled = true;
+      container.style.display = 'block';
+      bar.style.width = '100%';
+
+      const interval = setInterval(() => {
+        timeLeft--;
+        const percentage = (timeLeft / cooldownTime) * 100;
+        bar.style.width = percentage + '%';
+        
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          btn.disabled = false;
+          container.style.display = 'none';
+          cooldownActive = false;
+        }
+      }, 1000);
+    }
+
+    document.getElementById('desertTempleSeedBtn').addEventListener('click', () => {
+      if (!cooldownActive && dtSeeds.length > 0) {
+        const seedBox = document.getElementById('desertTempleSeedBox');
+        const downloadBox = document.getElementById('downloadBox');
+        const seed = getRandomSeed(dtSeeds);
+        seedBox.textContent = seed;
+        seedBox.style.display = 'flex';
+        document.getElementById('copyBtnRow').style.display = 'flex';
+        downloadBox.style.display = 'none';
+        logToGoogleSheet(seed, 'Desert Temple');
+        startCooldown();
+      }
+    });
+
+    document.getElementById('desertTempleSeedBox').addEventListener('dblclick', () => {
+      const box = document.getElementById('desertTempleSeedBox');
+      const seed = box.textContent.trim();
+      if (seed !== "" && seed !== "Seed copied!") {
+        navigator.clipboard.writeText(seed).then(() => {
+          box.textContent = "Seed copied!";
+          setTimeout(() => {
+            box.textContent = seed;
+          }, 1500);
+        }).catch(err => {
+          console.error("Error in copy:", err);
+        });
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if(e.target && e.target.id === 'copyBtn') {
+        const box = document.getElementById('desertTempleSeedBox');
+        const seed = box.textContent.trim();
+        if (seed !== "" && seed !== "Seed copied!") {
+          navigator.clipboard.writeText(seed).then(() => {
+            const copyBtn = document.getElementById('copyBtn');
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = "Copied!";
+            setTimeout(() => {
+              copyBtn.textContent = originalText;
+            }, 1500);
+          });
+        }
+      }
+    });
+
+    // Pack info modal
+    document.getElementById('packInfoBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('packInfoModal').classList.add('show');
+    });
+
+    function closePackInfo() {
+      document.getElementById('packInfoModal').classList.remove('show');
+    }
+
+    // Close on overlay click
+    document.getElementById('packInfoModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closePackInfo();
+      }
+    });
+
+    document.getElementById("desertTempleSeedBtn").disabled = true;
+    loadSeeds();
+  </script>
+</body>
+
+</html>

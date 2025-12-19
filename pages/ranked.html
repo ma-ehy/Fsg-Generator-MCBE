@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bedrock Ranked</title>
+<link rel="icon" type="image/x-icon" href="ranked.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="ranked.png">
+<link rel="icon" type="image/png" sizes="16x16" href="ranked.png">
+<link rel="shortcut icon" href="ranked.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+  <style>
+    /* Override panorama background for ranked page */
+    body::before {
+      background-image: url('../styles/images/ranked.png');
+    }
+    
+    /* Title image styling */
+    .title-image {
+      max-width: 800px;
+      width: 100%;
+      margin: 20px auto 40px;
+      display: block;
+      image-rendering: pixelated;
+    }
+
+    /* Ranked content wrapper */
+    .ranked-content {
+      display: flex;
+      gap: 30px;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto 30px;
+    }
+
+    /* Version columns */
+    .version-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Version box styling */
+    .version-box {
+      background: #2C2C2C;
+      border: 8px solid var(--minecraft-dark-gray);
+      padding: 30px;
+      box-shadow: 
+        inset 4px 4px 8px rgba(0,0,0,0.5),
+        inset -4px -4px 8px rgba(255,255,255,0.1),
+        0 12px 24px rgba(0,0,0,0.6);
+      position: relative;
+      image-rendering: pixelated;
+    }
+
+    .version-box::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--minecraft-dark-gray) 0px,
+        var(--minecraft-dark-gray) 4px,
+        var(--minecraft-black) 4px,
+        var(--minecraft-black) 8px
+      );
+      z-index: -1;
+    }
+
+    /* Version toggle button */
+    .version-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 2.5rem;
+      width: 100%;
+      background: linear-gradient(45deg, #0D47A1, #1565C0);
+      border-color: #0A3D91;
+    }
+
+    .version-toggle.v121 {
+      background: linear-gradient(45deg, #d37811, #ac5b0f);
+      border-color: #d66011;
+    }
+
+    .version-toggle:hover:not([disabled]) {
+      background: linear-gradient(45deg, #1565C0, #0D47A1);
+    }
+
+    .version-toggle.v121:hover:not([disabled]) {
+      background: linear-gradient(45deg, #c9782c, #a54e14);
+    }
+
+    .version-arrow {
+      transition: transform 0.3s ease;
+      font-size: 2rem;
+    }
+
+    .version-toggle.active .version-arrow {
+      transform: rotate(180deg);
+    }
+
+    /* Filter list */
+    .filter-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.4s ease;
+    }
+
+    .filter-list.show {
+      max-height: 800px;
+      opacity: 1;
+      margin-top: 20px;
+    }
+
+    .ranked-filter-btn {
+      font-size: 1.8rem;
+      padding: 15px 25px;
+      width: 100%;
+    }
+
+    /* Bottom section */
+    .ranked-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .info-btn {
+      font-size: 2rem;
+      padding: 15px 30px;
+      background: linear-gradient(45deg, #60089b, #5c06ad);
+      border-color: #5504a0;
+    }
+
+    .info-btn:hover:not([disabled]) {
+      background: linear-gradient(45deg, #6009b1, #670da3);
+    }
+
+    .info-btn:active:not([disabled]) {
+      background: #7304bd;
+    }
+
+.discord-join {
+  background: #2C2C2C;  /* Change from var(--minecraft-black) */
+  border: 6px solid var(--minecraft-dark-gray);
+  color: var(--minecraft-white);
+  font-size: 1.8rem;
+  font-family: 'VT323', monospace;
+  letter-spacing: 1px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 
+    inset 4px 4px 8px rgba(0,0,0,0.5),
+    inset -4px -4px 8px rgba(255,255,255,0.1),
+    0 12px 24px rgba(0,0,0,0.6);
+  image-rendering: pixelated;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+    .discord-join:hover {
+      background: #2C2C2C;
+    }
+
+    .discord-join a {
+      color: var(--minecraft-blue);
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.2s;
+      display: block;
+    }
+
+    .discord-join:hover a {
+      color: var(--minecraft-white);
+    }
+
+    /* Seed generator modal */
+    .generator-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .generator-modal.show {
+      display: flex;
+    }
+
+    .generator-container {
+      max-width: 600px;
+      width: 90vw;
+      background: #2C2C2C;
+      border: 8px solid var(--minecraft-dark-gray);
+      padding: 40px;
+      text-align: center;
+      position: relative;
+      box-shadow: 
+        inset 4px 4px 8px rgba(0,0,0,0.5),
+        inset -4px -4px 8px rgba(255,255,255,0.1),
+        0 12px 24px rgba(0,0,0,0.6);
+      image-rendering: pixelated;
+    }
+
+    .generator-container::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--minecraft-dark-gray) 0px,
+        var(--minecraft-dark-gray) 4px,
+        var(--minecraft-black) 4px,
+        var(--minecraft-black) 8px
+      );
+      z-index: -1;
+    }
+
+    .generator-title {
+      font-family: 'VT323', monospace;
+      font-size: 3rem;
+      color: var(--minecraft-white);
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    }
+
+    .seed-display {
+      margin-top: 20px;
+      background: var(--minecraft-black);
+      border: 6px solid var(--minecraft-dark-gray);
+      min-height: 100px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      font-family: 'VT323', monospace;
+      color: var(--minecraft-green);
+      letter-spacing: 2px;
+      padding: 20px;
+      word-break: break-word;
+      margin-bottom: 20px;
+      box-shadow: 
+        inset 4px 4px 8px rgba(0,0,0,0.8),
+        inset -4px -4px 8px rgba(255,255,255,0.1),
+        0 4px 8px rgba(0,0,0,0.3);
+      position: relative;
+      image-rendering: pixelated;
+      white-space: nowrap;
+      overflow-x: auto;
+    }
+
+    .generator-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .close-generator {
+      margin-top: 30px;
+      padding-top: 30px;
+      border-top: 4px solid var(--minecraft-dark-gray);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .ranked-content {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .title-image {
+        margin: 10px auto 20px;
+      }
+
+      .version-toggle {
+        font-size: 2rem;
+      }
+
+      .ranked-filter-btn {
+        font-size: 1.6rem;
+        padding: 12px 20px;
+      }
+
+      .info-btn {
+        font-size: 1.8rem;
+      }
+
+      .discord-join {
+        font-size: 1.6rem;
+        padding: 15px;
+      }
+
+      .generator-title {
+        font-size: 2.5rem;
+      }
+
+      .seed-display {
+        font-size: 2.5rem;
+      }
+    }
+    /* Bottom button row for two buttons side by side */
+.bottom-button-row {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.bottom-button-row .info-btn {
+  flex: 1; /* Both buttons take equal space */
+}
+
+.purple-info-btn {
+  background: linear-gradient(45deg, #7B1FA2, #9C27B0);
+  border-color: #6A1B9A;
+}
+
+.purple-info-btn:hover:not([disabled]) {
+  background: linear-gradient(45deg, #9C27B0, #7B1FA2);
+}
+
+.purple-info-btn:active:not([disabled]) {
+  background: #6A1B9A;
+}
+/* Responsive for bottom buttons */
+@media (max-width: 768px) {
+  .bottom-button-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <img src="../styles/images/title.png" alt="Ranked Title" class="title-image">
+    
+    <div class="ranked-content">
+      <!-- 1.16 Column -->
+      <div class="version-column">
+        <div class="version-box">
+          <button class="blocky-btn version-toggle" id="v116Toggle">
+            <span>1.16 Filters</span>
+            <span class="version-arrow">▼</span>
+          </button>
+          
+          <div class="filter-list" id="v116List">
+            <button class="blocky-btn ranked-filter-btn" data-mode="stronghold-village-116" data-title="Stronghold Village 1.16">
+              Stronghold Village
+            </button>
+            <button class="blocky-btn ranked-filter-btn red-btn" data-mode="ruined-portal-116" data-title="Ruined Portal 1.16">
+              Ruined Portal
+            </button>
+            <button class="blocky-btn ranked-filter-btn bottom-btn" data-mode="village-116" data-title="Village 1.16">
+              Village
+            </button>
+            <button class="blocky-btn ranked-filter-btn silver-btn" data-mode="desert-temple-116" data-title="Desert Temple 1.16">
+              Desert Temple
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.21+ Column -->
+      <div class="version-column">
+        <div class="version-box">
+          <button class="blocky-btn version-toggle v121" id="v121Toggle">
+            <span>1.21+ Filters</span>
+            <span class="version-arrow">▼</span>
+          </button>
+          
+          <div class="filter-list" id="v121List">
+            <button class="blocky-btn ranked-filter-btn blue-btn" data-mode="warped-forest-121" data-title="Warped Forest 1.21+">
+              Warped Forest
+            </button>
+            <button class="blocky-btn ranked-filter-btn black-btn" data-mode="bastion-121" data-title="Bastion 1.21+">
+              Bastion
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Section -->
+<div class="ranked-bottom">
+  <div class="bottom-button-row">
+    <button class="blocky-btn info-btn" id="rankedInfoBtn">
+      What is Bedrock Ranked?
+    </button>
+<button class="blocky-btn info-btn" onclick="window.location.href='../ranked1.1.mcaddon'">
+  Download Add-on
+</button>
+    <button class="blocky-btn info-btn" onclick="window.location.href='../index.html'">
+      Back to Main Menu
+    </button>
+  </div>
+  
+  <div class="discord-join">
+    <a href="https://discord.gg/KxDWCkuDj3" target="_blank">Start Playing Ranked Against the Best Bedrock Speedrunners!</a>
+  </div>
+</div>
+  <!-- Info Modal -->
+  <div class="modal-overlay" id="rankedInfoModal">
+    <div class="sign-modal">
+      <h2>What is Bedrock Ranked?</h2>
+      <p>Bedrock Ranked is a competitive speedrunning mode where you race against other players in the same seed and with similar rng!</p>
+      <p>This filter let's you practice solo ranked. To track your progress, climb the ranks, and compete against the best speedrunners Bedrock has ever seen, join the discord server where Bedrock Ranked is hosted!</p>
+      <p><strong>Features:</strong></p>
+      <p>• Leaderboards and rankings</p>
+      <p>• Multiple seed categories for various versions (1.16 & 1.21+)</p>
+      <p>• Compete with the best runners</p>
+      <p>• Fair and verified gameplay</p>
+      <button class="blocky-btn close-btn" onclick="closeRankedModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Seed Generator Modal -->
+  <div class="generator-modal" id="generatorModal">
+    <div class="generator-container">
+      <h1 class="generator-title" id="generatorTitle">Seed Generator</h1>
+      
+      <button class="blocky-btn" id="generateSeedBtn">Generate Seed</button>
+      
+      <div class="seed-display" id="seedDisplay"></div>
+      
+      <div class="button-row" id="copyBtnRow" style="display: none;">
+        <button class="blocky-btn copy-btn" id="copySeedBtn">Copy Seed</button>
+      </div>
+      
+      <div class="cooldown-container" id="cooldownContainer" style="display: none;">
+        <div class="cooldown-bar" id="cooldownBar"></div>
+      </div>
+      
+      <div class="close-generator">
+        <button class="blocky-btn back-btn" onclick="closeGenerator()">← Back to Filters</button>
+      </div>
+    </div>
+  </div>
+<!-- Feedback Popup -->
+<div class="feedback-popup" id="feedbackPopup">
+  <div class="feedback-content">
+    <p>Have any feedback or stuff you'd like to be added? Join the discord or contact me at maehy56@gmail.com!</p>
+    <button class="feedback-close" onclick="closeFeedback()">✕</button>
+  </div>
+</div>
+
+    <script>
+let feedbackTimer;
+let timeOnPage = 0;
+let feedbackClosed = sessionStorage.getItem('feedbackClosed') === 'true';
+
+function showFeedbackPopup() {
+  if (!feedbackClosed) {
+    document.getElementById('feedbackPopup').classList.add('show');
+    setTimeout(() => {
+      if (document.getElementById('feedbackPopup').classList.contains('show')) {
+        closeFeedback();
+      }
+    }, 7000);
+  }
+}
+
+function closeFeedback() {
+  document.getElementById('feedbackPopup').classList.remove('show');
+  feedbackClosed = true;
+  sessionStorage.setItem('feedbackClosed', 'true');
+  clearInterval(feedbackTimer);
+}
+
+// Close on page click
+document.addEventListener('click', (e) => {
+  const popup = document.getElementById('feedbackPopup');
+  if (popup.classList.contains('show') && !e.target.closest('.feedback-content')) {
+    closeFeedback();
+  }
+});
+
+// Start timer
+if (!feedbackClosed) {
+  feedbackTimer = setInterval(() => {
+    timeOnPage++;
+    if (timeOnPage % 15 === 0) {
+      const chance = Math.random();
+      if (chance < 0.05) {
+        showFeedbackPopup();
+      }
+    }
+  }, 1000);
+}
+    </script>
+  <script>
+    let currentMode = '';
+    let seedsData = {};
+    let cooldownActive = false;
+    const cooldownTime = 10;
+    const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxMxZ9zStBmy6ERJk1ne6_-zH8eOEce5ISf_wcWYmq2tHYhrwKmNSaYZ_LzDYEHQn3mIQ/exec';
+
+    // Load seed data files
+    const seedFiles = {
+      'stronghold-village-116': '../ranked-stronghold.json',
+      'ruined-portal-116': '../ranked-ruined-portal.json',
+      'village-116': '../ranked-village.json',
+      'desert-temple-116': '../ranked-desert-temple.json',
+      'warped-forest-121': '../ranked-warped.json',
+      'bastion-121': '../ranked-bastion.json'
+    };
+
+    async function loadSeedFile(mode) {
+      if (seedsData[mode]) return seedsData[mode];
+      
+      try {
+        const response = await fetch(seedFiles[mode]);
+        const data = await response.json();
+        seedsData[mode] = data;
+        return data;
+      } catch (err) {
+        console.error('Error loading seeds:', err);
+        return [];
+      }
+    }
+
+    async function logToGoogleSheet(seed, filterType) {
+      try {
+        const timestamp = new Date().toISOString();
+        const data = {
+          seed: seed,
+          filterType: filterType,
+          timestamp: timestamp,
+          userAgent: navigator.userAgent,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+        };
+
+        await fetch(GOOGLE_SHEET_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      } catch (error) {
+        console.error('Error logging to Google Sheets:', error);
+      }
+    }
+
+    function getRandomSeed(seedArray) {
+      const idx = Math.floor(Math.random() * seedArray.length);
+      return seedArray[idx];
+    }
+
+    function startCooldown() {
+      cooldownActive = true;
+      let timeLeft = cooldownTime;
+      const btn = document.getElementById('generateSeedBtn');
+      const container = document.getElementById('cooldownContainer');
+      const bar = document.getElementById('cooldownBar');
+
+      btn.disabled = true;
+      container.style.display = 'block';
+      bar.style.width = '100%';
+
+      const interval = setInterval(() => {
+        timeLeft--;
+        const percentage = (timeLeft / cooldownTime) * 100;
+        bar.style.width = percentage + '%';
+        
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          btn.disabled = false;
+          container.style.display = 'none';
+          cooldownActive = false;
+        }
+      }, 1000);
+    }
+
+    // Toggle 1.16 filters
+    document.getElementById('v116Toggle').addEventListener('click', function() {
+      this.classList.toggle('active');
+      document.getElementById('v116List').classList.toggle('show');
+    });
+
+    // Toggle 1.21+ filters
+    document.getElementById('v121Toggle').addEventListener('click', function() {
+      this.classList.toggle('active');
+      document.getElementById('v121List').classList.toggle('show');
+    });
+
+    // Show info modal
+    document.getElementById('rankedInfoBtn').addEventListener('click', function() {
+      document.getElementById('rankedInfoModal').classList.add('show');
+    });
+
+    // Close info modal
+    function closeRankedModal() {
+      document.getElementById('rankedInfoModal').classList.remove('show');
+    }
+
+    // Close info modal on overlay click
+    document.getElementById('rankedInfoModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeRankedModal();
+      }
+    });
+
+    // Open generator modal
+    document.querySelectorAll('.ranked-filter-btn').forEach(btn => {
+      btn.addEventListener('click', async function() {
+        currentMode = this.getAttribute('data-mode');
+        const title = this.getAttribute('data-title');
+        
+        document.getElementById('generatorTitle').textContent = title;
+        document.getElementById('generatorModal').classList.add('show');
+        document.getElementById('seedDisplay').style.display = 'none';
+        document.getElementById('copyBtnRow').style.display = 'none';
+        document.getElementById('generateSeedBtn').disabled = true;
+        
+        // Load seeds for this mode
+        await loadSeedFile(currentMode);
+        document.getElementById('generateSeedBtn').disabled = false;
+      });
+    });
+
+    // Close generator modal
+    function closeGenerator() {
+      document.getElementById('generatorModal').classList.remove('show');
+      currentMode = '';
+    }
+
+    // Close generator on overlay click
+    document.getElementById('generatorModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeGenerator();
+      }
+    });
+
+    // Generate seed button
+    document.getElementById('generateSeedBtn').addEventListener('click', async function() {
+      if (!cooldownActive && seedsData[currentMode]) {
+        const seedDisplay = document.getElementById('seedDisplay');
+        const seed = getRandomSeed(seedsData[currentMode]);
+        
+        seedDisplay.textContent = seed;
+        seedDisplay.style.display = 'flex';
+        document.getElementById('copyBtnRow').style.display = 'flex';
+        
+        logToGoogleSheet(seed, currentMode);
+        startCooldown();
+      }
+    });
+
+    // Copy seed button
+    document.getElementById('copySeedBtn').addEventListener('click', function() {
+      const seedDisplay = document.getElementById('seedDisplay');
+      const seed = seedDisplay.textContent.trim();
+      
+      if (seed !== "" && seed !== "Seed copied!") {
+        navigator.clipboard.writeText(seed).then(() => {
+          const originalText = this.textContent;
+          this.textContent = "Copied!";
+          setTimeout(() => {
+            this.textContent = originalText;
+          }, 1500);
+        });
+      }
+    });
+
+    // Double-click seed to copy
+    document.getElementById('seedDisplay').addEventListener('dblclick', function() {
+      const seed = this.textContent.trim();
+      if (seed !== "" && seed !== "Seed copied!") {
+        navigator.clipboard.writeText(seed).then(() => {
+          const originalText = this.textContent;
+          this.textContent = "Seed copied!";
+          setTimeout(() => {
+            this.textContent = originalText;
+          }, 1500);
+        }).catch(err => {
+          console.error("Error in copy:", err);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Help - MCBE 1.16 FSG Generator</title>
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+  <style>
+    .help-content {
+      max-width: 800px;
+      width: 90vw;
+      background: #2C2C2C;
+      border: 8px solid var(--minecraft-dark-gray);
+      padding: 40px;
+      text-align: left;
+      position: relative;
+      box-shadow: 
+        inset 4px 4px 8px rgba(0,0,0,0.5),
+        inset -4px -4px 8px rgba(255,255,255,0.1),
+        0 12px 24px rgba(0,0,0,0.6);
+      image-rendering: pixelated;
+      margin: 0 auto;
+    }
+
+    .help-content::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--minecraft-dark-gray) 0px,
+        var(--minecraft-dark-gray) 4px,
+        var(--minecraft-black) 4px,
+        var(--minecraft-black) 8px
+      );
+      z-index: -1;
+    }
+
+    .help-content p {
+      font-family: 'VT323', monospace;
+      font-size: 1.6rem;
+      color: #E0E0E0;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      letter-spacing: 1px;
+    }
+
+    .help-content h2 {
+      font-family: 'VT323', monospace;
+      font-size: 2rem;
+      color: #4CAF50;
+      margin: 0;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .mode-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 15px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      background: transparent;
+      border: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    .mode-toggle:hover h2 {
+      color: #81C784;
+    }
+
+    .mode-arrow {
+      transition: transform 0.3s ease;
+      font-size: 2rem;
+      color: #4CAF50;
+      font-family: 'VT323', monospace;
+      font-weight: bold;
+    }
+
+    .mode-toggle.active .mode-arrow {
+      transform: rotate(90deg);
+    }
+
+    .mode-content {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.4s ease, opacity 0.3s ease, margin-bottom 0.4s ease;
+      padding-left: 35px;
+    }
+
+    .mode-content.show {
+      max-height: 5000px;
+      opacity: 1;
+      margin-bottom: 30px;
+    }
+
+    .mode-section {
+      margin-bottom: 25px;
+    }
+
+    .navigation-buttons {
+      display: flex;
+      gap: 20px;
+      margin-top: 50px;
+      justify-content: center;
+      width: 100%;
+      padding-top: 30px;
+      border-top: 4px solid var(--minecraft-dark-gray);
+    }
+
+    .back-btn {
+      font-size: 2rem;
+      padding: 15px 30px;
+      background: linear-gradient(45deg, 
+        var(--minecraft-brown), 
+        var(--minecraft-dark-brown));
+      border-color: var(--minecraft-dark-brown);
+      margin: 0;
+    }
+
+    .back-btn:hover:not([disabled]) {
+      background: linear-gradient(45deg, 
+        var(--minecraft-dark-brown), 
+        var(--minecraft-brown));
+    }
+
+    @media (max-width: 768px) {
+      .help-content {
+        padding: 20px 15px;
+      }
+
+      .help-content p {
+        font-size: 1.8rem;
+      }
+
+      .help-content h2 {
+        font-size: 2.2rem;
+      }
+
+      .back-btn {
+        font-size: 1.6rem;
+        padding: 12px 25px;
+      }
+
+      .mode-content {
+        padding-left: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .help-content p {
+        font-size: 1.6rem;
+      }
+
+      .help-content h2 {
+        font-size: 2rem;
+      }
+
+      .back-btn {
+        font-size: 1.4rem;
+        padding: 10px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <img src="help.png" alt="Bedrock 1.16 FSG Generator" class="title-image">
+    
+    <div class="help-content">
+      <!-- What is FSG Section -->
+      <div class="mode-section">
+        <button class="mode-toggle" onclick="toggleSection('whatIsFSG', this)">
+          <span class="mode-arrow">▶</span>
+          <h2>What is FSG?</h2>
+        </button>
+        
+        <div id="whatIsFSG" class="mode-content">
+          <p>FSG stands for "Filtered Seed Glitchless". It's a speedrunning category where runners use a random geerator of seeds with favorable structures and conditions, making it easier to complete runs quickly compared to Random Seed Glitchless (RSG).</p>
+          <p>This generator gives seeds for Minecraft Bedrock Edition 1.16.1 with specific structures at optimal locations. Each mode filters for different combinations of structures to suit various playstyles and trains different aspect of speedrunning, such as playing with little food, quick decision making, etc.</p>
+        </div>
+      </div>
+
+      <div class="mode-section">
+        <button class="mode-toggle" onclick="toggleSection('desertTemple', this)">
+          <span class="mode-arrow">▶</span>
+          <h2>Stronghold</h2>
+        </button>
+        
+        <div id="desertTemple" class="mode-content">
+          <p>Spawns you near a stronghold village. The portal room will be within 10 rooms of starter staircase. There will be a fastion in the nether and a stronghold within 2000 blocks of 0 0.</p>
+        </div>
+      </div>
+
+      <div class="mode-section">
+        <button class="mode-toggle" onclick="toggleSection('ruinedPortal', this)">
+          <span class="mode-arrow">▶</span>
+          <h2>Ruined Portal</h2>
+        </button>
+        
+        <div id="ruinedPortal" class="mode-content">
+          <p>You spawn near a completable ruined portal that will also provide you with looting 3 sword, some iron and tools. There will be a fastion in the nether and a stronghold within 2000 blocks of 0 0.</p>
+        </div>
+      </div>
+
+      <div class="mode-section">
+        <button class="mode-toggle" onclick="toggleSection('bastion', this)">
+          <span class="mode-arrow">▶</span>
+          <h2>Ranked</h2>
+        </button>
+        
+        <div id="bastion" class="mode-content">
+          <p>Ranked is a concept where you compete with other runners to see who can beat the game fastest on similar comditions. Those filters are from the solo mode and they are even better in quality than the fsg ones. Plus, ranked packs also greatly affects in-game rng in non necessary areas.</p>
+        </div>
+      </div>
+
+      <div class="mode-section">
+        <button class="mode-toggle" onclick="toggleSection('fortress', this)">
+          <span class="mode-arrow">▶</span>
+          <h2>Classic</h2>
+        </button>
+        
+        <div id="fortress" class="mode-content">
+          <p>Overworld guarantees a stronghold village spawn. There will be only a fortress in the nether, but pack greatly increases pearl odds to allow for classic (mine gold ore in nether and trade with stray piglins).</p>
+        </div>
+      </div>
+
+      <div class="mode-section">
+        <button class="mode-toggle" onclick="toggleSection('bastionFortress', this)">
+          <span class="mode-arrow">▶</span>
+          <h2>Village</h2>
+        </button>
+        
+        <div id="bastionFortress" class="mode-content">
+          <p>Guarantees a village near spawn and lava pools near it. There will be a fastion in the nether and a stronghold within 2000 blocks of 0 0.</p>
+        </div>
+      </div>
+
+      <div class="mode-section">
+        <button class="mode-toggle" onclick="toggleSection('villageShipwreck', this)">
+          <span class="mode-arrow">▶</span>
+          <h2>Desert temple</h2>
+        </button>
+        
+        <div id="villageShipwreck" class="mode-content">
+          <p>Guarantees a desert temple near spawn and lava pools around it. There will be a fastion in the nether and a stronghold within 2000 blocks of 0 0.</p>
+        </div>
+      </div>
+
+      <div class="mode-section">
+        <button class="mode-toggle" onclick="toggleSection('packlessStronghold', this)">
+          <span class="mode-arrow">▶</span>
+          <h2>Packless Stronghold</h2>
+        </button>
+        
+        <div id="packlessStronghold" class="mode-content">
+          <p>Like stronghold, but without any need to install a pack, and therefore has less seeds. There will be a fastion in the nether.</p>
+        </div>
+      </div>
+
+      <div class="mode-section">
+        <button class="mode-toggle" onclick="toggleSection('structureless', this)">
+          <span class="mode-arrow">▶</span>
+          <h2>Structureless</h2>
+        </button>
+        
+        <div id="structureless" class="mode-content">
+          <p>A challenging mode with no structures in the overworld: you will have to enter the nether through a lava pool the pack will generate, and find iron in caves near spawn. There will be a fastion in the nether and a stronghold within 2000 blocks of 0 0.</p>
+        </div>
+      </div>
+
+      <p style="margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--minecraft-dark-gray); font-style: italic; color: #888;">
+        Experiment with different modes to find what works best for you!
+      </p>
+      
+      <div class="navigation-buttons">
+        <button class="blocky-btn back-btn" onclick="window.location.href='../index.html'">← Back to Home</button>
+      </div>
+    </div>
+  </div>
+<!-- Feedback Popup -->
+<div class="feedback-popup" id="feedbackPopup">
+  <div class="feedback-content">
+    <p>Have any feedback or stuff you'd like to be added? Join the discord or contact me at maehy56@gmail.com!</p>
+    <button class="feedback-close" onclick="closeFeedback()">✕</button>
+  </div>
+</div>
+  <script>
+let feedbackTimer;
+let timeOnPage = 0;
+let feedbackClosed = sessionStorage.getItem('feedbackClosed') === 'true';
+
+function showFeedbackPopup() {
+  if (!feedbackClosed) {
+    document.getElementById('feedbackPopup').classList.add('show');
+    setTimeout(() => {
+      if (document.getElementById('feedbackPopup').classList.contains('show')) {
+        closeFeedback();
+      }
+    }, 7000);
+  }
+}
+
+function closeFeedback() {
+  document.getElementById('feedbackPopup').classList.remove('show');
+  feedbackClosed = true;
+  sessionStorage.setItem('feedbackClosed', 'true');
+  clearInterval(feedbackTimer);
+}
+
+// Close on page click
+document.addEventListener('click', (e) => {
+  const popup = document.getElementById('feedbackPopup');
+  if (popup.classList.contains('show') && !e.target.closest('.feedback-content')) {
+    closeFeedback();
+  }
+});
+
+// Start timer
+if (!feedbackClosed) {
+  feedbackTimer = setInterval(() => {
+    timeOnPage++;
+    if (timeOnPage % 15 === 0) {
+      const chance = Math.random();
+      if (chance < 0.05) {
+        showFeedbackPopup();
+      }
+    }
+  }, 1000);
+}
+  </script>
+  <script>
+    function toggleSection(sectionId, button) {
+      const content = document.getElementById(sectionId);
+      content.classList.toggle('show');
+      button.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
