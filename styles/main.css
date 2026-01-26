@@ -1187,3 +1187,12 @@ h1 {
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
+
+.brown-btn {
+  background-color: #8B6F47;
+  border-color: #6B5435;
+}
+
+.brown-btn:hover {
+  background-color: #6B5435;
+}
