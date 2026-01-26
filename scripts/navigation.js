@@ -10,6 +10,7 @@ const pages = {
   'classic': 'pages/classic.html',
   'structureless': 'pages/structureless.html',
   'desert-temple': 'pages/desert-temple.html',
+  'shipwreck': 'pages/shipwreck.html',
   'help': 'pages/help.html',
   'tutorials': 'pages/tutorials.html',
   'resources': 'pages/resources.html'
@@ -149,3 +150,4 @@ function setupModalButtons() {
 document.getElementById('wrenchBtn')?.addEventListener('click', function() {
   document.getElementById('helpModal').classList.add('show');
 });
+
