@@ -1189,14 +1189,14 @@ h1 {
 }
 
 .brown-btn {
-  background: linear-gradient(45deg, #8B6F47, #6B5435);
-  border-color: #5D4037;
+  background: linear-gradient(45deg, #8B6F47, #6B5435) !important;
+  border-color: #5D4037 !important;
 }
 
 .brown-btn:hover:not([disabled]) {
-  background: linear-gradient(45deg, #6B5435, #8B6F47);
+  background: linear-gradient(45deg, #6B5435, #8B6F47) !important;
 }
 
 .brown-btn:active:not([disabled]) {
-  background: #5D4037;
+  background: #5D4037 !important;
 }
