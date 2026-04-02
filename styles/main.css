@@ -421,7 +421,7 @@ h1 {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 11px;
 }
 
 .resources-box {
@@ -1001,14 +1001,14 @@ h1 {
 .logo-image {
   max-width: 1200px;
   width: 100%;
-  margin: 20px auto 40px;
+  margin: 20px auto 20px;
   display: block;
   image-rendering: pixelated;
 }
 
 @media (max-width: 768px) {
   .logo-image {
-    margin: 10px auto 20px;
+    margin: 20px auto 20px;
   }
 }
 
@@ -1199,4 +1199,81 @@ h1 {
 
 .brown-btn:active:not([disabled]) {
   background: #5D4037 !important;
+}
+
+/* --- New additions --- */
+
+.subtitle-image {
+  max-width: 600px;
+  width: 100%;
+  display: block;
+  margin: -20px auto 30px;
+  image-rendering: pixelated;
+}
+
+.leaderboard a {
+  color: #FFD700;
+}
+
+.leaderboard a:hover {
+  color: #FFF8DC;
+}
+
+.subtitle-image {
+  max-width: 800px !important;
+  margin: -50px auto 20px !important;
+}
+
+.leaderboard-footer {
+  background: #2C2C2C;
+  border: 8px solid var(--minecraft-dark-gray);
+  font-size: 1.8rem;
+  font-family: 'VT323', monospace;
+  letter-spacing: 1px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 
+    inset 4px 4px 8px rgba(0,0,0,0.5),
+    inset -4px -4px 8px rgba(255,255,255,0.1),
+    0 12px 24px rgba(0,0,0,0.6);
+  image-rendering: pixelated;
+  width: 100%;
+  max-width: 950px;
+  margin-top: 10px;
+}
+
+.leaderboard-footer a {
+  color: #FFD700;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.leaderboard-footer a:hover {
+  color: #FFF8DC;
+  text-decoration: underline;
+}
+
+.bottom-btn {
+  background: linear-gradient(45deg, #4CAF50, #388E3C) !important;
+  border-color: var(--minecraft-dark-green) !important;
+}
+
+.bottom-btn:hover:not([disabled]) {
+  background: linear-gradient(45deg, #388E3C, #4CAF50) !important;
+}
+
+.bottom-btn:active:not([disabled]) {
+  background: var(--minecraft-dark-green) !important;
+}
+
+.subtitle-image {
+  max-width: 900px !important;
+  width: 90% !important;
+  margin: 0px auto 0 !important;
+  display: block !important;
+}
+
+.logo-image {
+  margin-top: 10px;
 }
