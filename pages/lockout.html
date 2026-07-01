@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lockout Bedrock</title>
+  <link rel="icon" type="image/x-icon" href="ranked.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="ranked.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="ranked.png">
+  <link rel="shortcut icon" href="ranked.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+  <style>
+    /* Override panorama background for lockout page */
+    body::before {
+      background-image: url('../styles/images/lockout-panorama.png');
+    }
+
+    /* Title image styling */
+    .title-image {
+      max-width: 700px;
+      width: 100%;
+      margin: 20px auto 30px;
+      display: block;
+      image-rendering: pixelated;
+    }
+
+    /* Top button row (download) */
+    .lockout-top {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto 30px;
+    }
+
+    .lockout-download-btn {
+      width: 100%;
+      font-size: 2.2rem;
+      background: linear-gradient(45deg, var(--minecraft-blue), #1976D2);
+      border-color: #1976D2;
+    }
+
+    .lockout-download-btn:hover:not([disabled]) {
+      background: linear-gradient(45deg, #1976D2, var(--minecraft-blue));
+    }
+
+    .lockout-download-btn:active:not([disabled]) {
+      background: #1976D2;
+    }
+
+    /* Gray middle section (matches version-box style) */
+    .lockout-box {
+      background: #2C2C2C;
+      border: 8px solid var(--minecraft-dark-gray);
+      padding: 35px;
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow:
+        inset 4px 4px 8px rgba(0,0,0,0.5),
+        inset -4px -4px 8px rgba(255,255,255,0.1),
+        0 12px 24px rgba(0,0,0,0.6);
+      position: relative;
+      image-rendering: pixelated;
+    }
+
+    .lockout-box::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--minecraft-dark-gray) 0px,
+        var(--minecraft-dark-gray) 4px,
+        var(--minecraft-black) 4px,
+        var(--minecraft-black) 8px
+      );
+      z-index: -1;
+    }
+
+    .lockout-menu-btn {
+      width: 100%;
+      font-size: 2rem;
+    }
+
+    /* Sword-red variant for the tasks button, matches sword icon accent */
+    .sword-red-btn {
+      background: linear-gradient(45deg, #E53935, #C62828);
+      border-color: #B71C1C;
+    }
+
+    .sword-red-btn:hover:not([disabled]) {
+      background: linear-gradient(45deg, #C62828, #E53935);
+    }
+
+    .sword-red-btn:active:not([disabled]) {
+      background: #C62828;
+    }
+
+    /* Discord blurple variant */
+    .discord-btn {
+      background: linear-gradient(45deg, #5865F2, #4752C4);
+      border-color: #3C45A5;
+    }
+
+    .discord-btn:hover:not([disabled]) {
+      background: linear-gradient(45deg, #4752C4, #5865F2);
+    }
+
+    .discord-btn:active:not([disabled]) {
+      background: #3C45A5;
+    }
+
+    /* Back button row */
+    .lockout-bottom {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto 30px;
+    }
+
+    /* Ko-fi footer */
+    .lockout-kofi {
+      text-align: center;
+      margin: 10px 0 20px;
+    }
+
+    .lockout-kofi a {
+      display: inline-block;
+      text-decoration: none;
+      padding: 10px 22px;
+      font-family: 'VT323', monospace;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      background: linear-gradient(45deg, #FFC107, #F9A825);
+      color: #4a4a4a;
+      border: 6px solid #F57F17;
+      cursor: pointer;
+    }
+
+    /* Seed generator modal specific */
+    .seed-display {
+      margin-top: 20px;
+      background: var(--minecraft-black);
+      border: 6px solid var(--minecraft-dark-gray);
+      min-height: 90px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.6rem;
+      font-family: 'VT323', monospace;
+      color: var(--minecraft-green);
+      letter-spacing: 2px;
+      padding: 15px;
+      word-break: break-word;
+      margin-bottom: 20px;
+      box-shadow:
+        inset 4px 4px 8px rgba(0,0,0,0.8),
+        inset -4px -4px 8px rgba(255,255,255,0.1),
+        0 4px 8px rgba(0,0,0,0.3);
+      position: relative;
+      image-rendering: pixelated;
+      white-space: nowrap;
+      overflow-x: auto;
+    }
+
+    /* Tasks modal specific */
+    #tasksModal .sign-modal {
+      max-width: 700px;
+    }
+
+    .tasks-search {
+      width: 100%;
+      font-family: 'VT323', monospace;
+      font-size: 1.6rem;
+      padding: 10px 15px;
+      background: var(--minecraft-black);
+      border: 4px solid var(--minecraft-dark-gray);
+      color: var(--minecraft-white);
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+
+    .tasks-search::placeholder {
+      color: #888;
+    }
+
+    .tasks-count {
+      font-size: 1.3rem;
+      color: #aaa;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .tasks-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 45vh;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    .task-item {
+      background: rgba(0,0,0,0.3);
+      border: 3px solid var(--minecraft-dark-brown);
+      padding: 12px 15px;
+    }
+
+    .task-item .task-name {
+      font-size: 1.7rem;
+      color: var(--minecraft-white);
+      text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+    }
+
+    .task-item .task-desc {
+      font-size: 1.3rem;
+      color: #c9c9c9;
+      margin-top: 4px;
+    }
+
+    .task-item.hidden {
+      display: none;
+    }
+
+    .no-results {
+      text-align: center;
+      font-size: 1.6rem;
+      color: #aaa;
+      padding: 20px 0;
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .title-image {
+        margin: 10px auto 20px;
+      }
+
+      .lockout-download-btn {
+        font-size: 1.8rem;
+      }
+
+      .lockout-menu-btn {
+        font-size: 1.7rem;
+      }
+
+      .lockout-box-title {
+        font-size: 1.9rem;
+      }
+
+      .tasks-list {
+        max-height: 55vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <img src="../styles/images/lockout.png" alt="Lockout Bedrock Title" class="title-image">
+
+    <!-- Download Button -->
+    <div class="lockout-top">
+      <button class="blocky-btn lockout-download-btn" onclick="window.location.href='../lockout_beta.mcaddon'">
+        Download Add-on
+      </button>
+    </div>
+
+    <!-- Gray middle section -->
+    <div class="lockout-box">
+      <button class="blocky-btn lockout-menu-btn blue-btn" id="whatIsBtn">
+        What is Bedrock Lockout?
+      </button>
+      <button class="blocky-btn lockout-menu-btn gold-btn" id="seedBtn">
+        Get Lockout Seed
+      </button>
+      <button class="blocky-btn lockout-menu-btn sword-red-btn" id="tasksBtn">
+        Tasks List
+      </button>
+      <button class="blocky-btn lockout-menu-btn discord-btn" id="communityBtn">
+        Join the Community
+      </button>
+    </div>
+
+    <!-- Back to main menu -->
+    <div class="lockout-bottom">
+      <button class="blocky-btn lockout-menu-btn" onclick="window.location.href='../index.html'">
+        Back to Main Menu
+      </button>
+    </div>
+
+    <!-- Ko-fi -->
+    <div class="lockout-kofi">
+      <a href="https://ko-fi.com/R7Y720YN70" target="_blank" rel="noopener noreferrer">
+        Support the project on Ko-fi!
+      </a>
+    </div>
+  </div>
+
+  <!-- What Is Modal -->
+  <div class="modal-overlay" id="whatIsModal">
+    <div class="sign-modal">
+      <h2>What is Bedrock Lockout?</h2>
+      <p>Bedrock Lockout is an add-on that offers a bingo minigame that can be played alone or with friends. You can apply it creating a new world and this will allow you to play a lockout game. The goal of the game is to claim as many tasks as possible as fast as possible or before the opponents. The experience is customizable by being allowed to set a time limit for the run and the number of total tasks, which are chosen randomly from a poll of 197 total tasks. Download the add-on and try it!</p>
+      <button class="blocky-btn close-btn" onclick="closeModal('whatIsModal')">Close</button>
+    </div>
+  </div>
+
+  <!-- Seed Generator Modal -->
+  <div class="modal-overlay" id="seedModal">
+    <div class="sign-modal">
+      <h2>Lockout Seed Generator</h2>
+      <p>Generate a random seed to play Lockout on.</p>
+      <button class="blocky-btn" id="generateSeedBtn">Generate Seed</button>
+      <div class="seed-display" id="seedDisplay"></div>
+      <div class="button-row" id="copyBtnRow" style="display: none;">
+        <button class="blocky-btn copy-btn" id="copySeedBtn">Copy Seed</button>
+      </div>
+      <div class="cooldown-container" id="cooldownContainer" style="display: none;">
+        <div class="cooldown-bar" id="cooldownBar"></div>
+      </div>
+      <button class="blocky-btn close-btn" style="margin-top: 20px;" onclick="closeModal('seedModal')">Close</button>
+    </div>
+  </div>
+
+  <!-- Tasks List Modal -->
+  <div class="modal-overlay" id="tasksModal">
+    <div class="sign-modal">
+      <h2>Tasks List</h2>
+      <input type="text" class="tasks-search" id="tasksSearch" placeholder="Search tasks...">
+      <div class="tasks-count" id="tasksCount"></div>
+      <div class="tasks-list" id="tasksList">
+        <p style="text-align:center; color:#aaa; font-size:1.4rem;">Loading tasks...</p>
+      </div>
+      <div class="no-results" id="noResults">No tasks match your search.</div>
+      <button class="blocky-btn close-btn" onclick="closeModal('tasksModal')">Close</button>
+    </div>
+  </div>
+
+  <!-- Community Modal -->
+  <div class="modal-overlay" id="communityModal">
+    <div class="sign-modal">
+      <h2>Join the Community</h2>
+      <p>Lockout is hosted and supported through the Bedrock Ranked Discord server. Join to get updates, report bugs, and play with others.</p>
+      <div class="discord-join" style="margin-top: 20px;">
+        <a href="https://discord.gg/KxDWCkuDj3" target="_blank" rel="noopener noreferrer">Join the Discord Server</a>
+      </div>
+      <button class="blocky-btn close-btn" style="margin-top: 20px;" onclick="closeModal('communityModal')">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // Generic modal open/close
+    function openModal(id) {
+      document.getElementById(id).classList.add('show');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('show');
+    }
+
+    document.getElementById('whatIsBtn').addEventListener('click', () => openModal('whatIsModal'));
+    document.getElementById('seedBtn').addEventListener('click', () => openModal('seedModal'));
+    document.getElementById('tasksBtn').addEventListener('click', () => openModal('tasksModal'));
+    document.getElementById('communityBtn').addEventListener('click', () => openModal('communityModal'));
+
+    // Close on overlay click
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', function(e) {
+        if (e.target === this) {
+          this.classList.remove('show');
+        }
+      });
+    });
+
+    // Task search filter
+    const tasksSearch = document.getElementById('tasksSearch');
+    const tasksList = document.getElementById('tasksList');
+    const tasksCount = document.getElementById('tasksCount');
+    const noResults = document.getElementById('noResults');
+
+    let tasksData = [];
+
+    async function loadTasks() {
+      try {
+        const response = await fetch('../lockout-tasks.json');
+        tasksData = await response.json();
+      } catch (err) {
+        console.error('Error loading tasks:', err);
+        tasksList.innerHTML = '<p style="text-align:center; color:#aaa; font-size:1.4rem;">Could not load tasks.</p>';
+        return;
+      }
+      renderTasks(tasksData);
+    }
+
+    function renderTasks(tasks) {
+      tasksList.innerHTML = tasks.map(t => `
+        <div class="task-item" data-name="${t.name.toLowerCase()}" data-desc="${t.desc.toLowerCase()}">
+          <div class="task-name">${t.name}</div>
+          <div class="task-desc">${t.desc}</div>
+        </div>
+      `).join('');
+      updateTasksCount();
+    }
+
+    function updateTasksCount() {
+      const items = tasksList.querySelectorAll('.task-item');
+      const visible = tasksList.querySelectorAll('.task-item:not(.hidden)');
+      tasksCount.textContent = `Showing ${visible.length} of ${items.length} tasks`;
+      noResults.style.display = (items.length > 0 && visible.length === 0) ? 'block' : 'none';
+    }
+
+    tasksSearch.addEventListener('input', function() {
+      const query = this.value.trim().toLowerCase();
+      tasksList.querySelectorAll('.task-item').forEach(item => {
+        const name = item.getAttribute('data-name');
+        const desc = item.getAttribute('data-desc');
+        const match = name.includes(query) || desc.includes(query);
+        item.classList.toggle('hidden', !match);
+      });
+      updateTasksCount();
+    });
+
+    document.getElementById('tasksBtn').addEventListener('click', () => {
+      if (tasksData.length === 0) loadTasks();
+    });
+
+    // Lockout seed generator
+    let lockoutSeeds = [];
+    let cooldownActive = false;
+    const cooldownTime = 10;
+
+    async function loadLockoutSeeds() {
+      if (lockoutSeeds.length > 0) return lockoutSeeds;
+      try {
+        const response = await fetch('../lockout.json');
+        lockoutSeeds = await response.json();
+      } catch (err) {
+        console.error('Error loading lockout seeds:', err);
+        lockoutSeeds = [];
+      }
+      return lockoutSeeds;
+    }
+
+    function getRandomSeed(seedArray) {
+      const idx = Math.floor(Math.random() * seedArray.length);
+      return seedArray[idx];
+    }
+
+    function startCooldown() {
+      cooldownActive = true;
+      let timeLeft = cooldownTime;
+      const btn = document.getElementById('generateSeedBtn');
+      const container = document.getElementById('cooldownContainer');
+      const bar = document.getElementById('cooldownBar');
+
+      btn.disabled = true;
+      container.style.display = 'block';
+      bar.style.width = '100%';
+
+      const interval = setInterval(() => {
+        timeLeft--;
+        const percentage = (timeLeft / cooldownTime) * 100;
+        bar.style.width = percentage + '%';
+
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          btn.disabled = false;
+          container.style.display = 'none';
+          cooldownActive = false;
+        }
+      }, 1000);
+    }
+
+    document.getElementById('seedBtn').addEventListener('click', () => {
+      loadLockoutSeeds();
+    });
+
+    document.getElementById('generateSeedBtn').addEventListener('click', async function() {
+      if (cooldownActive) return;
+      const seeds = await loadLockoutSeeds();
+      if (!seeds || seeds.length === 0) return;
+
+      const seedDisplay = document.getElementById('seedDisplay');
+      const seed = getRandomSeed(seeds);
+
+      seedDisplay.textContent = seed;
+      seedDisplay.style.display = 'flex';
+      document.getElementById('copyBtnRow').style.display = 'flex';
+
+      startCooldown();
+    });
+
+    document.getElementById('copySeedBtn').addEventListener('click', function() {
+      const seedDisplay = document.getElementById('seedDisplay');
+      const seed = seedDisplay.textContent.trim();
+
+      if (seed !== "" && seed !== "Copied!") {
+        navigator.clipboard.writeText(seed).then(() => {
+          const originalText = this.textContent;
+          this.textContent = "Copied!";
+          setTimeout(() => {
+            this.textContent = originalText;
+          }, 1500);
+        });
+      }
+    });
+
+    document.getElementById('seedDisplay').addEventListener('dblclick', function() {
+      const seed = this.textContent.trim();
+      if (seed !== "") {
+        navigator.clipboard.writeText(seed).then(() => {
+          const originalText = this.textContent;
+          this.textContent = "Copied!";
+          setTimeout(() => {
+            this.textContent = originalText;
+          }, 1500);
+        }).catch(err => {
+          console.error("Error in copy:", err);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
