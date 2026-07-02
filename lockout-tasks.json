@@ -1,0 +1,987 @@
+[
+  {
+    "id": 1,
+    "name": "Craft a Crafting Table",
+    "desc": "Have a crafting table in your inventory."
+  },
+  {
+    "id": 2,
+    "name": "Craft a Wooden Pickaxe",
+    "desc": "Craft a wooden pickaxe."
+  },
+  {
+    "id": 3,
+    "name": "Craft a Furnace",
+    "desc": "Have a furnace in your inventory."
+  },
+  {
+    "id": 4,
+    "name": "Craft a Chest",
+    "desc": "Have a chest in your inventory."
+  },
+  {
+    "id": 5,
+    "name": "Obtain Raw Iron",
+    "desc": "Have raw iron in your inventory."
+  },
+  {
+    "id": 6,
+    "name": "Craft a Stone Pickaxe",
+    "desc": "Craft a stone pickaxe."
+  },
+  {
+    "id": 7,
+    "name": "Pork Chop",
+    "desc": "Have cooked porkchop in your inventory."
+  },
+  {
+    "id": 8,
+    "name": "Obtain Cooked Chicken",
+    "desc": "Have cooked chicken in your inventory."
+  },
+  {
+    "id": 9,
+    "name": "Kill a Zombie",
+    "desc": "Kill a zombie."
+  },
+  {
+    "id": 10,
+    "name": "Kill a Skeleton",
+    "desc": "Kill a skeleton."
+  },
+  {
+    "id": 11,
+    "name": "Kill a Spider",
+    "desc": "Kill a spider."
+  },
+  {
+    "id": 12,
+    "name": "Kill a Creeper",
+    "desc": "Kill a creeper."
+  },
+  {
+    "id": 13,
+    "name": "Craft a Fishing Rod",
+    "desc": "Have a fishing rod in your inventory."
+  },
+  {
+    "id": 14,
+    "name": "Obtain Milk Bucket",
+    "desc": "Have a milk bucket in your inventory."
+  },
+  {
+    "id": 15,
+    "name": "Stack of One Item",
+    "desc": "Have a full stack of 64 of any single item or block."
+  },
+  {
+    "id": 16,
+    "name": "Touch the Sky",
+    "desc": "Reach build height y=319 or above."
+  },
+  {
+    "id": 17,
+    "name": "Obtain Iron Ingot",
+    "desc": "Have an iron ingot in your inventory."
+  },
+  {
+    "id": 18,
+    "name": "Craft an Iron Pickaxe",
+    "desc": "Have an iron pickaxe in your inventory."
+  },
+  {
+    "id": 19,
+    "name": "Craft an Iron Sword",
+    "desc": "Have an iron sword in your inventory."
+  },
+  {
+    "id": 20,
+    "name": "Obtain a Shield",
+    "desc": "Have a shield in your inventory."
+  },
+  {
+    "id": 21,
+    "name": "Obtain Raw Copper",
+    "desc": "Have raw copper in your inventory."
+  },
+  {
+    "id": 22,
+    "name": "Craft Flint and Steel",
+    "desc": "Have flint and steel in your inventory."
+  },
+  {
+    "id": 23,
+    "name": "Get 1 Black Wool",
+    "desc": "Have 1 black wool in your inventory."
+  },
+  {
+    "id": 24,
+    "name": "Eat Steak",
+    "desc": "Eat a steak."
+  },
+  {
+    "id": 25,
+    "name": "Obtain a Bow",
+    "desc": "Have a bow in your inventory."
+  },
+  {
+    "id": 26,
+    "name": "Kill a Husk",
+    "desc": "Kill a husk."
+  },
+  {
+    "id": 27,
+    "name": "Kill a Stray",
+    "desc": "Kill a stray."
+  },
+  {
+    "id": 28,
+    "name": "Obtain Redstone Dust",
+    "desc": "Have redstone dust in your inventory."
+  },
+  {
+    "id": 29,
+    "name": "Obtain Lapis Lazuli",
+    "desc": "Have lapis lazuli in your inventory."
+  },
+  {
+    "id": 30,
+    "name": "Obtain Raw Gold",
+    "desc": "Have raw gold in your inventory."
+  },
+  {
+    "id": 31,
+    "name": "Fishy Business",
+    "desc": "Have cooked cod in your inventory."
+  },
+  {
+    "id": 32,
+    "name": "Eat Suspicious Stew",
+    "desc": "Eat a bowl of suspicious stew."
+  },
+  {
+    "id": 33,
+    "name": "Collect 6 Flower Types",
+    "desc": "Have 6 different flower types in your inventory at once."
+  },
+  {
+    "id": 34,
+    "name": "Obtain a Pumpkin",
+    "desc": "Have a pumpkin in your inventory."
+  },
+  {
+    "id": 35,
+    "name": "Obtain a Compass",
+    "desc": "Have a compass in your inventory."
+  },
+  {
+    "id": 36,
+    "name": "Obtain a Clock",
+    "desc": "Have a clock in your inventory."
+  },
+  {
+    "id": 37,
+    "name": "Obtain Deepslate",
+    "desc": "Have deepslate in your inventory."
+  },
+  {
+    "id": 38,
+    "name": "Obtain Stained Glass",
+    "desc": "Have any stained glass in your inventory."
+  },
+  {
+    "id": 39,
+    "name": "Super Fuel",
+    "desc": "Power a furnace with lava."
+  },
+  {
+    "id": 40,
+    "name": "Free Diver",
+    "desc": "Stay underwater for 2 minutes."
+  },
+  {
+    "id": 41,
+    "name": "Wear Iron Armor Set",
+    "desc": "Wear a full set of iron armor."
+  },
+  {
+    "id": 42,
+    "name": "Full Set of Iron Tools",
+    "desc": "Have an iron pickaxe, axe, shovel, hoe, and sword in your inventory at once."
+  },
+  {
+    "id": 43,
+    "name": "Obtain Obsidian",
+    "desc": "Have obsidian in your inventory."
+  },
+  {
+    "id": 44,
+    "name": "Hit Bedrock",
+    "desc": "Stand at y=-59 or below."
+  },
+  {
+    "id": 45,
+    "name": "Obtain a Stack of Seeds",
+    "desc": "Have 64 of any single seed type in your inventory."
+  },
+  {
+    "id": 46,
+    "name": "Obtain Bread",
+    "desc": "Have bread in your inventory."
+  },
+  {
+    "id": 47,
+    "name": "Eat a Poisonous Potato",
+    "desc": "Eat a poisonous potato."
+  },
+  {
+    "id": 48,
+    "name": "I Am a Marine Biologist",
+    "desc": "Catch a fish in a bucket."
+  },
+  {
+    "id": 49,
+    "name": "Obtain Composter",
+    "desc": "Have a composter in your inventory."
+  },
+  {
+    "id": 50,
+    "name": "Obtain Cauldron",
+    "desc": "Have a cauldron in your inventory."
+  },
+  {
+    "id": 51,
+    "name": "Obtain Loom",
+    "desc": "Have a loom in your inventory."
+  },
+  {
+    "id": 52,
+    "name": "Obtain Leash",
+    "desc": "Have a lead in your inventory."
+  },
+  {
+    "id": 53,
+    "name": "Interact with a Villager",
+    "desc": "Interact with a villager or wandering trader."
+  },
+  {
+    "id": 54,
+    "name": "Obtain a Bell",
+    "desc": "Have a bell in your inventory."
+  },
+  {
+    "id": 55,
+    "name": "Eat Sweet Berries",
+    "desc": "Eat sweet berries."
+  },
+  {
+    "id": 56,
+    "name": "Eat Pumpkin Pie",
+    "desc": "Eat a pumpkin pie."
+  },
+  {
+    "id": 57,
+    "name": "Obtain a Piston",
+    "desc": "Have a piston in your inventory."
+  },
+  {
+    "id": 58,
+    "name": "Obtain TNT",
+    "desc": "Have TNT in your inventory."
+  },
+  {
+    "id": 59,
+    "name": "Obtain a Dispenser",
+    "desc": "Have a dispenser in your inventory."
+  },
+  {
+    "id": 60,
+    "name": "Obtain a Dropper",
+    "desc": "Have a dropper in your inventory."
+  },
+  {
+    "id": 61,
+    "name": "Obtain a Hopper",
+    "desc": "Have a hopper in your inventory."
+  },
+  {
+    "id": 62,
+    "name": "Obtain an Observer",
+    "desc": "Have an observer in your inventory."
+  },
+  {
+    "id": 63,
+    "name": "Obtain Repeater",
+    "desc": "Have a redstone repeater in your inventory."
+  },
+  {
+    "id": 64,
+    "name": "Obtain Daylight Sensor",
+    "desc": "Have a daylight sensor in your inventory."
+  },
+  {
+    "id": 65,
+    "name": "Mine Diamond Ore",
+    "desc": "Mine a diamond ore block."
+  },
+  {
+    "id": 66,
+    "name": "Obtain a Diamond Pickaxe",
+    "desc": "Have a diamond pickaxe in your inventory."
+  },
+  {
+    "id": 67,
+    "name": "Obtain a Diamond Sword",
+    "desc": "Have a diamond sword in your inventory."
+  },
+  {
+    "id": 68,
+    "name": "Obtain an Amethyst Shard",
+    "desc": "Have an amethyst shard in your inventory."
+  },
+  {
+    "id": 69,
+    "name": "Obtain a Moss Block",
+    "desc": "Have a moss block in your inventory."
+  },
+  {
+    "id": 70,
+    "name": "Obtain a Bookshelf",
+    "desc": "Have a bookshelf in your inventory."
+  },
+  {
+    "id": 71,
+    "name": "Caves & Cliffs",
+    "desc": "Freefall from top to bottom of the world and survive."
+  },
+  {
+    "id": 72,
+    "name": "Obtain a Stack of Flint",
+    "desc": "Have 64 flint in your inventory."
+  },
+  {
+    "id": 73,
+    "name": "Wear Diamond Armor Set",
+    "desc": "Wear a full set of diamond armor."
+  },
+  {
+    "id": 74,
+    "name": "Full Set of Diamond Tools",
+    "desc": "Have a diamond pickaxe, axe, shovel, hoe, and sword in your inventory at once."
+  },
+  {
+    "id": 75,
+    "name": "Reach Level 30",
+    "desc": "Reach experience level 30."
+  },
+  {
+    "id": 76,
+    "name": "Obtain Enchanting Table",
+    "desc": "Have an enchanting table in your inventory."
+  },
+  {
+    "id": 77,
+    "name": "Obtain an Enchanted Book",
+    "desc": "Have an enchanted book in your inventory."
+  },
+  {
+    "id": 78,
+    "name": "Obtain Anvil",
+    "desc": "Have an anvil in your inventory."
+  },
+  {
+    "id": 79,
+    "name": "Obtain Grindstone",
+    "desc": "Have a grindstone in your inventory."
+  },
+  {
+    "id": 80,
+    "name": "Obtain a Melon",
+    "desc": "Have a melon slice in your inventory."
+  },
+  {
+    "id": 81,
+    "name": "Enter the Nether",
+    "desc": "Step through a Nether portal."
+  },
+  {
+    "id": 82,
+    "name": "Obtain Soul Sand",
+    "desc": "Have soul sand in your inventory."
+  },
+  {
+    "id": 83,
+    "name": "Obtain Nether Quartz",
+    "desc": "Have nether quartz in your inventory."
+  },
+  {
+    "id": 84,
+    "name": "Obtain Glowstone Dust",
+    "desc": "Have glowstone dust in your inventory."
+  },
+  {
+    "id": 85,
+    "name": "Obtain Nether Wart",
+    "desc": "Have nether wart in your inventory."
+  },
+  {
+    "id": 86,
+    "name": "Obtain a Magma Block",
+    "desc": "Have a magma block in your inventory."
+  },
+  {
+    "id": 87,
+    "name": "Stayin' Frosty",
+    "desc": "Swim in lava while having Fire Resistance."
+  },
+  {
+    "id": 89,
+    "name": "Kill a Piglin",
+    "desc": "Kill a piglin."
+  },
+  {
+    "id": 90,
+    "name": "Kill a Hoglin",
+    "desc": "Kill a hoglin."
+  },
+  {
+    "id": 91,
+    "name": "Obtain Crimson Stem",
+    "desc": "Have crimson stem in your inventory."
+  },
+  {
+    "id": 92,
+    "name": "Obtain Warped Stem",
+    "desc": "Have warped stem in your inventory."
+  },
+  {
+    "id": 93,
+    "name": "Obtain Crimson Fungus",
+    "desc": "Have crimson fungus in your inventory."
+  },
+  {
+    "id": 94,
+    "name": "Obtain Warped Fungus",
+    "desc": "Have warped fungus in your inventory."
+  },
+  {
+    "id": 95,
+    "name": "Obtain Basalt",
+    "desc": "Have basalt in your inventory."
+  },
+  {
+    "id": 96,
+    "name": "Obtain Crying Obsidian",
+    "desc": "Have crying obsidian in your inventory."
+  },
+  {
+    "id": 97,
+    "name": "Kill a Blaze",
+    "desc": "Kill a blaze."
+  },
+  {
+    "id": 98,
+    "name": "Obtain a Blaze Rod",
+    "desc": "Have a blaze rod in your inventory."
+  },
+  {
+    "id": 99,
+    "name": "Kill a Wither Skeleton",
+    "desc": "Kill a wither skeleton."
+  },
+  {
+    "id": 100,
+    "name": "Get Potion/Water Bottle",
+    "desc": "Have any potion in your inventory."
+  },
+  {
+    "id": 101,
+    "name": "Obtain Brewing Stand",
+    "desc": "Have a brewing stand in your inventory."
+  },
+  {
+    "id": 102,
+    "name": "Kill a Ghast",
+    "desc": "Kill a ghast."
+  },
+  {
+    "id": 103,
+    "name": "Return to Sender",
+    "desc": "Destroy a ghast with a fireball."
+  },
+  {
+    "id": 104,
+    "name": "Obtain Magma Cream",
+    "desc": "Have magma cream in your inventory."
+  },
+  {
+    "id": 105,
+    "name": "Tame a Wolf",
+    "desc": "Tame a wolf with bones."
+  },
+  {
+    "id": 106,
+    "name": "Tame a Cat",
+    "desc": "Tame a cat with raw fish."
+  },
+  {
+    "id": 107,
+    "name": "Tame a Horse",
+    "desc": "Tame a horse by riding it until it accepts you."
+  },
+  {
+    "id": 108,
+    "name": "Tame a Parrot",
+    "desc": "Tame a parrot with seeds."
+  },
+  {
+    "id": 109,
+    "name": "Obtain Terracotta",
+    "desc": "Have terracotta in your inventory."
+  },
+  {
+    "id": 110,
+    "name": "Obtain Glazed Terracotta",
+    "desc": "Have any glazed terracotta in your inventory."
+  },
+  {
+    "id": 111,
+    "name": "Obtain a Cookie",
+    "desc": "Have a cookie in your inventory."
+  },
+  {
+    "id": 112,
+    "name": "Eat Rabbit Stew",
+    "desc": "Eat a bowl of rabbit stew."
+  },
+  {
+    "id": 113,
+    "name": "Kill a Pillager",
+    "desc": "Kill a pillager."
+  },
+  {
+    "id": 114,
+    "name": "Kill a Vindicator",
+    "desc": "Kill a vindicator."
+  },
+  {
+    "id": 115,
+    "name": "Get Bad Omen",
+    "desc": "Get the Bad Omen effect."
+  },
+  {
+    "id": 116,
+    "name": "Kill a Witch",
+    "desc": "Kill a witch."
+  },
+  {
+    "id": 117,
+    "name": "Overkill",
+    "desc": "Deal 9 hearts of damage in a single hit."
+  },
+  {
+    "id": 118,
+    "name": "Archer",
+    "desc": "Kill a creeper with an arrow."
+  },
+  {
+    "id": 119,
+    "name": "Obtain a Crossbow",
+    "desc": "Have a crossbow in your inventory."
+  },
+  {
+    "id": 120,
+    "name": "Obtain a Goat Horn",
+    "desc": "Have a goat horn in your inventory."
+  },
+  {
+    "id": 121,
+    "name": "Kill a Guardian",
+    "desc": "Kill a guardian."
+  },
+  {
+    "id": 122,
+    "name": "Obtain a Sea Lantern",
+    "desc": "Have a sea lantern in your inventory."
+  },
+  {
+    "id": 123,
+    "name": "Obtain a Sponge",
+    "desc": "Have a wet or dry sponge in your inventory."
+  },
+  {
+    "id": 124,
+    "name": "Obtain a Nautilus Shell",
+    "desc": "Have a nautilus shell in your inventory."
+  },
+  {
+    "id": 125,
+    "name": "Obtain a Heart of the Sea",
+    "desc": "Have a heart of the sea in your inventory."
+  },
+  {
+    "id": 126,
+    "name": "Obtain a Trident",
+    "desc": "Have a trident in your inventory."
+  },
+  {
+    "id": 127,
+    "name": "Craft a Conduit",
+    "desc": "Have a conduit in your inventory."
+  },
+  {
+    "id": 128,
+    "name": "Fully Charge Respawn Anchor",
+    "desc": "Fully charge a respawn anchor with 4 glowstone."
+  },
+  {
+    "id": 129,
+    "name": "Kill a Ravager",
+    "desc": "Kill a ravager."
+  },
+  {
+    "id": 130,
+    "name": "Kill an Evoker",
+    "desc": "Kill an evoker."
+  },
+  {
+    "id": 131,
+    "name": "Obtain a Totem of Undying",
+    "desc": "Have a totem of undying in your inventory."
+  },
+  {
+    "id": 132,
+    "name": "Haggler",
+    "desc": "Trade with villagers for 30 emeralds total."
+  },
+  {
+    "id": 133,
+    "name": "Obtain a Sticky Piston",
+    "desc": "Have a sticky piston in your inventory."
+  },
+  {
+    "id": 134,
+    "name": "Inception",
+    "desc": "Push a piston with a piston moved by a piston."
+  },
+  {
+    "id": 135,
+    "name": "Obtain a Music Disc",
+    "desc": "Have any music disc in your inventory."
+  },
+  {
+    "id": 136,
+    "name": "Eat Golden Apple",
+    "desc": "Eat a golden apple."
+  },
+  {
+    "id": 137,
+    "name": "Kill an Enderman",
+    "desc": "Kill an enderman."
+  },
+  {
+    "id": 138,
+    "name": "Kill 10 Unique Mobs",
+    "desc": "Kill 10 different types of mobs (not fish)."
+  },
+  {
+    "id": 139,
+    "name": "Obtain Sculk",
+    "desc": "Have a sculk block in your inventory."
+  },
+  {
+    "id": 140,
+    "name": "Obtain a Sculk Catalyst",
+    "desc": "Have a sculk catalyst in your inventory."
+  },
+  {
+    "id": 141,
+    "name": "Obtain Flowering Azalea",
+    "desc": "Have a flowering azalea in your inventory."
+  },
+  {
+    "id": 142,
+    "name": "Obtain a Spyglass",
+    "desc": "Have a spyglass in your inventory."
+  },
+  {
+    "id": 143,
+    "name": "Obtain Book and Quill",
+    "desc": "Have a book and quill in your inventory."
+  },
+  {
+    "id": 144,
+    "name": "Obtain Honey Block",
+    "desc": "Have a honey block in your inventory."
+  },
+  {
+    "id": 145,
+    "name": "Ride a Minecart",
+    "desc": "Ride in any type of minecart."
+  },
+  {
+    "id": 146,
+    "name": "On a Rail",
+    "desc": "Travel 500 blocks by minecart."
+  },
+  {
+    "id": 148,
+    "name": "Obtain a Stack of Powered Rails",
+    "desc": "Have 64 powered rails in your inventory."
+  },
+  {
+    "id": 149,
+    "name": "Obtain a Stack of Detector Rails",
+    "desc": "Have 64 detector rails in your inventory."
+  },
+  {
+    "id": 150,
+    "name": "Obtain a Stack of Activator Rails",
+    "desc": "Have 64 activator rails in your inventory."
+  },
+  {
+    "id": 151,
+    "name": "Ride Pig with Carrot",
+    "desc": "Ride a pig using a carrot on a stick."
+  },
+  {
+    "id": 152,
+    "name": "Obtain Jukebox",
+    "desc": "Have a jukebox in your inventory."
+  },
+  {
+    "id": 153,
+    "name": "Obtain Ancient Debris",
+    "desc": "Have ancient debris in your inventory."
+  },
+  {
+    "id": 154,
+    "name": "Obtain a Netherite Ingot",
+    "desc": "Have a netherite ingot in your inventory."
+  },
+  {
+    "id": 155,
+    "name": "Wear Netherite Armor",
+    "desc": "Equip any single piece of netherite armor."
+  },
+  {
+    "id": 156,
+    "name": "Use a Smithing Table",
+    "desc": "Interact with a smithing table."
+  },
+  {
+    "id": 157,
+    "name": "The Beginning?",
+    "desc": "Spawn the Wither within 110 blocks."
+  },
+  {
+    "id": 158,
+    "name": "Obtain a Nether Star",
+    "desc": "Have a nether star in your inventory."
+  },
+  {
+    "id": 159,
+    "name": "Obtain Firework Rockets",
+    "desc": "Have a firework rocket in your inventory."
+  },
+  {
+    "id": 160,
+    "name": "Beam Me Up",
+    "desc": "Teleport 100m with a single ender pearl."
+  },
+  {
+    "id": 161,
+    "name": "Enter the End",
+    "desc": "Step through an End portal."
+  },
+  {
+    "id": 162,
+    "name": "Obtain End Stone",
+    "desc": "Have end stone in your inventory."
+  },
+  {
+    "id": 163,
+    "name": "Obtain Purpur Block",
+    "desc": "Have a purpur block in your inventory."
+  },
+  {
+    "id": 164,
+    "name": "Obtain Chorus Fruit",
+    "desc": "Have chorus fruit in your inventory."
+  },
+  {
+    "id": 165,
+    "name": "Obtain an End Rod",
+    "desc": "Have an end rod in your inventory."
+  },
+  {
+    "id": 166,
+    "name": "Obtain an Ender Chest",
+    "desc": "Have an ender chest in your inventory."
+  },
+  {
+    "id": 167,
+    "name": "Get End Crystal",
+    "desc": "Have an end crystal in your inventory."
+  },
+  {
+    "id": 168,
+    "name": "Eat 50 Raw Muttons",
+    "desc": "Eat 50 raw mutton."
+  },
+  {
+    "id": 169,
+    "name": "Kill a Shulker",
+    "desc": "Kill a shulker in the End."
+  },
+  {
+    "id": 170,
+    "name": "Obtain a Shulker Shell",
+    "desc": "Have a shulker shell in your inventory."
+  },
+  {
+    "id": 171,
+    "name": "Organizational Wizard",
+    "desc": "Name a shulker box with an anvil."
+  },
+  {
+    "id": 172,
+    "name": "Great View From Up Here",
+    "desc": "Levitate up 50 blocks from a shulker attack."
+  },
+  {
+    "id": 173,
+    "name": "Obtain the Dragon Egg",
+    "desc": "Have the dragon egg in your inventory."
+  },
+  {
+    "id": 174,
+    "name": "Obtain Elytra",
+    "desc": "Have elytra in your inventory."
+  },
+  {
+    "id": 175,
+    "name": "Kill an Elder Guardian",
+    "desc": "Kill an elder guardian."
+  },
+  {
+    "id": 176,
+    "name": "Obtain a Cake",
+    "desc": "Have a cake in your inventory."
+  },
+  {
+    "id": 177,
+    "name": "Get Name Tag",
+    "desc": "Have a name tag in your inventory."
+  },
+  {
+    "id": 178,
+    "name": "Get Rabbit Foot",
+    "desc": "Have a rabbit's foot in your inventory."
+  },
+  {
+    "id": 179,
+    "name": "Obtain Iron Horse Armor",
+    "desc": "Have iron horse armor in your inventory."
+  },
+  {
+    "id": 180,
+    "name": "Get Bone Block",
+    "desc": "Have a bone block in your inventory."
+  },
+  {
+    "id": 181,
+    "name": "Obtain a Cobweb",
+    "desc": "Have a cobweb in your inventory."
+  },
+  {
+    "id": 182,
+    "name": "Kill a Blaze with Snowballs",
+    "desc": "Kill a blaze with a snowball as the finishing hit."
+  },
+  {
+    "id": 183,
+    "name": "Die by an Anvil",
+    "desc": "Be killed by a falling anvil."
+  },
+  {
+    "id": 184,
+    "name": "Use Compass on Lodestone",
+    "desc": "Create a lodestone compass."
+  },
+  {
+    "id": 185,
+    "name": "Get a Stack of Eggs",
+    "desc": "Have 10 eggs in your inventory."
+  },
+  {
+    "id": 186,
+    "name": "Get a Stack of Black Wool",
+    "desc": "Have 64 black wool in your inventory."
+  },
+  {
+    "id": 187,
+    "name": "Obtain a Stack of Snow Blocks",
+    "desc": "Have 64 snow blocks in your inventory."
+  },
+  {
+    "id": 188,
+    "name": "Stack of Blue Concrete",
+    "desc": "Have 64 blue concrete in your inventory."
+  },
+  {
+    "id": 189,
+    "name": "Get a Stack of Ink Sacks",
+    "desc": "Have 64 ink sacs in your inventory."
+  },
+  {
+    "id": 190,
+    "name": "Get Blue Ice",
+    "desc": "Have blue ice in your inventory."
+  },
+  {
+    "id": 191,
+    "name": "Get Mud Bricks",
+    "desc": "Have mud bricks in your inventory."
+  },
+  {
+    "id": 192,
+    "name": "Obtain Powdered Snow Bucket",
+    "desc": "Have a powder snow bucket in your inventory."
+  },
+  {
+    "id": 193,
+    "name": "Obtain an Echo Shard",
+    "desc": "Have an echo shard in your inventory."
+  },
+  {
+    "id": 194,
+    "name": "Obtain a Disc Fragment",
+    "desc": "Have a disc fragment 5 in your inventory."
+  },
+  {
+    "id": 195,
+    "name": "Lion Hunter",
+    "desc": "Gain the trust of an ocelot."
+  },
+  {
+    "id": 196,
+    "name": "Leader of the Pack",
+    "desc": "Tame five wolves."
+  },
+  {
+    "id": 197,
+    "name": "Where Have You Been?",
+    "desc": "Receive a gift from a tamed cat in the morning."
+  },
+  {
+    "id": 198,
+    "name": "Kill a Pufferfish",
+    "desc": "Kill a pufferfish."
+  },
+  {
+    "id": 200,
+    "name": "Eat Glow Berry",
+    "desc": "Eat a glow berry."
+  }
+]
