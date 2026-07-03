@@ -135,12 +135,34 @@
       text-decoration: none;
       padding: 10px 22px;
       font-family: 'VT323', monospace;
-      font-size: 1.1rem;
+      font-size: 1.5rem;
+      font-weight: bold;
       letter-spacing: 1px;
       background: linear-gradient(45deg, #FFC107, #F9A825);
       color: #4a4a4a;
       border: 6px solid #F57F17;
       cursor: pointer;
+    }
+
+    /* Center the seed generator button */
+    #generateSeedBtn {
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* Discord button inside the Community modal */
+    .discord-join {
+      display: flex;
+      justify-content: center;
+    }
+
+    .discord-join a {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: center;
+      text-decoration: none;
+      font-size: 2rem;
     }
 
     /* Seed generator modal specific */
@@ -347,7 +369,7 @@
       <h2>Join the Community</h2>
       <p>Lockout is hosted and supported through the Bedrock Ranked Discord server. Join to get updates, report bugs, and play with others.</p>
       <div class="discord-join" style="margin-top: 20px;">
-        <a href="https://discord.gg/KxDWCkuDj3" target="_blank" rel="noopener noreferrer">Join the Discord Server</a>
+        <a class="blocky-btn discord-btn" href="https://discord.gg/KxDWCkuDj3" target="_blank" rel="noopener noreferrer">Join the Discord Server</a>
       </div>
       <button class="blocky-btn close-btn" style="margin-top: 20px;" onclick="closeModal('communityModal')">Close</button>
     </div>
