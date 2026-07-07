@@ -2,51 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Village Seed Generator, Minecraft Bedrock Speedrunning</title>
+  <title>Buried Treasure Seed Generator, Latest Bedrock Version</title>
 
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Generate Village FSG seeds for Minecraft Bedrock Edition speedrunning. Free seed generation built for village focused speedrun categories.">
-  <meta name="keywords" content="village seed generator, minecraft village speedrun, bedrock village seed, mcbe fsg village">
+  <meta name="description" content="Generate Buried Treasure seeds for the latest version of Minecraft Bedrock Edition speedrunning. Free FSG seed generator for current game versions.">
+  <meta name="keywords" content="buried treasure seed, minecraft treasure speedrun, bedrock buried treasure fsg, mcbe treasure seed generator">
   <meta name="author" content="ma_ehy">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://minecraft-fsg.com/pages/village.html">
+  <link rel="canonical" href="https://minecraft-fsg.com/pages/buried-treasure.html">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Village Seed Generator, Minecraft Bedrock Speedrunning">
-  <meta property="og:description" content="Generate Village FSG seeds for Minecraft Bedrock Edition speedrunning. Free seed generation built for village focused speedrun categories.">
-  <meta property="og:url" content="https://minecraft-fsg.com/pages/village.html">
+  <meta property="og:title" content="Buried Treasure Seed Generator, Latest Bedrock Version">
+  <meta property="og:description" content="Generate Buried Treasure seeds for the latest version of Minecraft Bedrock Edition speedrunning. Free FSG seed generator for current game versions.">
+  <meta property="og:url" content="https://minecraft-fsg.com/pages/buried-treasure.html">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://minecraft-fsg.com/styles/images/village.png">
+  <meta property="og:image" content="https://minecraft-fsg.com/styles/images/bt-panorama.jpg">
   <meta property="og:site_name" content="MCBE FSG Generator">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Village Seed Generator, Minecraft Bedrock Speedrunning">
-  <meta name="twitter:description" content="Generate Village FSG seeds for Minecraft Bedrock Edition speedrunning. Free seed generation built for village focused speedrun categories.">
-  <meta name="twitter:image" content="https://minecraft-fsg.com/styles/images/village.png">
+  <meta name="twitter:title" content="Buried Treasure Seed Generator, Latest Bedrock Version">
+  <meta name="twitter:description" content="Generate Buried Treasure seeds for the latest version of Minecraft Bedrock Edition speedrunning. Free FSG seed generator for current game versions.">
+  <meta name="twitter:image" content="https://minecraft-fsg.com/styles/images/bt-panorama.jpg">
   <link rel="icon" type="image/x-icon" href="../styles/favicons/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles/main.css">
   <style>
     body::before {
-      background-image: url('../styles/images/village-panorama.jpg');
+      background-image: url('../styles/images/bt-panorama.jpg');
     }
   </style>
 </head>
 <body>
   <div class="page-container">
     <!-- Visually hidden H1 for SEO, matches title image -->
-    <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">Village Seed Generator</h1>
+    <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">Buried Treasure Seed Generator</h1>
 
-    <img src="../styles/images/village.png" alt="Village Seed Generator Title" class="title-image">
+    <img src="../styles/images/buried-treasure.png" alt="Buried Treasure Title" class="title-image">
     <div class="container">
-      <button class="blocky-btn" id="villageSeedBtn">Generate Seed</button>
-      <div class="download-box" id="villageDownloadBox">
-        <a href="../packs/vilFSG.mcpack" download class="blocky-btn filter-btn">Download Village FSG Pack</a>
-        <button class="info-icon-btn" id="packInfoBtn">ⓘ</button>
-      </div>
-      <div class="seed-box" id="villageSeedBox"></div>
+      <button class="blocky-btn" id="treasureSeedBtn">Generate Seed</button>
+      <div class="seed-box" id="treasureSeedBox"></div>
       <div class="button-row" id="copyBtnRow" style="display: none;">
         <button class="blocky-btn copy-btn" id="copyBtn">Copy Seed</button>
       </div>
@@ -57,23 +53,16 @@
         <a class="blocky-btn back-btn" href="../index.html">← Back</a>
         <a class="blocky-btn help-btn" href="help.html">Help</a>
       </div>
-      <div class="packless-warning">Warning: This mode requires the above pack to work as intended. If you cannot download the pack, you can find the packless modes <a href="packless.html">here</a>.</div>
+      <div class="packless-warning">Warning: this mode is still in beta. The seeds might not work as intended (bt should always be at 8 8).</div>
     </div>
     <div class="discord discord-page">
       <a href="https://discord.gg/Hngq5zYw3k" target="_blank" rel="noopener noreferrer">Join the Discord for any questions, feedback and info.</a>
     </div>
-    <!-- Pack Info Modal -->
-    <div class="modal-overlay" id="packInfoModal">
-      <div class="sign-modal">
-        <h2>Village FSG Pack</h2>
-        <p>The Village, Desert Temple and Structureless pack forces many lava pools to generate near spawn and guarantees iron from desert temple, making entering the nether possible in all seeds. EXPERIMENTAL GAMEPLAY IS REQUIRED TO BE TURNED ON DURING WORLD CREATION!</p>
-        <button class="blocky-btn close-btn" onclick="closePackInfo()">Close</button>
-      </div>
-    </div>
   </div>
 </div>
+
 <script>
-    let villageSeeds = [];
+    let treasureSeeds = [];
     const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxMxZ9zStBmy6ERJk1ne6_-zH8eOEce5ISf_wcWYmq2tHYhrwKmNSaYZ_LzDYEHQn3mIQ/exec';
     let cooldownActive = false;
     let cooldownTime = 10;
@@ -104,10 +93,10 @@
 
     async function loadSeeds() {
       try {
-        const response = await fetch("../seeds/village.json");
+        const response = await fetch("../seeds/buried-treasure.json");
         const seedText = await response.text();
-        villageSeeds = JSON.parse(seedText.replace(/-?\d+/g, m => '"' + m + '"'));
-        document.getElementById("villageSeedBtn").disabled = false;
+        treasureSeeds = JSON.parse(seedText.replace(/-?\d+/g, m => '"' + m + '"'));
+        document.getElementById("treasureSeedBtn").disabled = false;
       } catch (err) {
         console.error("Error loading seeds:", err);
       }
@@ -121,7 +110,7 @@
     function startCooldown() {
       cooldownActive = true;
       let timeLeft = cooldownTime;
-      const btn = document.getElementById('villageSeedBtn');
+      const btn = document.getElementById('treasureSeedBtn');
       const container = document.getElementById('cooldownContainer');
       const bar = document.getElementById('cooldownBar');
 
@@ -133,7 +122,7 @@
         timeLeft--;
         const percentage = (timeLeft / cooldownTime) * 100;
         bar.style.width = percentage + '%';
-        
+
         if (timeLeft <= 0) {
           clearInterval(interval);
           btn.disabled = false;
@@ -143,22 +132,20 @@
       }, 1000);
     }
 
-    document.getElementById('villageSeedBtn').addEventListener('click', () => {
-      if (!cooldownActive && villageSeeds.length > 0) {
-        const seedBox = document.getElementById('villageSeedBox');
-        const downloadBox = document.getElementById('villageDownloadBox');
-        const seed = getRandomSeed(villageSeeds);
+    document.getElementById('treasureSeedBtn').addEventListener('click', () => {
+      if (!cooldownActive && treasureSeeds.length > 0) {
+        const seedBox = document.getElementById('treasureSeedBox');
+        const seed = getRandomSeed(treasureSeeds);
         seedBox.textContent = seed;
         seedBox.style.display = 'flex';
         document.getElementById('copyBtnRow').style.display = 'flex';
-        downloadBox.style.display = 'none';
-        logToGoogleSheet(seed, 'Village');
+        logToGoogleSheet(seed, 'Buried Treasure');
         startCooldown();
       }
     });
 
-    document.getElementById('villageSeedBox').addEventListener('dblclick', () => {
-      const box = document.getElementById('villageSeedBox');
+    document.getElementById('treasureSeedBox').addEventListener('dblclick', () => {
+      const box = document.getElementById('treasureSeedBox');
       const seed = box.textContent.trim();
       if (seed !== "" && seed !== "Seed copied!") {
         navigator.clipboard.writeText(seed).then(() => {
@@ -174,7 +161,7 @@
 
     document.addEventListener('click', (e) => {
       if (e.target && e.target.id === 'copyBtn') {
-        const box = document.getElementById('villageSeedBox');
+        const box = document.getElementById('treasureSeedBox');
         const seed = box.textContent.trim();
         if (seed !== "" && seed !== "Seed copied!") {
           navigator.clipboard.writeText(seed).then(() => {
@@ -189,26 +176,8 @@
       }
     });
 
-    // Pack info modal
-    document.getElementById('packInfoBtn').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById('packInfoModal').classList.add('show');
-    });
-
-    function closePackInfo() {
-      document.getElementById('packInfoModal').classList.remove('show');
-    }
-
-    // Close on overlay click
-    document.getElementById('packInfoModal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closePackInfo();
-      }
-    });
-
-    document.getElementById("villageSeedBtn").disabled = true;
+    document.getElementById("treasureSeedBtn").disabled = true;
     loadSeeds();
   </script>
 </body>
-
 </html>

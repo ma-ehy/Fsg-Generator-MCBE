@@ -2,34 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Minecraft Bedrock 1.16 FSG Seed Generator</title>
+  <title>Minecraft Bedrock FSG Seed Generator for Speedrunning</title>
 
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Free FSG seed generator for Minecraft Bedrock Edition 1.16. Generate seeds for Stronghold Village, Ruined Portal, Desert Temple, Shipwreck and more. Built for MCBE speedrunners.">
-  <meta name="keywords" content="Minecraft Bedrock FSG, MCBE seed generator, 1.16 speedrun seeds, stronghold village seed, ruined portal seed, bedrock speedrunning, FSG generator, MCBE 1.16, minecraft speedrun seeds bedrock">
+  <meta name="description" content="Free FSG seed generator for Minecraft Bedrock Edition. Generate Stronghold Village, Ruined Portal, Desert Temple, Bastion, Ranked and Lockout speedrun seeds.">
+  <meta name="keywords" content="minecraft bedrock fsg, mcbe seed generator, speedrun seeds bedrock, stronghold village seed, ruined portal seed, bastion seed, ranked minecraft speedrun, lockout bingo minecraft, minecraft speedrunning tools">
   <meta name="author" content="ma_ehy">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://ma-ehy.github.io/Fsg-Generator-MCBE/">
+  <link rel="canonical" href="https://minecraft-fsg.com/">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Minecraft Bedrock 1.16 FSG Seed Generator">
-  <meta property="og:description" content="Generate FSG seeds for MCBE 1.16 speedrunning. Stronghold Village, Ruined Portal, Ranked and more. Over 417,000 seeds available.">
-  <meta property="og:url" content="https://ma-ehy.github.io/Fsg-Generator-MCBE/">
+  <meta property="og:title" content="Minecraft Bedrock FSG Seed Generator for Speedrunning">
+  <meta property="og:description" content="Free FSG seed generator for Minecraft Bedrock Edition. Generate Stronghold Village, Ruined Portal, Desert Temple, Bastion, Ranked and Lockout speedrun seeds.">
+  <meta property="og:url" content="https://minecraft-fsg.com/">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://ma-ehy.github.io/Fsg-Generator-MCBE/styles/images/logo.png">
+  <meta property="og:image" content="https://minecraft-fsg.com/styles/images/logo.png">
   <meta property="og:site_name" content="MCBE FSG Generator">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Minecraft Bedrock 1.16 FSG Seed Generator">
-  <meta name="twitter:description" content="Generate FSG seeds for MCBE 1.16 speedrunning. Over 417,000 seeds available.">
-  <meta name="twitter:image" content="https://ma-ehy.github.io/Fsg-Generator-MCBE/styles/images/logo.png">
+  <meta name="twitter:title" content="Minecraft Bedrock FSG Seed Generator for Speedrunning">
+  <meta name="twitter:description" content="Free FSG seed generator for Minecraft Bedrock Edition. Generate Stronghold Village, Ruined Portal, Desert Temple, Bastion, Ranked and Lockout speedrun seeds.">
+  <meta name="twitter:image" content="https://minecraft-fsg.com/styles/images/logo.png">
 
   <!-- Favicons -->
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="styles/favicons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="styles/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="styles/favicons/favicon-16x16.png">
+  <link rel="shortcut icon" href="styles/favicons/favicon.ico">
 
   <!-- Viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,7 +44,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Minecraft Bedrock 1.16 FSG Seed Generator",
-    "url": "https://ma-ehy.github.io/Fsg-Generator-MCBE/",
+    "url": "https://minecraft-fsg.com/",
     "description": "Free FSG seed generator for Minecraft Bedrock Edition 1.16. Generate seeds for Stronghold Village, Ruined Portal, Desert Temple, Shipwreck and more. Built for MCBE speedrunners.",
     "applicationCategory": "GameApplication",
     "operatingSystem": "Any",
@@ -67,6 +67,7 @@
       "Shipwreck seeds",
       "Village seeds",
       "Structureless seeds",
+      "Buried Treasure seeds",
       "Classic FSG seeds",
       "Solo Ranked seeds",
       "Over 417000 seeds available"
@@ -75,41 +76,50 @@
   }
   </script>
 </head>
-<body>
-  <!-- Visually hidden H1 for SEO — matches logo content -->
+<body style="padding-top: 5px;">
+  <!-- Visually hidden H1 for SEO , matches logo content -->
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">Minecraft Bedrock 1.16 FSG Seed Generator</h1>
 
   <div class="page-container">
-    <a href="https://www.speedrun.com/bfsg" target="_blank" rel="noopener noreferrer">
-      <img src="styles/images/subtitle.png" alt="Subtitle" class="subtitle-image">
-    </a>
     <img src="styles/images/logo.png" alt="Minecraft Bedrock 1.16 FSG Seed Generator Logo" class="logo-image">
     
     <div class="content-wrapper">
       <!-- Left Column - Main Filters -->
       <div class="left-column">
         <div class="filter-box">
-          <div class="filter-title">Choose a Filter</div>
-          <div class="filter-grid">
-            <button class="blocky-btn filter-btn" data-page="stronghold">Stronghold Village</button>
-            <button class="blocky-btn filter-btn red-btn" data-page="ruined-portal">Ruined Portal</button>
-            <button class="blocky-btn filter-btn dark-blue-btn" data-page="ranked">Play Solo Ranked</button>
-          </div>
-          <!-- Miscellaneous Toggle Button -->
-          <div class="misc-container">
-            <button class="blocky-btn filter-btn bronze-btn misc-toggle-btn" id="miscToggle">
-              <span id="miscText">More Filters</span>
-              <span id="miscArrow">▼</span>
+          <div class="filter-title">Choose a Version</div>
+
+          <div class="version-toggle-group">
+            <button class="blocky-btn filter-btn green-btn version-toggle-btn" id="latestToggle" data-target="latestExpanded">
+              <span>Latest</span>
+              <span class="toggle-arrow" id="latestArrow">▼</span>
             </button>
+            <div class="misc-expanded" id="latestExpanded">
+              <a class="blocky-btn filter-btn mode-bastion" href="pages/bastion.html">Bastion</a>
+              <a class="blocky-btn filter-btn mode-warped" href="pages/warped.html">Warped Forest</a>
+              <a class="blocky-btn filter-btn mode-portal-latest" href="pages/ruined-portal-latest.html">Ruined Portal</a>
+              <a class="blocky-btn filter-btn mode-treasure" href="pages/buried-treasure.html">Buried Treasure</a>
+            </div>
+
+            <button class="blocky-btn filter-btn red-btn version-toggle-btn" id="v116Toggle" data-target="v116Expanded">
+              <span>1.16</span>
+              <span class="toggle-arrow" id="v116Arrow">▼</span>
+            </button>
+            <div class="misc-expanded" id="v116Expanded">
+              <a class="blocky-btn filter-btn mode-stronghold" href="pages/stronghold.html">Stronghold Village</a>
+              <a class="blocky-btn filter-btn mode-portal" href="pages/ruined-portal.html">Ruined Portal</a>
+              <a class="blocky-btn filter-btn mode-packless" href="pages/packless-stronghold.html">Packless Stronghold Village</a>
+              <a class="blocky-btn filter-btn mode-village" href="pages/village.html">Village</a>
+              <a class="blocky-btn filter-btn mode-desert" href="pages/desert-temple.html">Desert Temple</a>
+              <a class="blocky-btn filter-btn mode-classic" href="pages/classic.html">Classic</a>
+              <a class="blocky-btn filter-btn mode-structureless" href="pages/structureless.html">Structureless</a>
+              <a class="blocky-btn filter-btn mode-shipwreck" href="pages/shipwreck.html">Shipwreck</a>
+            </div>
           </div>
 
-          <div class="misc-expanded" id="miscExpanded">
-            <button class="blocky-btn filter-btn blue-btn" data-page="packless-stronghold">Packless Stronghold Village</button>
-            <button class="blocky-btn filter-btn orange-btn" data-page="village">Village</button>
-            <button class="blocky-btn filter-btn purple-btn" data-page="structureless">Structureless</button>
-            <button class="blocky-btn filter-btn gold-btn" data-page="classic">Classic</button>
-            <button class="blocky-btn filter-btn silver-btn" data-page="desert-temple">Desert Temple</button>
-            <button class="blocky-btn filter-btn brown-btn" data-page="shipwreck">Shipwreck</button>
+          <div class="play-buttons">
+            <a class="blocky-btn play-btn blue-btn" href="pages/ranked.html">Play Ranked</a>
+            <a class="blocky-btn play-btn light-blue-btn" href="lockout.html">Play Lockout</a>
           </div>
         </div>
       </div>
@@ -117,9 +127,9 @@
       <!-- Right Column - Resources -->
       <div class="right-column">
         <div class="resources-box">
-          <button class="blocky-btn resource-btn" data-page="help">Help</button>
-          <button class="blocky-btn resource-btn" data-page="tutorials">Tutorials</button>
-          <button class="blocky-btn resource-btn" data-page="resources">Resources</button>
+          <a class="blocky-btn resource-btn" href="pages/help.html">Help</a>
+          <a class="blocky-btn resource-btn" href="pages/tutorials.html">Tutorials</a>
+          <a class="blocky-btn resource-btn" href="pages/resources.html">Resources</a>
         </div>
 
         <!-- Bottom buttons -->
@@ -135,7 +145,6 @@
         </div>
       </div>
     </div>
-
 
     <!-- Leaderboard Footer -->
     <div class="leaderboard-footer">
@@ -209,30 +218,7 @@
     </div>
   </div>
 
-  <!-- Feedback Popup -->
-  <div class="feedback-popup" id="feedbackPopup">
-    <div class="feedback-content">
-      <p>Have any feedback or stuff you'd like to be added? Join the discord or contact me at maehy56@gmail.com!</p>
-      <button class="feedback-close" onclick="closeFeedback()">✕</button>
-    </div>
-  </div>
-
-  <!-- Help/Feedback Modal -->
-  <div class="modal-overlay" id="helpModal">
-    <div class="sign-modal">
-      <h2>Help &amp; Feedback</h2>
-      <p>Hey! Do you want to help in any way this website or my other projects to improve?</p>
-      <p>Contact me on Discord (<strong>ma_ehy</strong>), or join the server or email me at <strong>maehy56@gmail.com</strong> with your ideas or feedback!</p>
-      <button class="blocky-btn close-btn" onclick="closeModal('helpModal')">Close</button>
-    </div>
-  </div>
-
-  <!-- Wrench Icon Button -->
-  <button class="wrench-btn" id="wrenchBtn" title="Help &amp; Feedback">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-    </svg>
-  </button>
+</div>
 
   <script src="scripts/navigation.js"></script>
 </body>

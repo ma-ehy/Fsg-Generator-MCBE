@@ -1,27 +1,11 @@
 // Navigation handler for the FSG Generator
 
-// Page routing configuration
-const pages = {
-  'stronghold': 'pages/stronghold.html',
-  'ruined-portal': 'pages/ruined-portal.html',
-  'ranked': 'pages/ranked.html',
-  'packless-stronghold': 'pages/packless-stronghold.html',
-  'village': 'pages/village.html',
-  'classic': 'pages/classic.html',
-  'structureless': 'pages/structureless.html',
-  'desert-temple': 'pages/desert-temple.html',
-  'shipwreck': 'pages/shipwreck.html',
-  'help': 'pages/help.html',
-  'tutorials': 'pages/tutorials.html',
-  'resources': 'pages/resources.html'
-};
-
 // Create audio objects for chest sounds
-const chestOpenSound = new Audio('./chest_open.ogg');
-const chestCloseSound = new Audio('./chest_close.ogg');
+const chestOpenSound = new Audio('./sounds/chest_open.ogg');
+const chestCloseSound = new Audio('./sounds/chest_close.ogg');
 
 // Create audio object for menu clicks
-const menuClickSound = new Audio('./menu_click.ogg');
+const menuClickSound = new Audio('./sounds/menu_click.ogg');
 
 // Set volume for chest sounds (lower volume)
 chestOpenSound.volume = 0.33;
@@ -31,35 +15,14 @@ chestCloseSound.volume = 0.33;
 document.addEventListener('DOMContentLoaded', () => {
   setupNavigation();
   setupMiscToggle();
+  setupVersionToggles();
   setupModalHandlers();
   setupModalButtons(); 
 });
 
 function setupNavigation() {
-  // Add click handlers to all buttons with data-page attribute
-  const navButtons = document.querySelectorAll('[data-page]');
-  
-  navButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-      e.preventDefault();
-      const page = button.getAttribute('data-page');
-      
-      // Check if it's a modal page
-      if (page === 'stats') {
-        menuClickSound.currentTime = 0;
-        menuClickSound.play();
-        document.getElementById('statsModal').classList.add('show');
-        loadStats();
-      } else if (page === 'credits') {
-        menuClickSound.currentTime = 0;
-        menuClickSound.play();
-        document.getElementById('creditsModal').classList.add('show');
-      } else {
-        // Navigate to page
-        navigateTo(page);
-      }
-    });
-  });
+  // Internal navigation now uses real <a href> links (crawlable by search
+  // engines without JS). Nothing left to wire up here for page navigation.
 }
 
 function setupMiscToggle() {
@@ -84,6 +47,36 @@ function setupMiscToggle() {
   }
 }
 
+function setupVersionToggles() {
+  // Generic accordion handler for the "1.16" and "Latest" version dropdowns
+  // on the homepage. Any button with class "version-toggle-btn" and a
+  // "data-target" attribute pointing to the id of the panel it controls
+  // will work with this automatically.
+  const toggles = document.querySelectorAll('.version-toggle-btn');
+
+  toggles.forEach(toggle => {
+    const targetId = toggle.getAttribute('data-target');
+    const expanded = targetId ? document.getElementById(targetId) : null;
+
+    if (!expanded) return;
+
+    toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggle.classList.toggle('active');
+      expanded.classList.toggle('show');
+
+      // Play the appropriate chest sound based on the new state
+      if (expanded.classList.contains('show')) {
+        chestOpenSound.currentTime = 0;
+        chestOpenSound.play();
+      } else {
+        chestCloseSound.currentTime = 0;
+        chestCloseSound.play();
+      }
+    });
+  });
+}
+
 function setupModalHandlers() {
   // Close modal when clicking outside
   document.querySelectorAll('.modal-overlay').forEach(overlay => {
@@ -93,16 +86,6 @@ function setupModalHandlers() {
       }
     });
   });
-}
-
-function navigateTo(pageName) {
-  const pageUrl = pages[pageName];
-  
-  if (pageUrl) {
-    window.location.href = pageUrl;
-  } else {
-    console.error(`Page not found: ${pageName}`);
-  }
 }
 
 // Modal functions
@@ -145,9 +128,4 @@ function setupModalButtons() {
     });
   });
 }
-
-// Wrench button handler
-document.getElementById('wrenchBtn')?.addEventListener('click', function() {
-  document.getElementById('helpModal').classList.add('show');
-});
 

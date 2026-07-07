@@ -76,7 +76,7 @@ body::before {
   align-items: center;
 }
 
-h1 {
+h1, h2.generator-title {
   text-align: center;
   font-family: 'VT323', monospace;
   font-size: 4rem;
@@ -121,7 +121,7 @@ h1 {
 .filter-box {
   background: #2C2C2C; /* Dark gray instead of light gray */
   border: 8px solid var(--minecraft-dark-gray);
-  padding: 30px;
+  padding: 20px;
   box-shadow: 
     inset 4px 4px 8px rgba(0,0,0,0.5), /* Darker inset shadows */
     inset -4px -4px 8px rgba(255,255,255,0.1),
@@ -151,7 +151,7 @@ h1 {
   font-size: 2.5rem;
   color: #E0E0E0; /* Light text on dark background */
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   letter-spacing: 2px;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
 }
@@ -177,6 +177,9 @@ h1 {
 
 /* Blocky Button Styles - Exact replica from original */
 .blocky-btn {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
   font-size: 2.5rem;
   background: linear-gradient(45deg, #4CAF50, #388E3C);
   color: var(--minecraft-white);
@@ -264,7 +267,7 @@ h1 {
 }
 
 .misc-expanded.show {
-  max-height: 600px;
+  max-height: 800px;
   opacity: 1;
   margin-top: 20px;
 }
@@ -273,11 +276,6 @@ h1 {
   font-size: 1.6rem;
   padding: 10px 20px;
   width: 100%;
-}
-.misc-expanded.show {
-  max-height: 600px;
-  opacity: 1;
-  margin-top: 20px;
 }
 
 /* Color variants */
@@ -382,6 +380,19 @@ h1 {
   background: #0A3D91;
 }
 
+.green-btn {
+  background: linear-gradient(45deg, var(--minecraft-green), var(--minecraft-dark-green));
+  border-color: var(--minecraft-dark-green);
+}
+
+.green-btn:hover:not([disabled]) {
+  background: linear-gradient(45deg, var(--minecraft-dark-green), var(--minecraft-green));
+}
+
+.green-btn:active:not([disabled]) {
+  background: var(--minecraft-dark-green);
+}
+
 .silver-btn {
   background: linear-gradient(45deg, 
     #D9BF89, 
@@ -479,6 +490,13 @@ h1 {
   position: relative;
 }
 
+/* Standalone discord box shown below the generator .container on seed pages */
+.discord-page {
+  max-width: 600px;
+  width: 90vw;
+  margin: 20px auto 0;
+}
+
 .discord a {
   color: var(--minecraft-blue);
   text-decoration: none;
@@ -539,7 +557,7 @@ h1 {
     padding: 10px;
   }
   
-  h1 {
+  h1, h2.generator-title {
     font-size: 2.5rem;
     margin: 10px auto 20px;
     padding: 15px 20px;
@@ -562,7 +580,7 @@ h1 {
 }
 
 @media (max-width: 480px) {
-  h1 {
+  h1, h2.generator-title {
     font-size: 2rem;
     padding: 10px 15px;
   }
@@ -605,47 +623,95 @@ h1 {
   background: #4f4f50;
 }
 
-/* Packless Stronghold - Light Blue-Purple */
-.misc-expanded .blue-btn {
-  background: linear-gradient(45deg, #7E57C2, #5E35B1);
-  border-color: #512DA8;
-}
+/* ===== Progressive gradient ("mode") palette =====
+   "Latest" row (Bastion -> Warped -> Ruined Portal -> Buried Treasure)
+   sweeps green to red. "1.16 Modes" row (Stronghold -> ... -> Shipwreck)
+   sweeps red to the same blue used on the lockout page, so each row reads
+   as one smooth, vivid, uniform gradient instead of unrelated colors. */
 
-.misc-expanded .blue-btn:hover:not([disabled]) {
-  background: linear-gradient(45deg, #5E35B1, #7E57C2);
+.mode-bastion {
+  background: linear-gradient(45deg, #49DF49, #20B620);
+  border-color: #188B18;
 }
+.mode-bastion:hover:not([disabled]) { background: linear-gradient(45deg, #20B620, #49DF49); }
+.mode-bastion:active:not([disabled]) { background: #188B18; }
 
-.misc-expanded .blue-btn:active:not([disabled]) {
-  background: #4527A0;
+.mode-warped {
+  background: linear-gradient(45deg, #A9DF49, #81B620);
+  border-color: #628B18;
 }
+.mode-warped:hover:not([disabled]) { background: linear-gradient(45deg, #81B620, #A9DF49); }
+.mode-warped:active:not([disabled]) { background: #628B18; }
 
-/* Village - Orange-Purple */
-.misc-expanded .orange-btn {
-  background: linear-gradient(45deg, #EC407A, #D81B60);
-  border-color: #C2185B;
+.mode-portal-latest {
+  background: linear-gradient(45deg, #DFB449, #B68B20);
+  border-color: #8B6A18;
 }
+.mode-portal-latest:hover:not([disabled]) { background: linear-gradient(45deg, #B68B20, #DFB449); }
+.mode-portal-latest:active:not([disabled]) { background: #8B6A18; }
 
-.misc-expanded .orange-btn:hover:not([disabled]) {
-  background: linear-gradient(45deg, #D81B60, #EC407A);
+.mode-treasure {
+  background: linear-gradient(45deg, #DF5349, #B62A20);
+  border-color: #8B2018;
 }
+.mode-treasure:hover:not([disabled]) { background: linear-gradient(45deg, #B62A20, #DF5349); }
+.mode-treasure:active:not([disabled]) { background: #8B2018; }
 
-.misc-expanded .orange-btn:active:not([disabled]) {
-  background: #AD1457;
+.mode-stronghold {
+  background: linear-gradient(45deg, #DF5349, #B62A20);
+  border-color: #8B2018;
 }
+.mode-stronghold:hover:not([disabled]) { background: linear-gradient(45deg, #B62A20, #DF5349); }
+.mode-stronghold:active:not([disabled]) { background: #8B2018; }
 
-/* Structureless - Between Village and Desert Temple (peachy/warm) */
-.misc-expanded .purple-btn {
-  background: linear-gradient(45deg, #FF8A65, #F4511E);
-  border-color: #E64A19;
+.mode-portal {
+  background: linear-gradient(45deg, #DF9949, #B67020);
+  border-color: #8B5518;
 }
+.mode-portal:hover:not([disabled]) { background: linear-gradient(45deg, #B67020, #DF9949); }
+.mode-portal:active:not([disabled]) { background: #8B5518; }
 
-.misc-expanded .purple-btn:hover:not([disabled]) {
-  background: linear-gradient(45deg, #F4511E, #FF8A65);
+.mode-packless {
+  background: linear-gradient(45deg, #DFDE49, #B6B520);
+  border-color: #8B8A18;
 }
+.mode-packless:hover:not([disabled]) { background: linear-gradient(45deg, #B6B520, #DFDE49); }
+.mode-packless:active:not([disabled]) { background: #8B8A18; }
 
-.misc-expanded .purple-btn:active:not([disabled]) {
-  background: #D84315;
+.mode-village {
+  background: linear-gradient(45deg, #9ADF49, #71B620);
+  border-color: #568B18;
 }
+.mode-village:hover:not([disabled]) { background: linear-gradient(45deg, #71B620, #9ADF49); }
+.mode-village:active:not([disabled]) { background: #568B18; }
+
+.mode-desert {
+  background: linear-gradient(45deg, #55DF49, #2CB620);
+  border-color: #218B18;
+}
+.mode-desert:hover:not([disabled]) { background: linear-gradient(45deg, #2CB620, #55DF49); }
+.mode-desert:active:not([disabled]) { background: #218B18; }
+
+.mode-classic {
+  background: linear-gradient(45deg, #49DF83, #20B65A);
+  border-color: #188B44;
+}
+.mode-classic:hover:not([disabled]) { background: linear-gradient(45deg, #20B65A, #49DF83); }
+.mode-classic:active:not([disabled]) { background: #188B44; }
+
+.mode-structureless {
+  background: linear-gradient(45deg, #49DFC8, #20B69F);
+  border-color: #188B79;
+}
+.mode-structureless:hover:not([disabled]) { background: linear-gradient(45deg, #20B69F, #49DFC8); }
+.mode-structureless:active:not([disabled]) { background: #188B79; }
+
+.mode-shipwreck {
+  background: linear-gradient(45deg, #49B0DF, #2087B6);
+  border-color: #18678B;
+}
+.mode-shipwreck:hover:not([disabled]) { background: linear-gradient(45deg, #2087B6, #49B0DF); }
+.mode-shipwreck:active:not([disabled]) { background: #18678B; }
 
 .container {
   max-width: 600px;
@@ -1019,6 +1085,7 @@ h1 {
   margin: 20px auto 40px;
   display: block;
   image-rendering: pixelated;
+  transform: translateY(-10px);
 }
 
 @media (max-width: 768px) {
@@ -1203,25 +1270,12 @@ h1 {
 
 /* --- New additions --- */
 
-.subtitle-image {
-  max-width: 600px;
-  width: 100%;
-  display: block;
-  margin: -20px auto 30px;
-  image-rendering: pixelated;
-}
-
 .leaderboard a {
   color: #FFD700;
 }
 
 .leaderboard a:hover {
   color: #FFF8DC;
-}
-
-.subtitle-image {
-  max-width: 800px !important;
-  margin: -50px auto 20px !important;
 }
 
 .leaderboard-footer {
@@ -1267,13 +1321,127 @@ h1 {
   background: var(--minecraft-dark-green) !important;
 }
 
-.subtitle-image {
-  max-width: 900px !important;
-  width: 90% !important;
-  margin: 0px auto 0 !important;
-  display: block !important;
-}
-
 .logo-image {
   margin-top: 10px;
+}
+
+/* ===== Version Chooser (index.html main box) ===== */
+
+.version-toggle-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.version-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.toggle-arrow {
+  transition: transform 0.3s ease;
+  font-size: 1.6rem;
+}
+
+.version-toggle-btn.active .toggle-arrow {
+  transform: rotate(180deg);
+}
+
+.version-toggle-group .misc-expanded {
+  margin-top: 0;
+}
+
+.version-toggle-group .misc-expanded.show {
+  margin-top: 15px;
+  margin-bottom: 35px;
+}
+
+.play-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 15px;
+}
+
+.play-btn {
+  width: 100%;
+  font-size: 2.3rem;
+  padding: 22px 30px;
+}
+
+/* Light Blue - Play Lockout */
+.light-blue-btn {
+  background: linear-gradient(45deg, #4FC3F7, #29B6F6);
+  border-color: #0288D1;
+}
+
+.light-blue-btn:hover:not([disabled]) {
+  background: linear-gradient(45deg, #29B6F6, #4FC3F7);
+}
+
+.light-blue-btn:active:not([disabled]) {
+  background: #0288D1;
+}
+
+/* Disabled "coming soon" buttons */
+.blocky-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(30%);
+}
+
+/* Text-based title used on pages that don't have a custom pixel-art title image */
+.page-title-text {
+  font-size: 3.4rem;
+  color: var(--minecraft-white);
+  text-align: center;
+  margin: 20px auto 40px;
+  letter-spacing: 2px;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+}
+
+@media (max-width: 768px) {
+  .play-btn {
+    font-size: 1.9rem;
+    padding: 16px 25px;
+  }
+
+  .page-title-text {
+    font-size: 2.4rem;
+    margin: 10px auto 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .play-btn {
+    font-size: 1.6rem;
+    padding: 12px 20px;
+  }
+
+  .page-title-text {
+    font-size: 1.9rem;
+  }
+}
+
+/* Small yellow notice pointing to the packless modes hub, shown under the
+   seed-generator box on modes that rely on a companion add-on. */
+.packless-warning {
+  font-size: 1.3rem;
+  color: #FFD700;
+  text-align: center;
+  margin-top: 20px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+  line-height: 1.4;
+}
+
+.packless-warning a {
+  color: #FFEB80;
+  text-decoration: underline;
+}
+
+.packless-warning a:hover {
+  color: #FFFFFF;
 }

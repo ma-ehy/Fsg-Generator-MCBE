@@ -2,11 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Help - MCBE 1.16 FSG Generator</title>
-  <link rel="icon" type="image/x-icon" href="../favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
-  <link rel="shortcut icon" href="../favicon.ico">
+  <title>Help and FAQ, Minecraft Bedrock FSG Generator</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Find help and answers for the Minecraft Bedrock FSG Generator. Learn how seed generation, downloads and speedrun categories work.">
+  <meta name="keywords" content="fsg generator help, minecraft bedrock faq, seed generator support, mcbe fsg questions">
+  <meta name="author" content="ma_ehy">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://minecraft-fsg.com/pages/help.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Help and FAQ, Minecraft Bedrock FSG Generator">
+  <meta property="og:description" content="Find help and answers for the Minecraft Bedrock FSG Generator. Learn how seed generation, downloads and speedrun categories work.">
+  <meta property="og:url" content="https://minecraft-fsg.com/pages/help.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://minecraft-fsg.com/styles/images/help.png">
+  <meta property="og:site_name" content="MCBE FSG Generator">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Help and FAQ, Minecraft Bedrock FSG Generator">
+  <meta name="twitter:description" content="Find help and answers for the Minecraft Bedrock FSG Generator. Learn how seed generation, downloads and speedrun categories work.">
+  <meta name="twitter:image" content="https://minecraft-fsg.com/styles/images/help.png">
+  <link rel="icon" type="image/x-icon" href="../styles/favicons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../styles/favicons/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../styles/favicons/favicon.png">
+  <link rel="shortcut icon" href="../styles/favicons/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles/main.css">
@@ -177,7 +198,10 @@
 </head>
 <body>
   <div class="page-container">
-    <img src="help.png" alt="Bedrock 1.16 FSG Generator" class="title-image">
+    <!-- Visually hidden H1 for SEO, matches title image -->
+    <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">Help and FAQ</h1>
+
+    <img src="../styles/images/help.png" alt="Help and FAQ Title" class="title-image">
     
     <div class="help-content">
       <!-- What is FSG Section -->
@@ -281,67 +305,61 @@
         </div>
       </div>
 
+      <div class="mode-section">
+        <button class="mode-toggle" onclick="toggleSection('lockout', this)">
+          <span class="mode-arrow">▶</span>
+          <h2>Lockout</h2>
+        </button>
+        
+        <div id="lockout" class="mode-content">
+          <p>Bedrock Lockout is a speedrun mini-game where you race to complete as many achievements as possible. Completing an achievement will award you a score and that achievement will be locked out for everyone else!</p>
+        </div>
+      </div>
+
+      <div class="mode-section">
+        <button class="mode-toggle" onclick="toggleSection('warped', this)">
+          <span class="mode-arrow">▶</span>
+          <h2>Warped</h2>
+        </button>
+        
+        <div id="warped" class="mode-content">
+          <p>Spawns you near a stronghold village. There will be a fortress and a warped forest in the nether.</p>
+        </div>
+      </div>
+
+      <div class="mode-section">
+        <button class="mode-toggle" onclick="toggleSection('bastionMode', this)">
+          <span class="mode-arrow">▶</span>
+          <h2>Bastion</h2>
+        </button>
+        
+        <div id="bastionMode" class="mode-content">
+          <p>Spawns you near a stronghold village. There will be a fortress and a bastion in the nether.</p>
+        </div>
+      </div>
+
+      <div class="mode-section">
+        <button class="mode-toggle" onclick="toggleSection('buriedTreasure', this)">
+          <span class="mode-arrow">▶</span>
+          <h2>Buried Treasure</h2>
+        </button>
+        
+        <div id="buriedTreasure" class="mode-content">
+          <p>Spawns you near a buried treasure (always at coordinates 8 8) and a ruined portal to enter the nether. There will be a fortress and a warped forest in the nether.</p>
+        </div>
+      </div>
+
       <p style="margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--minecraft-dark-gray); font-style: italic; color: #888;">
         Experiment with different modes to find what works best for you!
       </p>
       
       <div class="navigation-buttons">
-        <button class="blocky-btn back-btn" onclick="window.location.href='../index.html'">← Back to Home</button>
+        <a class="blocky-btn back-btn" href="../index.html">← Back to Home</a>
       </div>
     </div>
   </div>
-<!-- Feedback Popup -->
-<div class="feedback-popup" id="feedbackPopup">
-  <div class="feedback-content">
-    <p>Have any feedback or stuff you'd like to be added? Join the discord or contact me at maehy56@gmail.com!</p>
-    <button class="feedback-close" onclick="closeFeedback()">✕</button>
-  </div>
 </div>
-  <script>
-let feedbackTimer;
-let timeOnPage = 0;
-let feedbackClosed = sessionStorage.getItem('feedbackClosed') === 'true';
-
-function showFeedbackPopup() {
-  if (!feedbackClosed) {
-    document.getElementById('feedbackPopup').classList.add('show');
-    setTimeout(() => {
-      if (document.getElementById('feedbackPopup').classList.contains('show')) {
-        closeFeedback();
-      }
-    }, 7000);
-  }
-}
-
-function closeFeedback() {
-  document.getElementById('feedbackPopup').classList.remove('show');
-  feedbackClosed = true;
-  sessionStorage.setItem('feedbackClosed', 'true');
-  clearInterval(feedbackTimer);
-}
-
-// Close on page click
-document.addEventListener('click', (e) => {
-  const popup = document.getElementById('feedbackPopup');
-  if (popup.classList.contains('show') && !e.target.closest('.feedback-content')) {
-    closeFeedback();
-  }
-});
-
-// Start timer
-if (!feedbackClosed) {
-  feedbackTimer = setInterval(() => {
-    timeOnPage++;
-    if (timeOnPage % 15 === 0) {
-      const chance = Math.random();
-      if (chance < 0.05) {
-        showFeedbackPopup();
-      }
-    }
-  }, 1000);
-}
-  </script>
-  <script>
+<script>
     function toggleSection(sectionId, button) {
       const content = document.getElementById(sectionId);
       content.classList.toggle('show');

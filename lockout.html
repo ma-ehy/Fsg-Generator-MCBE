@@ -2,16 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Lockout Bedrock</title>
-  <link rel="icon" type="image/png" href="../lockicon.png">
-  <link rel="shortcut icon" type="image/png" href="../lockicon.png">
+  <title>Bedrock Lockout, Competitive Minecraft Bingo Minigame</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Play Bedrock Lockout, a competitive bingo style minigame add-on for Minecraft Bedrock Edition. Race the clock or opponents to complete randomized tasks.">
+  <meta name="keywords" content="minecraft lockout, bedrock lockout addon, minecraft bingo minigame, competitive minecraft minigame, lockout tasks generator, minecraft speedrun bingo">
+  <meta name="author" content="ma_ehy">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://minecraft-fsg.com/lockout.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Bedrock Lockout, Competitive Minecraft Bingo Minigame">
+  <meta property="og:description" content="Play Bedrock Lockout, a competitive bingo style minigame add-on for Minecraft Bedrock Edition. Race the clock or opponents to complete randomized tasks.">
+  <meta property="og:url" content="https://minecraft-fsg.com/lockout.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://minecraft-fsg.com/styles/images/lockout.webp">
+  <meta property="og:site_name" content="MCBE FSG Generator">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bedrock Lockout, Competitive Minecraft Bingo Minigame">
+  <meta name="twitter:description" content="Play Bedrock Lockout, a competitive bingo style minigame add-on for Minecraft Bedrock Edition. Race the clock or opponents to complete randomized tasks.">
+  <meta name="twitter:image" content="https://minecraft-fsg.com/styles/images/lockout.webp">
+  <link rel="icon" type="image/png" href="styles/favicons/lockicon.png">
+  <link rel="shortcut icon" type="image/png" href="styles/favicons/lockicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="styles/main.css">
   <style>
     /* Override panorama background for lockout page */
     body::before {
-      background-image: url('../styles/images/lockout-panorama.png');
+      background-image: url('styles/images/lockout-panorama.jpg');
     }
 
     /* Title image styling */
@@ -281,13 +302,13 @@
 </head>
 <body>
   <div class="page-container">
-    <img src="../styles/images/lockout.png" alt="Lockout Bedrock Title" class="title-image">
+    <img src="styles/images/lockout.webp" alt="Lockout Bedrock Title" class="title-image">
 
     <!-- Download Button -->
     <div class="lockout-top">
-      <button class="blocky-btn lockout-download-btn" onclick="window.location.href='https://www.curseforge.com/minecraft-bedrock/addons/bedrock-lockout'">
+      <a class="blocky-btn lockout-download-btn" href="https://www.curseforge.com/minecraft-bedrock/addons/bedrock-lockout">
         Download Add-on
-      </button>
+      </a>
     </div>
 
     <!-- Gray middle section -->
@@ -308,9 +329,14 @@
 
     <!-- Back to main menu -->
     <div class="lockout-bottom">
-      <button class="blocky-btn lockout-menu-btn" onclick="window.location.href='../index.html'">
+      <a class="blocky-btn lockout-menu-btn" href="index.html">
         Back to Main Menu
-      </button>
+      </a>
+    </div>
+
+    <!-- Find Opponents -->
+    <div class="discord" style="max-width: 700px; margin: 0 auto 20px;">
+      <a href="https://discord.gg/Hngq5zYw3k" target="_blank" rel="noopener noreferrer"><strong>Find opponents in the Discord server!</strong></a>
     </div>
 
     <!-- Ko-fi -->
@@ -407,7 +433,7 @@
 
     async function loadTasks() {
       try {
-        const response = await fetch('../lockout-tasks.json');
+        const response = await fetch('./seeds/lockout-tasks.json');
         tasksData = await response.json();
       } catch (err) {
         console.error('Error loading tasks:', err);
@@ -453,11 +479,36 @@
     let lockoutSeeds = [];
     let cooldownActive = false;
     const cooldownTime = 10;
+    const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxMxZ9zStBmy6ERJk1ne6_-zH8eOEce5ISf_wcWYmq2tHYhrwKmNSaYZ_LzDYEHQn3mIQ/exec';
+
+    async function logToGoogleSheet(seed, filterType) {
+      try {
+        const timestamp = new Date().toISOString();
+        const data = {
+          seed: seed,
+          filterType: filterType,
+          timestamp: timestamp,
+          userAgent: navigator.userAgent,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+        };
+
+        await fetch(GOOGLE_SHEET_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      } catch (error) {
+        console.error('Error logging to Google Sheets:', error);
+      }
+    }
 
     async function loadLockoutSeeds() {
       if (lockoutSeeds.length > 0) return lockoutSeeds;
       try {
-        const response = await fetch('../lockout.json');
+        const response = await fetch('./seeds/lockout.json');
         lockoutSeeds = await response.json();
       } catch (err) {
         console.error('Error loading lockout seeds:', err);
@@ -512,6 +563,7 @@
       seedDisplay.style.display = 'flex';
       document.getElementById('copyBtnRow').style.display = 'flex';
 
+      logToGoogleSheet(seed, 'Lockout');
       startCooldown();
     });
 

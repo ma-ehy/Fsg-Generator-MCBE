@@ -2,11 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Tutorials - MCBE</title>
-  <link rel="icon" type="image/x-icon" href="../favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
-  <link rel="shortcut icon" href="../favicon.ico">
+  <title>Learn Minecraft Speedrunning, Bedrock Tutorials and Guides</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Learn Minecraft speedrunning with Bedrock Edition tutorials covering strongholds, portals and splits. Beginner friendly guides to get you started today.">
+  <meta name="keywords" content="learn minecraft speedrunning, minecraft speedrun tutorial, bedrock speedrun guide, how to speedrun minecraft, mcbe speedrunning basics">
+  <meta name="author" content="ma_ehy">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://minecraft-fsg.com/pages/tutorials.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Learn Minecraft Speedrunning, Bedrock Tutorials and Guides">
+  <meta property="og:description" content="Learn Minecraft speedrunning with Bedrock Edition tutorials covering strongholds, portals and splits. Beginner friendly guides to get you started today.">
+  <meta property="og:url" content="https://minecraft-fsg.com/pages/tutorials.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://minecraft-fsg.com/styles/images/tut.png">
+  <meta property="og:site_name" content="MCBE FSG Generator">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Learn Minecraft Speedrunning, Bedrock Tutorials and Guides">
+  <meta name="twitter:description" content="Learn Minecraft speedrunning with Bedrock Edition tutorials covering strongholds, portals and splits. Beginner friendly guides to get you started today.">
+  <meta name="twitter:image" content="https://minecraft-fsg.com/styles/images/tut.png">
+  <link rel="icon" type="image/x-icon" href="../styles/favicons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../styles/favicons/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../styles/favicons/favicon.png">
+  <link rel="shortcut icon" href="../styles/favicons/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles/main.css">
@@ -275,6 +296,12 @@
         var(--minecraft-brown));
     }
 
+    .help-content a.back-btn,
+    .help-content a.back-btn:hover {
+      color: var(--minecraft-white);
+      text-decoration: none;
+    }
+
     @media (max-width: 768px) {
       .help-content {
         padding: 20px 15px;
@@ -316,7 +343,10 @@
 </head>
 <body>
   <div class="page-container">
-    <img src="tut.png" alt="Bedrock 1.16 FSG Generator" class="title-image">
+    <!-- Visually hidden H1 for SEO, matches title image -->
+    <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">Minecraft Speedrunning Tutorials and Guides</h1>
+
+    <img src="../styles/images/tut.png" alt="Speedrunning Tutorials Title" class="title-image">
     
     <div class="help-content">
       <p>Welcome to Minecraft Bedrock Edition speedrunning! Here are comprehensive guides to help you get started and improve your runs.</p>
@@ -484,7 +514,7 @@
       </p>
       
     <div class="navigation-buttons">
-        <button class="blocky-btn back-btn" onclick="window.location.href='../index.html'">← Back to Home</button>
+        <a class="blocky-btn back-btn" href="../index.html">← Back to Home</a>
       </div>
       <div style="text-align: center; margin-top: 20px;">
         <a href="https://ko-fi.com/R7Y720YN70" target="_blank" rel="noopener noreferrer"
@@ -494,58 +524,8 @@
       </div>
     </div>
   </div>
-<!-- Feedback Popup -->
-<div class="feedback-popup" id="feedbackPopup">
-  <div class="feedback-content">
-    <p>Have any feedback or stuff you'd like to be added? Join the discord or contact me at maehy56@gmail.com!</p>
-    <button class="feedback-close" onclick="closeFeedback()">✕</button>
-  </div>
 </div>
-  <script>
-let feedbackTimer;
-let timeOnPage = 0;
-let feedbackClosed = sessionStorage.getItem('feedbackClosed') === 'true';
-
-function showFeedbackPopup() {
-  if (!feedbackClosed) {
-    document.getElementById('feedbackPopup').classList.add('show');
-    setTimeout(() => {
-      if (document.getElementById('feedbackPopup').classList.contains('show')) {
-        closeFeedback();
-      }
-    }, 7000);
-  }
-}
-
-function closeFeedback() {
-  document.getElementById('feedbackPopup').classList.remove('show');
-  feedbackClosed = true;
-  sessionStorage.setItem('feedbackClosed', 'true');
-  clearInterval(feedbackTimer);
-}
-
-// Close on page click
-document.addEventListener('click', (e) => {
-  const popup = document.getElementById('feedbackPopup');
-  if (popup.classList.contains('show') && !e.target.closest('.feedback-content')) {
-    closeFeedback();
-  }
-});
-
-// Start timer
-if (!feedbackClosed) {
-  feedbackTimer = setInterval(() => {
-    timeOnPage++;
-    if (timeOnPage % 15 === 0) {
-      const chance = Math.random();
-      if (chance < 0.05) {
-        showFeedbackPopup();
-      }
-    }
-  }, 1000);
-}
-  </script>
-  <script>
+<script>
     function toggleSection(sectionId, button) {
       const content = document.getElementById(sectionId);
       content.classList.toggle('show');

@@ -2,20 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Packless Stronghold Village Generator</title>
-  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <title>Packless Stronghold Village Seed Generator, Bedrock FSG</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Generate Packless Stronghold Village seeds for Minecraft Bedrock Edition speedrunning. No add-on required for this FSG seed category.">
+  <meta name="keywords" content="packless stronghold seed, minecraft packless speedrun, bedrock packless fsg, no addon stronghold seed">
+  <meta name="author" content="ma_ehy">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://minecraft-fsg.com/pages/packless-stronghold.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Packless Stronghold Village Seed Generator, Bedrock FSG">
+  <meta property="og:description" content="Generate Packless Stronghold Village seeds for Minecraft Bedrock Edition speedrunning. No add-on required for this FSG seed category.">
+  <meta property="og:url" content="https://minecraft-fsg.com/pages/packless-stronghold.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://minecraft-fsg.com/styles/images/packless.png">
+  <meta property="og:site_name" content="MCBE FSG Generator">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Packless Stronghold Village Seed Generator, Bedrock FSG">
+  <meta name="twitter:description" content="Generate Packless Stronghold Village seeds for Minecraft Bedrock Edition speedrunning. No add-on required for this FSG seed category.">
+  <meta name="twitter:image" content="https://minecraft-fsg.com/styles/images/packless.png">
+  <link rel="icon" type="image/x-icon" href="../styles/favicons/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles/main.css">
   <style>
     body::before {
-      background-image: url('../styles/images/sh-panorama.png');
+      background-image: url('../styles/images/sh-panorama.jpg');
     }
   </style>
 </head>
 <body>
   <div class="page-container">
-    <img src="packless.png" alt="Bedrock 1.16 FSG Generator" class="title-image">
+    <!-- Visually hidden H1 for SEO, matches title image -->
+    <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">Packless Stronghold Village Seed Generator</h1>
+
+    <img src="../styles/images/packless.png" alt="Packless Stronghold Village Seed Generator Title" class="title-image">
     <div class="container">
       <button class="blocky-btn" id="packlessStrongholdSeedBtn">Generate Seed</button>
       <div class="seed-box" id="packlessStrongholdSeedBox"></div>
@@ -26,63 +50,16 @@
         <div class="cooldown-bar" id="cooldownBar"></div>
       </div>
       <div class="navigation-buttons">
-        <button class="blocky-btn back-btn" onclick="window.location.href='../index.html'">← Back</button>
-        <button class="blocky-btn help-btn" onclick="window.location.href='help.html'">Help</button>
+        <a class="blocky-btn back-btn" href="../index.html">← Back</a>
+        <a class="blocky-btn help-btn" href="help.html">Help</a>
       </div>
     </div>
-  </div>
-<!-- Feedback Popup -->
-<div class="feedback-popup" id="feedbackPopup">
-  <div class="feedback-content">
-    <p>Have any feedback or stuff you'd like to be added? Join the discord or contact me at maehy56@gmail.com!</p>
-    <button class="feedback-close" onclick="closeFeedback()">✕</button>
+    <div class="discord discord-page">
+      <a href="https://discord.gg/Hngq5zYw3k" target="_blank" rel="noopener noreferrer">Join the Discord for any questions, feedback and info.</a>
+    </div>
   </div>
 </div>
-  <script>
-let feedbackTimer;
-let timeOnPage = 0;
-let feedbackClosed = sessionStorage.getItem('feedbackClosed') === 'true';
-
-function showFeedbackPopup() {
-  if (!feedbackClosed) {
-    document.getElementById('feedbackPopup').classList.add('show');
-    setTimeout(() => {
-      if (document.getElementById('feedbackPopup').classList.contains('show')) {
-        closeFeedback();
-      }
-    }, 7000);
-  }
-}
-
-function closeFeedback() {
-  document.getElementById('feedbackPopup').classList.remove('show');
-  feedbackClosed = true;
-  sessionStorage.setItem('feedbackClosed', 'true');
-  clearInterval(feedbackTimer);
-}
-
-// Close on page click
-document.addEventListener('click', (e) => {
-  const popup = document.getElementById('feedbackPopup');
-  if (popup.classList.contains('show') && !e.target.closest('.feedback-content')) {
-    closeFeedback();
-  }
-});
-
-// Start timer
-if (!feedbackClosed) {
-  feedbackTimer = setInterval(() => {
-    timeOnPage++;
-    if (timeOnPage % 15 === 0) {
-      const chance = Math.random();
-      if (chance < 0.05) {
-        showFeedbackPopup();
-      }
-    }
-  }, 1000);
-}
-  </script>
-  <script>
+<script>
     let packlessStrongholdSeeds = [];
     const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxMxZ9zStBmy6ERJk1ne6_-zH8eOEce5ISf_wcWYmq2tHYhrwKmNSaYZ_LzDYEHQn3mIQ/exec';
     let cooldownActive = false;
@@ -114,8 +91,9 @@ if (!feedbackClosed) {
 
     async function loadSeeds() {
       try {
-        const response = await fetch("../stronghold.json");
-        packlessStrongholdSeeds = await response.json();
+        const response = await fetch("../seeds/stronghold.json");
+        const seedText = await response.text();
+        packlessStrongholdSeeds = JSON.parse(seedText.replace(/-?\d+/g, m => '"' + m + '"'));
         document.getElementById("packlessStrongholdSeedBtn").disabled = false;
       } catch (err) {
         console.error("Error loading seeds:", err);

@@ -2,18 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Bedrock Ranked</title>
-<link rel="icon" type="image/x-icon" href="ranked.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="ranked.png">
-<link rel="icon" type="image/png" sizes="16x16" href="ranked.png">
-<link rel="shortcut icon" href="ranked.ico">
+  <title>Bedrock Ranked, Competitive Minecraft Speedrun Leaderboard</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Play Bedrock Ranked and climb the competitive Minecraft speedrunning leaderboard. Generate ranked seeds for Stronghold Village, Ruined Portal and more.">
+  <meta name="keywords" content="minecraft ranked, bedrock ranked speedrun, minecraft speedrun leaderboard, competitive minecraft speedrunning, ranked seed generator, mcbe ranked">
+  <meta name="author" content="ma_ehy">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://minecraft-fsg.com/pages/ranked.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Bedrock Ranked, Competitive Minecraft Speedrun Leaderboard">
+  <meta property="og:description" content="Play Bedrock Ranked and climb the competitive Minecraft speedrunning leaderboard. Generate ranked seeds for Stronghold Village, Ruined Portal and more.">
+  <meta property="og:url" content="https://minecraft-fsg.com/pages/ranked.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://minecraft-fsg.com/styles/images/ranked.jpg">
+  <meta property="og:site_name" content="MCBE FSG Generator">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bedrock Ranked, Competitive Minecraft Speedrun Leaderboard">
+  <meta name="twitter:description" content="Play Bedrock Ranked and climb the competitive Minecraft speedrunning leaderboard. Generate ranked seeds for Stronghold Village, Ruined Portal and more.">
+  <meta name="twitter:image" content="https://minecraft-fsg.com/styles/images/ranked.jpg">
+<link rel="icon" type="image/x-icon" href="../styles/favicons/ranked.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../styles/images/ranked.jpg">
+<link rel="icon" type="image/png" sizes="16x16" href="../styles/images/ranked.jpg">
+<link rel="shortcut icon" href="../styles/favicons/ranked.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles/main.css">
   <style>
     /* Override panorama background for ranked page */
     body::before {
-      background-image: url('../styles/images/ranked.png');
+      background-image: url('../styles/images/ranked.jpg');
     }
     
     /* Title image styling */
@@ -156,41 +177,6 @@
       background: #7304bd;
     }
 
-.discord-join {
-  background: #2C2C2C;  /* Change from var(--minecraft-black) */
-  border: 6px solid var(--minecraft-dark-gray);
-  color: var(--minecraft-white);
-  font-size: 1.8rem;
-  font-family: 'VT323', monospace;
-  letter-spacing: 1px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 
-    inset 4px 4px 8px rgba(0,0,0,0.5),
-    inset -4px -4px 8px rgba(255,255,255,0.1),
-    0 12px 24px rgba(0,0,0,0.6);
-  image-rendering: pixelated;
-  position: relative;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-    .discord-join:hover {
-      background: #2C2C2C;
-    }
-
-    .discord-join a {
-      color: var(--minecraft-blue);
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.2s;
-      display: block;
-    }
-
-    .discord-join:hover a {
-      color: var(--minecraft-white);
-    }
-
     /* Seed generator modal */
     .generator-modal {
       display: none;
@@ -313,11 +299,6 @@
         font-size: 1.8rem;
       }
 
-      .discord-join {
-        font-size: 1.6rem;
-        padding: 15px;
-      }
-
       .generator-title {
         font-size: 2.5rem;
       }
@@ -356,12 +337,50 @@
     gap: 15px;
   }
 }
+
+/* Discord section , styled like the simple text link on index.html,
+   just with a title + short subtitle instead of a single line */
+.discord-ranked-title {
+  font-size: 1.9rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.discord-ranked-subtitle {
+  font-size: 1.3rem;
+  font-weight: normal;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.kofi-row {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.kofi-row a {
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .discord-ranked-title {
+    font-size: 1.6rem;
+  }
+
+  .discord-ranked-subtitle {
+    font-size: 1.1rem;
+  }
+}
   </style>
 </head>
 <body>
   <div class="page-container">
+    <!-- Visually hidden H1 for SEO, matches title image -->
+    <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">Bedrock Ranked Speedrun Leaderboard</h1>
+
     <img src="../styles/images/title.png" alt="Ranked Title" class="title-image">
-    
+
     <div class="ranked-content">
       <!-- 1.16 Column -->
       <div class="version-column">
@@ -413,20 +432,30 @@
 
     <!-- Bottom Section -->
 <div class="ranked-bottom">
+  <div class="discord">
+    <a href="https://discord.gg/KxDWCkuDj3" target="_blank" rel="noopener noreferrer">
+      <div class="discord-ranked-title"><strong>JOIN THE DISCORD SERVER TO PLAY</strong></div>
+      <div class="discord-ranked-subtitle"><strong>Bedrock Ranked is hosted in a discord server. Tap here to join and play against the best Bedrock speedrunners!</strong></div>
+    </a>
+  </div>
+
   <div class="bottom-button-row">
     <button class="blocky-btn info-btn" id="rankedInfoBtn">
       What is Bedrock Ranked?
     </button>
-<button class="blocky-btn info-btn" onclick="window.location.href='../ranked1.1.mcaddon'">
+<a class="blocky-btn info-btn" href="../packs/ranked1.1.mcaddon">
   Download Add-on
-</button>
-    <button class="blocky-btn info-btn" onclick="window.location.href='../index.html'">
+</a>
+    <a class="blocky-btn info-btn" href="../index.html">
       Back to Main Menu
-    </button>
+    </a>
   </div>
-  
-  <div class="discord-join">
-    <a href="https://discord.gg/KxDWCkuDj3" target="_blank">Start Playing Ranked Against the Best Bedrock Speedrunners!</a>
+
+  <div class="kofi-row">
+    <a href="https://ko-fi.com/R7Y720YN70" target="_blank" rel="noopener noreferrer"
+       style="display: inline-block; text-decoration: none; padding: 10px 22px; font-family: 'VT323', monospace; font-size: 1.1rem; font-weight: bold; letter-spacing: 1px; background: linear-gradient(45deg, #FFC107, #F9A825); color: #4a4a4a; border: 6px solid #F57F17; cursor: pointer;">
+      Support the project on Ko-fi!
+    </a>
   </div>
 </div>
   <!-- Info Modal -->
@@ -447,7 +476,7 @@
   <!-- Seed Generator Modal -->
   <div class="generator-modal" id="generatorModal">
     <div class="generator-container">
-      <h1 class="generator-title" id="generatorTitle">Seed Generator</h1>
+      <h2 class="generator-title" id="generatorTitle">Seed Generator</h2>
       
       <button class="blocky-btn" id="generateSeedBtn">Generate Seed</button>
       
@@ -466,59 +495,9 @@
       </div>
     </div>
   </div>
-<!-- Feedback Popup -->
-<div class="feedback-popup" id="feedbackPopup">
-  <div class="feedback-content">
-    <p>Have any feedback or stuff you'd like to be added? Join the discord or contact me at maehy56@gmail.com!</p>
-    <button class="feedback-close" onclick="closeFeedback()">✕</button>
-  </div>
 </div>
 
-    <script>
-let feedbackTimer;
-let timeOnPage = 0;
-let feedbackClosed = sessionStorage.getItem('feedbackClosed') === 'true';
-
-function showFeedbackPopup() {
-  if (!feedbackClosed) {
-    document.getElementById('feedbackPopup').classList.add('show');
-    setTimeout(() => {
-      if (document.getElementById('feedbackPopup').classList.contains('show')) {
-        closeFeedback();
-      }
-    }, 7000);
-  }
-}
-
-function closeFeedback() {
-  document.getElementById('feedbackPopup').classList.remove('show');
-  feedbackClosed = true;
-  sessionStorage.setItem('feedbackClosed', 'true');
-  clearInterval(feedbackTimer);
-}
-
-// Close on page click
-document.addEventListener('click', (e) => {
-  const popup = document.getElementById('feedbackPopup');
-  if (popup.classList.contains('show') && !e.target.closest('.feedback-content')) {
-    closeFeedback();
-  }
-});
-
-// Start timer
-if (!feedbackClosed) {
-  feedbackTimer = setInterval(() => {
-    timeOnPage++;
-    if (timeOnPage % 15 === 0) {
-      const chance = Math.random();
-      if (chance < 0.05) {
-        showFeedbackPopup();
-      }
-    }
-  }, 1000);
-}
-    </script>
-  <script>
+<script>
     let currentMode = '';
     let seedsData = {};
     let cooldownActive = false;
@@ -527,13 +506,13 @@ if (!feedbackClosed) {
 
     // Load seed data files
     const seedFiles = {
-      'stronghold-village-116': '../ranked-stronghold.json',
-      'ruined-portal-116': '../ranked-ruined-portal.json',
-      'village-116': '../ranked-village.json',
-      'desert-temple-116': '../ranked-desert-temple.json',
-      'shipwreck-116': '../shipwreck.json',  
-      'warped-forest-121': '../ranked-warped.json',
-      'bastion-121': '../ranked-bastion.json'
+      'stronghold-village-116': '../seeds/ranked-stronghold.json',
+      'ruined-portal-116': '../seeds/ranked-ruined-portal.json',
+      'village-116': '../seeds/ranked-village.json',
+      'desert-temple-116': '../seeds/ranked-desert-temple.json',
+      'shipwreck-116': '../seeds/shipwreck.json',  
+      'warped-forest-121': '../seeds/ranked-warped.json',
+      'bastion-121': '../seeds/ranked-bastion.json'
     };
 
     async function loadSeedFile(mode) {
@@ -713,6 +692,4 @@ if (!feedbackClosed) {
   </script>
 </body>
 </html>
-
-
 
