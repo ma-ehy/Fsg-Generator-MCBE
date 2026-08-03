@@ -4,13 +4,57 @@
 <meta charset="UTF-8">
 <title>Ranked - Solo Practice</title>
 <style>
-  body { font-family: sans-serif; max-width: 500px; margin: 40px auto; padding: 0 16px; }
+  body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 0 16px; }
   select, button { font-size: 1rem; padding: 6px 10px; margin: 4px 4px 4px 0; }
   #result { margin-top: 20px; padding: 12px; border: 1px solid #ccc; display: none; }
   #error { color: #b00; margin-top: 10px; }
+
+  .tabs { display: flex; gap: 4px; margin-bottom: 20px; border-bottom: 2px solid #ddd; }
+  .tab-btn { background: none; border: none; padding: 10px 16px; cursor: pointer; font-size: 1rem; border-bottom: 2px solid transparent; margin-bottom: -2px; }
+  .tab-btn.active { border-bottom: 2px solid #5865F2; font-weight: bold; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .rankedError { color: #b00; margin: 10px 0; }
+  #loginBtn { background: #5865F2; color: #fff; border: none; border-radius: 4px; padding: 10px 18px; cursor: pointer; font-size: 1rem; }
+  #userBar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  #userBar img { width: 32px; height: 32px; border-radius: 50%; }
+  #logoutBtn { margin-left: auto; background: none; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; padding: 4px 10px; }
+
+  #queuePanel, #matchPanel { display: none; }
+  .queueBtns button { background: #eee; border: 1px solid #ccc; border-radius: 4px; }
+  .queueBtns button.leave { background: #fde8e8; }
+
+  #matchPanel { border: 1px solid #ddd; border-radius: 6px; padding: 14px; }
+  #chatLog { height: 260px; overflow-y: auto; border: 1px solid #ddd; border-radius: 4px; padding: 8px; margin: 10px 0; background: #fafafa; font-size: 0.92rem; }
+  #chatLog .msg { margin-bottom: 6px; }
+  #chatLog .msg .who { font-weight: bold; }
+  #chatLog .msg.web .who { color: #5865F2; }
+  #chatLog .msg.discord .who { color: #2e7d32; }
+  #chatLog .sys { color: #888; font-style: italic; }
+  #chatForm { display: flex; gap: 6px; }
+  #chatInput { flex: 1; padding: 8px; font-size: 0.95rem; }
+
+  .actionRow { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .actionRow button { border: 1px solid #ccc; border-radius: 4px; background: #fff; }
+  .actionRow button.danger { background: #fde8e8; border-color: #e0a0a0; }
+
+  #pendingConfirm { display: none; margin-top: 12px; padding: 10px; background: #fff8e1; border: 1px solid #e0c060; border-radius: 4px; }
+  #pendingConfirm button { margin-right: 6px; }
+
+  #resultForm { margin-top: 12px; padding: 10px; border: 1px dashed #ccc; border-radius: 4px; display: none; }
+  #resultForm input { padding: 6px; font-size: 0.95rem; margin-right: 6px; }
 </style>
 </head>
 <body>
+
+<div class="tabs">
+  <button class="tab-btn active" data-tab="soloTab">Solo Practice</button>
+  <button class="tab-btn" data-tab="rankedTab">Ranked</button>
+</div>
+
+<!-- ===================== SOLO PRACTICE TAB ===================== -->
+<div id="soloTab" class="tab-panel active">
 
 <h1>Solo Practice</h1>
 
@@ -33,6 +77,70 @@
   <p><strong>Mode:</strong> <span id="modeVal"></span></p>
 </div>
 
+</div>
+
+<!-- ===================== RANKED TAB ===================== -->
+<div id="rankedTab" class="tab-panel">
+
+  <div id="loggedOutView">
+    <p>Login with Discord to queue for ranked matches.</p>
+    <button id="loginBtn">Login with Discord</button>
+    <div id="rankedError" class="rankedError"></div>
+  </div>
+
+  <div id="loggedInView" style="display:none;">
+    <div id="userBar">
+      <img id="userAvatar" src="" alt="" style="display:none;">
+      <span id="userName"></span>
+      <button id="logoutBtn">Log out</button>
+    </div>
+    <div id="rankedError" class="rankedError"></div>
+
+    <div id="queuePanel">
+      <h2>Queue</h2>
+      <p id="queueStatusText">Not in queue.</p>
+      <div class="queueBtns">
+        <button id="joinQueue116">Queue 1.16</button>
+        <button id="joinQueue118">Queue 1.18+</button>
+        <button id="joinQueueBoth">Queue Both</button>
+        <button id="leaveQueueBtn" class="leave" style="display:none;">Leave Queue</button>
+      </div>
+    </div>
+
+    <div id="matchPanel">
+      <h2>Live Match</h2>
+      <p id="matchInfo"></p>
+
+      <div id="pendingConfirm">
+        <span id="pendingConfirmText"></span><br>
+        <button id="confirmYes">Confirm</button>
+        <button id="confirmNo">Deny</button>
+      </div>
+
+      <div id="chatLog"></div>
+      <form id="chatForm">
+        <input id="chatInput" type="text" placeholder="Message the thread..." autocomplete="off">
+        <button type="submit">Send</button>
+      </form>
+
+      <div class="actionRow">
+        <button id="btnDraw">Request Draw</button>
+        <button id="btnSeedChange">Request Seed Change</button>
+        <button id="btnShowResult">Submit Result</button>
+        <button id="btnForfeit" class="danger">Forfeit</button>
+      </div>
+
+      <div id="resultForm">
+        <p>Enter <strong>your</strong> finish time if you won:</p>
+        <input id="resultTime" type="text" placeholder="MM:SS">
+        <button id="submitResultBtn">Submit (I Won)</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
 <script>
 const API_BASE = "https://ranked.maehy.aninternettroll.xyz";
 
@@ -147,6 +255,303 @@ btn.addEventListener("click", async () => {
     btn.disabled = false;
   }
 });
+</script>
+
+<script>
+// ===================== TAB SWITCHING =====================
+document.querySelectorAll(".tab-btn").forEach(b => {
+  b.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(x => x.classList.remove("active"));
+    document.querySelectorAll(".tab-panel").forEach(x => x.classList.remove("active"));
+    b.classList.add("active");
+    document.getElementById(b.dataset.tab).classList.add("active");
+  });
+});
+
+// ===================== RANKED: AUTH =====================
+(function () {
+  const rankedError = document.getElementById("rankedError");
+  const loggedOutView = document.getElementById("loggedOutView");
+  const loggedInView = document.getElementById("loggedInView");
+  const userAvatar = document.getElementById("userAvatar");
+  const userName = document.getElementById("userName");
+  const queuePanel = document.getElementById("queuePanel");
+  const matchPanel = document.getElementById("matchPanel");
+  const queueStatusText = document.getElementById("queueStatusText");
+  const leaveQueueBtn = document.getElementById("leaveQueueBtn");
+  const matchInfo = document.getElementById("matchInfo");
+  const chatLog = document.getElementById("chatLog");
+  const chatForm = document.getElementById("chatForm");
+  const chatInput = document.getElementById("chatInput");
+  const pendingConfirm = document.getElementById("pendingConfirm");
+  const pendingConfirmText = document.getElementById("pendingConfirmText");
+  const resultForm = document.getElementById("resultForm");
+
+  let myDiscordId = null;
+  let socket = null;
+  let currentThreadId = null;
+  let statusPollTimer = null;
+  let pendingKind = null; // "draw" | "change" | "time" - what the confirm banner is for
+
+  function getToken() { return localStorage.getItem("jwt"); }
+  function setToken(t) { localStorage.setItem("jwt", t); }
+  function clearToken() { localStorage.removeItem("jwt"); }
+
+  function decodeJwtPayload(token) {
+    try {
+      const b64 = token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
+      return JSON.parse(atob(b64));
+    } catch (e) { return null; }
+  }
+
+  async function apiFetch(path, opts = {}) {
+    const token = getToken();
+    opts.headers = Object.assign({}, opts.headers, {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json"
+    });
+    const res = await fetch(`${API_BASE}${path}`, opts);
+    let data = {};
+    try { data = await res.json(); } catch (e) {}
+    if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+    return data;
+  }
+
+  function showLoggedOut() {
+    loggedOutView.style.display = "block";
+    loggedInView.style.display = "none";
+  }
+
+  function showLoggedIn(payload) {
+    loggedOutView.style.display = "none";
+    loggedInView.style.display = "block";
+    myDiscordId = payload.sub;
+    userName.textContent = payload.username || "Player";
+    if (payload.avatar) {
+      userAvatar.src = payload.avatar;
+      userAvatar.style.display = "inline-block";
+    }
+  }
+
+  document.getElementById("loginBtn").addEventListener("click", () => {
+    window.location.href = `${API_BASE}/api/auth/discord/login`;
+  });
+
+  document.getElementById("logoutBtn").addEventListener("click", () => {
+    clearToken();
+    if (socket) socket.disconnect();
+    if (statusPollTimer) clearInterval(statusPollTimer);
+    showLoggedOut();
+  });
+
+  async function init() {
+    // Handle token coming back from the OAuth redirect (#token=...)
+    if (window.location.hash.startsWith("#token=")) {
+      const token = window.location.hash.slice(7);
+      setToken(token);
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+      document.querySelector('.tab-btn[data-tab="rankedTab"]').click();
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("error")) {
+      rankedError.textContent = "Login failed, please try again.";
+    }
+
+    const token = getToken();
+    if (!token) { showLoggedOut(); return; }
+
+    try {
+      const data = await apiFetch("/api/auth/session");
+      if (!data.authenticated) { clearToken(); showLoggedOut(); return; }
+      if (data.token) setToken(data.token);
+      showLoggedIn(decodeJwtPayload(getToken()));
+      pollQueueStatus();
+      statusPollTimer = setInterval(pollQueueStatus, 5000);
+    } catch (e) {
+      clearToken();
+      showLoggedOut();
+    }
+  }
+
+  // ===================== RANKED: QUEUE =====================
+  async function pollQueueStatus() {
+    try {
+      const data = await apiFetch("/api/queue/status");
+      if (data.state === "in_match") {
+        queuePanel.style.display = "none";
+        if (currentThreadId !== data.thread_id) {
+          enterMatch(data);
+        }
+      } else if (data.state === "in_queue") {
+        matchPanel.style.display = "none";
+        if (socket) { socket.disconnect(); socket = null; }
+        currentThreadId = null;
+        queuePanel.style.display = "block";
+        const v = [];
+        if (data.queues["116"]) v.push("1.16");
+        if (data.queues["118"]) v.push("1.18+");
+        queueStatusText.textContent = `In queue: ${v.join(" / ")}`;
+        leaveQueueBtn.style.display = "inline-block";
+      } else {
+        matchPanel.style.display = "none";
+        if (socket) { socket.disconnect(); socket = null; }
+        currentThreadId = null;
+        queuePanel.style.display = "block";
+        queueStatusText.textContent = "Not in queue.";
+        leaveQueueBtn.style.display = "none";
+      }
+    } catch (e) { /* silent - keep last known state */ }
+  }
+
+  async function joinQueue(version) {
+    rankedError.textContent = "";
+    try {
+      await apiFetch("/api/queue/join", { method: "POST", body: JSON.stringify({ version }) });
+      pollQueueStatus();
+    } catch (e) { rankedError.textContent = e.message; }
+  }
+
+  document.getElementById("joinQueue116").addEventListener("click", () => joinQueue("116"));
+  document.getElementById("joinQueue118").addEventListener("click", () => joinQueue("118"));
+  document.getElementById("joinQueueBoth").addEventListener("click", () => joinQueue("both"));
+  leaveQueueBtn.addEventListener("click", async () => {
+    rankedError.textContent = "";
+    try {
+      await apiFetch("/api/queue/leave", { method: "POST" });
+      pollQueueStatus();
+    } catch (e) { rankedError.textContent = e.message; }
+  });
+
+  // ===================== RANKED: LIVE MATCH =====================
+  function appendChat(html, cls) {
+    const div = document.createElement("div");
+    div.className = `msg ${cls || ""}`;
+    div.innerHTML = html;
+    chatLog.appendChild(div);
+    chatLog.scrollTop = chatLog.scrollHeight;
+  }
+
+  function enterMatch(data) {
+    currentThreadId = data.thread_id;
+    queuePanel.style.display = "none";
+    matchPanel.style.display = "block";
+    chatLog.innerHTML = "";
+    resultForm.style.display = "none";
+    pendingConfirm.style.display = "none";
+    matchInfo.textContent = `Mode: ${data.mode || "?"} ${data.ranked ? "(ranked)" : "(unranked)"}`;
+    appendChat("Connected to match.", "sys");
+
+    socket = io(API_BASE);
+    socket.on("connect", () => {
+      socket.emit("join_match", { token: getToken(), thread_id: currentThreadId });
+    });
+    socket.on("error", (e) => appendChat(`Error: ${e.error || "unknown"}`, "sys"));
+    socket.on("message", (m) => {
+      const who = m.source === "web" ? "You" : (m.author_name || "Opponent");
+      appendChat(`<span class="who">${who}:</span> ${escapeHtml(m.text)}`, m.source);
+    });
+    socket.on("match_action", (a) => handleMatchAction(a));
+  }
+
+  function escapeHtml(s) {
+    const d = document.createElement("div");
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  function handleMatchAction(a) {
+    const byMe = a.by === myDiscordId;
+    const who = byMe ? "You" : "Opponent";
+    switch (a.action) {
+      case "forfeit":
+        appendChat(`${who} forfeited the match.`, "sys");
+        break;
+      case "draw_requested":
+        appendChat(`${who} requested a draw.`, "sys");
+        if (!byMe) showConfirmBanner("draw", "Opponent requested a draw. Agree?");
+        break;
+      case "seed_change_requested":
+        appendChat(`${who} requested a seed change.`, "sys");
+        if (!byMe) showConfirmBanner("change", "Opponent requested a seed change. Agree?");
+        break;
+      case "result_submitted":
+        appendChat(`${who} submitted a result (time: ${a.time}).`, "sys");
+        break;
+      default:
+        if (a.action && a.action.endsWith("ed")) {
+          appendChat(`${who} ${a.decision}ed the ${a.action.replace(/_?(confirm|deny)ed$/, "")} request.`, "sys");
+        }
+    }
+  }
+
+  function showConfirmBanner(kind, text) {
+    pendingKind = kind;
+    pendingConfirmText.textContent = text;
+    pendingConfirm.style.display = "block";
+  }
+
+  document.getElementById("confirmYes").addEventListener("click", () => respondConfirm("confirm"));
+  document.getElementById("confirmNo").addEventListener("click", () => respondConfirm("deny"));
+
+  async function respondConfirm(decision) {
+    if (!pendingKind || !currentThreadId) return;
+    try {
+      await apiFetch(`/api/match/${currentThreadId}/confirm`, {
+        method: "POST",
+        body: JSON.stringify({ kind: pendingKind, decision })
+      });
+      pendingConfirm.style.display = "none";
+      pendingKind = null;
+    } catch (e) { rankedError.textContent = e.message; }
+  }
+
+  chatForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const text = chatInput.value.trim();
+    if (!text || !currentThreadId) return;
+    chatInput.value = "";
+    try {
+      await apiFetch(`/api/match/${currentThreadId}/message`, {
+        method: "POST", body: JSON.stringify({ text })
+      });
+    } catch (e2) { appendChat(`Failed to send: ${e2.message}`, "sys"); }
+  });
+
+  document.getElementById("btnDraw").addEventListener("click", async () => {
+    try { await apiFetch(`/api/match/${currentThreadId}/draw`, { method: "POST" }); }
+    catch (e) { rankedError.textContent = e.message; }
+  });
+
+  document.getElementById("btnSeedChange").addEventListener("click", async () => {
+    try { await apiFetch(`/api/match/${currentThreadId}/change-seed`, { method: "POST" }); }
+    catch (e) { rankedError.textContent = e.message; }
+  });
+
+  document.getElementById("btnForfeit").addEventListener("click", async () => {
+    if (!confirm("Are you sure you want to forfeit?")) return;
+    try { await apiFetch(`/api/match/${currentThreadId}/forfeit`, { method: "POST" }); }
+    catch (e) { rankedError.textContent = e.message; }
+  });
+
+  document.getElementById("btnShowResult").addEventListener("click", () => {
+    resultForm.style.display = resultForm.style.display === "block" ? "none" : "block";
+  });
+
+  document.getElementById("submitResultBtn").addEventListener("click", async () => {
+    const time = document.getElementById("resultTime").value.trim();
+    if (!time) { rankedError.textContent = "Enter your finish time."; return; }
+    try {
+      await apiFetch(`/api/match/${currentThreadId}/submit-result`, {
+        method: "POST",
+        body: JSON.stringify({ winner_id: myDiscordId, time })
+      });
+      resultForm.style.display = "none";
+    } catch (e) { rankedError.textContent = e.message; }
+  });
+
+  init();
+})();
 </script>
 
 </body>
