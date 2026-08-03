@@ -24,6 +24,7 @@
 <select id="mode"></select>
 
 <button id="getSeed">Get Seed</button>
+<label><input type="checkbox" id="packless"> Packless (seed only, no .mctemplate)</label>
 
 <div id="error"></div>
 
@@ -88,7 +89,8 @@ btn.addEventListener("click", async () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         version: versionSel.value,
-        mode: modeSel.value
+        mode: modeSel.value,
+        packless: document.getElementById("packless").checked
       })
     });
 
@@ -98,16 +100,45 @@ btn.addEventListener("click", async () => {
       return;
     }
 
-    const data = await res.json();
+    const contentType = res.headers.get("content-type") || "";
 
-    if (!res.ok) {
-      errorDiv.textContent = data.error || "Something went wrong.";
-      return;
+    if (contentType.includes("application/json")) {
+      const data = await res.json();
+
+      if (!res.ok) {
+        errorDiv.textContent = data.error || "Something went wrong.";
+        return;
+      }
+      if (data.warning) {
+        errorDiv.textContent = data.warning;
+      }
+
+      document.getElementById("seedVal").textContent = data.seed;
+      document.getElementById("modeVal").textContent = data.mode;
+      resultDiv.style.display = "block";
+    } else {
+      // File download (.mctemplate)
+      if (!res.ok) {
+        errorDiv.textContent = "Something went wrong generating the template.";
+        return;
+      }
+      const blob = await res.blob();
+      const disposition = res.headers.get("content-disposition") || "";
+      const match = disposition.match(/filename="?([^"]+)"?/);
+      const filename = match ? match[1] : "seed.mctemplate";
+
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+      resultDiv.style.display = "none";
     }
 
-    document.getElementById("seedVal").textContent = data.seed;
-    document.getElementById("modeVal").textContent = data.mode;
-    resultDiv.style.display = "block";
     cooldownUntil = Date.now() + 10000;
 
   } catch (e) {
