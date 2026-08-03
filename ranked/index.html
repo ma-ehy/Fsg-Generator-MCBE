@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ranked - Solo Practice</title>
+<style>
+  body { font-family: sans-serif; max-width: 500px; margin: 40px auto; padding: 0 16px; }
+  select, button { font-size: 1rem; padding: 6px 10px; margin: 4px 4px 4px 0; }
+  #result { margin-top: 20px; padding: 12px; border: 1px solid #ccc; display: none; }
+  #error { color: #b00; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<h1>Solo Practice</h1>
+
+<label for="version">Version:</label>
+<select id="version">
+  <option value="116">1.16</option>
+  <option value="118">1.18+</option>
+</select>
+
+<label for="mode">Mode:</label>
+<select id="mode"></select>
+
+<button id="getSeed">Get Seed</button>
+
+<div id="error"></div>
+
+<div id="result">
+  <p><strong>Seed:</strong> <span id="seedVal"></span></p>
+  <p><strong>Mode:</strong> <span id="modeVal"></span></p>
+</div>
+
+<script>
+const API_BASE = "https://ranked.maehy.aninternettroll.xyz";
+
+const modesByVersion = {
+  "116": [
+    ["stronghold", "Stronghold"],
+    ["ruined_portal", "Ruined Portal"],
+    ["village", "Village"],
+    ["desert_temple", "Desert Temple"],
+    ["shipwreck", "Shipwreck"]
+  ],
+  "118": [
+    ["bastion", "Bastion"],
+    ["warped_forest", "Warped Forest"],
+    ["ruined_portal", "Ruined Portal"],
+    ["buried_treasure", "Buried Treasure"]
+  ]
+};
+
+const versionSel = document.getElementById("version");
+const modeSel = document.getElementById("mode");
+const errorDiv = document.getElementById("error");
+const resultDiv = document.getElementById("result");
+const btn = document.getElementById("getSeed");
+
+function populateModes() {
+  modeSel.innerHTML = "";
+  modesByVersion[versionSel.value].forEach(([val, label]) => {
+    const opt = document.createElement("option");
+    opt.value = val;
+    opt.textContent = label;
+    modeSel.appendChild(opt);
+  });
+}
+versionSel.addEventListener("change", populateModes);
+populateModes();
+
+let cooldownUntil = 0;
+
+btn.addEventListener("click", async () => {
+  errorDiv.textContent = "";
+
+  const now = Date.now();
+  if (now < cooldownUntil) {
+    const wait = Math.ceil((cooldownUntil - now) / 1000);
+    errorDiv.textContent = `Wait ${wait}s before requesting again.`;
+    return;
+  }
+
+  btn.disabled = true;
+  try {
+    const res = await fetch(`${API_BASE}/api/solo`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        version: versionSel.value,
+        mode: modeSel.value
+      })
+    });
+
+    if (res.status === 429) {
+      errorDiv.textContent = "Rate limited, wait a few seconds.";
+      cooldownUntil = Date.now() + 10000;
+      return;
+    }
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      errorDiv.textContent = data.error || "Something went wrong.";
+      return;
+    }
+
+    document.getElementById("seedVal").textContent = data.seed;
+    document.getElementById("modeVal").textContent = data.mode;
+    resultDiv.style.display = "block";
+    cooldownUntil = Date.now() + 10000;
+
+  } catch (e) {
+    errorDiv.textContent = "Could not reach API.";
+  } finally {
+    btn.disabled = false;
+  }
+});
+</script>
+
+</body>
+</html>
