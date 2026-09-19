@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Searching For Pseudo 12-Eyes in 26.50 | MCBE FSG</title>
+  <meta name="description" content="Research into pseudo-12 eye strongholds, altar chest pearls and fortress proximity in Minecraft Bedrock 26.50.">
+  <meta name="author" content="Ma Ehy">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="../../styles/favicons/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles/main.css">
+  <style>
+    body::before { background-image: url('../../styles/images/lockout-panorama.jpg'); }
+    .no-sister-row { background: rgba(255, 70, 70, 0.10); }
+    .no-sister-seed { color: #ff5a5a; font-weight: 700; }
+
+    #interactive-list .seed-sort-row,
+    #interactive-list .seed-filter-row,
+    #interactive-list .seed-table-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 18px;
+      padding: 14px 16px;
+      margin: 16px 0;
+      background: rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 10px;
+    }
+
+    #interactive-list .seed-sort-row label,
+    #interactive-list .seed-filter-row > label:not(.seed-checkbox) {
+      margin-right: -6px;
+      color: var(--minecraft-light-gray, #cfcfcf);
+    }
+
+    #interactive-list .seed-sort-select,
+    #interactive-list .seed-search-input {
+      min-height: 38px;
+      padding: 7px 10px;
+      background: rgba(0, 0, 0, 0.42);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 8px;
+      color: var(--minecraft-white, #fff);
+    }
+
+    #interactive-list .seed-search-input { min-width: min(320px, 100%); }
+
+    #interactive-list .seed-checkbox {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+    }
+
+    #interactive-list .seed-checkbox input { transform: translateY(1px); }
+
+    #interactive-list .seed-controls {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+      gap: 14px;
+      padding: 16px;
+      margin: 18px 0;
+      background: rgba(0, 0, 0, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+    }
+
+    #interactive-list .seed-controls label {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 8px;
+      font-size: 1.2rem;
+    }
+
+    #interactive-list .weight-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      white-space: nowrap;
+    }
+
+    #interactive-list .seed-controls input[type=range] { margin-top: 0; }
+
+    #interactive-list .seed-table-meta {
+      justify-content: space-between;
+      color: var(--minecraft-light-gray, #cfcfcf);
+    }
+
+    #interactive-list .seed-pager {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    #interactive-list .list-note { line-height: 1.55; }
+
+    .verified-sister-btn {
+      cursor: pointer;
+      color: #8ee08e;
+      background: rgba(92, 184, 92, 0.10);
+      border: 1px solid rgba(142, 224, 142, 0.34);
+      border-radius: 7px;
+      padding: 4px 8px;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .verified-sister-btn:hover,
+    .verified-sister-btn:focus {
+      background: rgba(92, 184, 92, 0.20);
+      outline: none;
+    }
+
+    .verified-sister-btn.copied { color: #ffffff; }
+
+    @media (max-width: 900px) {
+      #interactive-list .seed-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 560px) {
+      #interactive-list .seed-sort-row,
+      #interactive-list .seed-filter-row,
+      #interactive-list .seed-table-meta,
+      #interactive-list .seed-pager { align-items: stretch; flex-direction: column; }
+      #interactive-list .seed-controls { grid-template-columns: 1fr; }
+      #interactive-list .seed-search-input { min-width: 0; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <main class="article-shell">
+      <a class="article-back" href="../index.html">← News</a>
+      <h1>Searching For Pseudo 12-Eyes in 26.50</h1>
+
+      <section class="article-section">
+        <h2>Introduction</h2>
+        <p>In the update 26.50, Minecraft: Bedrock Edition fixed a bug where the stronghold RNG was offset by other structures, such as villages. Therefore, the only boost in likelihood for us to get 12 eyes near spawn is now gone. With the addition of the 26.50+ SSG category, it is now needed more than ever to find a good, new SSG seed.</p>
+        <p>The first obvious step is to find possible Pseudo-12 Eyes seeds. To do it, we need to predict the eye count and the altar chest loot of candidate strongholds for each base seed (2<sup>32</sup>). If the sum of the eyes in the portal and pearls in altar chests is equal to or greater than 12, the seed is a candidate.</p>
+      </section>
+
+      <section class="article-section">
+        <h2>On The Absence of Trial Chambers</h2>
+        <p>Trial chamber barrels can contain pearls as well, so technically those can get us a pseudo-12 eye too. Furthermore, trial chambers carve out strongholds, but not the portal blocks: therefore, an ideal seed with a completable, exposed portal frame with the rest of the portal room overwritten by the trial chamber is theoretically possible near spawn.</p>
+        <p>However, due to the complexity of this task, and the absence of a way to seedfind for trial chamber barrel loot yet, I have not seedfound for this.</p>
+      </section>
+
+      <section class="article-section">
+        <h2>Results and Limitations</h2>
+        <p>Out of 4,294,967,296 bases, <strong>5916</strong> potential pseudo-12 Eyes bases were found. The majority of these are indeed pseudo-12 eyes. However, due to limitations with the tool I made for this research, there are three main issues:</p>
+        <ul>
+          <li>Eye count is not always accurate. From testing, about 1/10 of seeds has the wrong eye count, and lower eye counts appear more prone to this error. Since manual checking was very limited in order to make the list public as soon as possible, these numbers could be completely wrong.</li>
+          <li>Altar chest pearl count is not always accurate: for unknown reasons, sometimes there simply are not the predicted amount of pearls in the chests. This seems rarer than the eye-count error.</li>
+          <li>Enchantment book limitation: enchantment books consume more RNG calls, and because I did not know how to predict that branch, about 3% of the chests could not be predicted accurately.</li>
+        </ul>
+      </section>
+
+      <section class="article-section">
+        <h2>Searching For the Perfect Seed</h2>
+        <p>This step requires a rather manual search that I am not keen on doing, which means the work of manually checking the best seeds and finding a route for them will be left to those who are more capable of doing so: you, the reader.</p>
+        <p>However, I processed the data to make this search as easy as possible for runners, by filtering for:</p>
+        <ul>
+          <li>stronghold height</li>
+          <li>fortress distance (approx)</li>
+          <li>altar pearl proximity radius (how far away the required pearl chests are)</li>
+          <li>distance from 0 0</li>
+        </ul>
+      </section>
+
+      <section class="article-section" id="interactive-list">
+        <h2>Interactive List</h2>
+        <p>Realistically, a sub-2 seed can already be found within these lists.</p>
+        <p>How to use the list:</p>
+        <ul>
+          <li>The first column gives the base seed for each candidate. Red base seeds mean no sister seed found in high32 0..65535.</li>
+          <li>The verified sister column gives one full sister seed whose target stronghold was rechecked. Clicking the sister seed copies the portal-room <code>/tp</code> command. Warning: this is still a generator-level check; cave/terrain edge cases can rarely break the in-game portal room.</li>
+          <li>Use the sliders below to change the weight of each metric: stronghold height, fortress distance, altar pearl proximity radius and distance from 0 0.</li>
+        </ul>
+
+        <div class="seed-sort-row">
+          <label for="sortMode">Order by</label>
+          <select id="sortMode" class="seed-sort-select">
+            <option value="weighted">Weighted score</option>
+            <option value="eyes">Eye count</option>
+          </select>
+          <span id="sortHint" class="list-note">Weighted mode uses the four sliders below.</span>
+        </div>
+
+        <div class="seed-filter-row">
+          <label for="seedSearch">Search</label>
+          <input id="seedSearch" class="seed-search-input" type="search" placeholder="base or /tp">
+          <label class="seed-checkbox"><input id="excludeNoSister" type="checkbox"> exclude no-sister bases</label>
+        </div>
+
+        <div class="seed-controls" id="seedControls" aria-label="Seed ranking weights">
+          <label><span class="weight-heading"><span>Fortress</span><span><strong id="fortWeightValue">70</strong>%</span></span><input id="fortWeight" type="range" min="0" max="100" value="70"></label>
+          <label><span class="weight-heading"><span>Pearl radius</span><span><strong id="radiusWeightValue">25</strong>%</span></span><input id="radiusWeight" type="range" min="0" max="100" value="25"></label>
+          <label><span class="weight-heading"><span>Height</span><span><strong id="heightWeightValue">5</strong>%</span></span><input id="heightWeight" type="range" min="0" max="100" value="5"></label>
+          <label><span class="weight-heading"><span>0,0 distance</span><span><strong id="originWeightValue">0</strong>%</span></span><input id="originWeight" type="range" min="0" max="100" value="0"></label>
+        </div>
+
+        <div class="seed-table-meta">
+          <span id="seedCount">Loading seed data…</span>
+          <span id="pageStatus"></span>
+        </div>
+        <div class="seed-pager">
+          <button class="blocky-btn compact-btn" id="downloadBasesCsv">Download ordered CSV</button>
+        </div>
+        <div class="seed-table-wrap">
+          <table class="seed-table">
+            <thead><tr><th>Base seed</th><th>Verified sister</th><th>Eyes</th><th>Pearls</th><th>Radius</th><th>Fort</th><th>Y</th><th>0,0 dist</th><th>Score</th></tr></thead>
+            <tbody id="seedRows"><tr><td colspan="9">Loading…</td></tr></tbody>
+          </table>
+        </div>
+        <div class="seed-pager">
+          <button class="blocky-btn compact-btn" id="prevPage">← Prev</button>
+          <button class="blocky-btn compact-btn" id="nextPage">Next →</button>
+        </div>
+        <p class="list-note">The table shows 50 bases per page. The base list is loaded from an external JSON file generated from the current scan. The CSV download always exports the full visible list in the exact order produced by the current sorting mode, filters and weights. Fortress distance is approximate. Red rows are bases with no sister seed found in high32 0..65535.</p>
+      </section>
+
+      <section class="article-section">
+        <h2>Credits</h2>
+        <p>The tools, research, lists and article were made by Ma Ehy. For parts of the project, the Cubiomes source code was used.</p>
+      </section>
+    </main>
+  </div>
+  <script>
+    if (location.protocol === 'file:') {
+      document.write('<script src="data/bases-data.js"><\/script>');
+    }
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

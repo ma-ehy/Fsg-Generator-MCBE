@@ -1,0 +1,2 @@
+window.PSEUDO12_SISTERS = window.PSEUDO12_SISTERS || {};
+window.PSEUDO12_SISTERS["3800314519"] = [{"seed":"16685216407","spawnX":null,"spawnZ":null,"biome":"\u2014","tp":"/tp @s 1259 3 -332","note":"I manually checked seed 16685216407, and the seed was not a pseudo 12 eye. Maybe some other sister can be 12 eye, but I doubt that's how it works."}];
