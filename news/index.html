@@ -11,7 +11,15 @@
   <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles/main.css">
   <style>
-    body::before { background-image: url('../styles/images/lockout-panorama.jpg'); }
+    body::before {
+      background-image: url('../styles/images/lockout-panorama.jpg');
+    }
+
+    .news-shell {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
   </style>
 </head>
 <body>
@@ -19,6 +27,13 @@
     <h1 class="page-title-text">News</h1>
 
     <main class="news-shell">
+      <a class="news-card" href="shscan.html">
+        <div class="news-card-kicker">Seedfinding Research</div>
+        <h2>Scanning Every Nearby Stronghold Candidate</h2>
+        <p>Exhaustive 2^32 base-seed scan for nearby stronghold portal eye counts, with downloadable high-eye lists.</p>
+        <span class="news-card-link">Read article →</span>
+      </a>
+
       <a class="news-card" href="pseudo12/index.html">
         <div class="news-card-kicker">Seedfinding Research</div>
         <h2>Searching For Pseudo 12-Eyes in 26.50</h2>

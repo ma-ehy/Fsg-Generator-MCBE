@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Searching Every Stronghold</title>
+  <meta name="description" content="Minecraft Bedrock 26.50 scan of every low32 base seed for all candidate strongholds portal eye counts within 1500 blocks of 0,0, with downloadable high-eye lists.">
+  <meta name="author" content="Ma Ehy">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="../styles/favicons/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+  <style>
+    body::before { background-image: url('../styles/images/sh-panorama.jpg'); }
+
+    .scan-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 4px;
+    }
+
+    .scan-stat {
+      padding: 14px 16px;
+      background: rgba(0, 0, 0, 0.26);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 9px;
+    }
+
+    .scan-stat strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--minecraft-white, #fff);
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.03rem;
+    }
+
+    .scan-stat span { color: #bdbdbd; }
+
+
+
+
+
+
+
+
+
+
+
+
+    .download-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .scan-download {
+      display: flex;
+      min-height: 70px;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .scan-download.disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      filter: grayscale(0.3);
+    }
+
+    .download-caption {
+      margin-top: 12px !important;
+      color: #bdbdbd;
+      font-size: 0.92rem !important;
+    }
+
+    code { overflow-wrap: anywhere; }
+
+    @media (max-width: 800px) {
+      .scan-stat-grid,
+      .download-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <main class="article-shell">
+      <a class="article-back" href="index.html">← News</a>
+      <h1>Searching Every Stronghold</h1>
+
+      <section class="article-section">
+        <h2>Introduction</h2>
+        <p>This project scanned every one of the 2<sup>32</sup> Bedrock base seeds and checks every stronghold candidate whose portal room can be within 1500 blocks of 0,0.</p>
+        <p>For every candidate portal, I saved the result if it had more than 2 eyes in the portal frame. Therefore, now every single stronghold with 2+ eyes is now known. A raw txt file with such data would be over 200GB big, so I saved it in a custom binary format of about 5gb. If you want the full 2+ eye binary list, contact me in discord (ma_ehy).</p>
+      </section>
+
+      <section class="article-section">
+        <h2>Disclaimer</h2>
+        <p>This is a <strong>base-seed candidate scan</strong>. A candidate stronghold is not automatically a stronghold in every full 64-bit world seed with that low32 value, and sometime it's never used in any of the 65536 sister picks.</p>
+        <p>The final eye model was tested against Bedrock Dedicated Server 1.26.51.1. An old bug with eye calculation was fixed, and further testing matched the complete 12-frame masks in all portal rooms.</p>
+      </section>
+
+
+      <section class="article-section" id="downloads">
+        <h2>Downloads</h2>
+        <p>All portal rooms in the game that are 6+, 7+, 8+, 9+, 10+ and 11+ eye candidates. Each line contains the base seed, stronghold X/Z coordinates (y was omitted to save space) and eye count. Heaviest file (6+ eye) is 309MB.</p>
+        <div class="download-grid">
+          <a class="blocky-btn scan-download" href="shscan-downloads/eyes-11plus.txt" download>11+ eyes TXT<br><small>download</small></a>
+          <a class="blocky-btn scan-download" href="shscan-downloads/eyes-10plus.txt" download>10+ eyes TXT<br><small>download</small></a>
+          <a class="blocky-btn scan-download" href="shscan-downloads/eyes-9plus.txt" download>9+ eyes TXT<br><small>download</small></a>
+          <a class="blocky-btn scan-download" href="shscan-downloads/eyes-8plus.txt" download>8+ eyes TXT<br><small>download</small></a>
+          <a class="blocky-btn scan-download" href="shscan-downloads/eyes-7plus.txt" download>7+ eyes TXT<br><small>download</small></a>
+          <a class="blocky-btn scan-download" href="shscan-downloads/eyes-6plus.txt" download>6+ eyes TXT<br><small>download</small></a>
+        </div>
+        <p class="download-caption">For the full 2+ eye list, contact me on Discord.</p>
+      </section>
+
+      <section class="article-section">
+        <h2>Credits</h2>
+        <p>The scanner, research, dataset and article were made by Ma Ehy. The scanner uses Cubiomes code for parts of stronghold generation.</p>
+      </section>
+    </main>
+  </div>
+
+</body>
+</html>
