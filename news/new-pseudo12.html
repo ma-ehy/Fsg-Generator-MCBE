@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Fixed Pseudo 12-Eye List</title>
-  <meta name="description" content="Corrected pseudo-12 eye base-seed list with fixed portal-eye counts and altar chest pearl, and more interactive list settings.">
+  <title>Fixed Pseudo 12-Eye List | MCBE FSG</title>
+  <meta name="description" content="Corrected pseudo-12 eye base-seed list with fixed portal-eye counts and altar chest pearl prediction for Minecraft Bedrock.">
   <meta name="author" content="Ma Ehy">
   <meta name="robots" content="index, follow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,8 +45,14 @@
 
       <section class="article-section">
         <h2>What Changed</h2>
-        <p>This is a corrected pseudo-12 list built from fixed stronghold eye count and fixed altar chest pearl prediction. The previous published list had known issues with portal eye counts, altar loot seed accounting and enchanted-book RNG consumption.</p>
-        <p>The fixed scan keeps the same practical definition: a base seed is listed when corrected portal eyes plus predicted altar chest pearls total at least 12. The new list is, as far as empirical testing goes, 100% accurate.</p>
+        <p>This is a corrected pseudo-12 list built from the fixed stronghold eye count and fixed altar chest pearl prediction. The previous published list had known issues with portal eye counts, altar loot seed accounting and enchanted-book RNG consumption.</p>
+        <p>The fixed scan keeps the same practical definition: a base seed is listed when corrected portal eyes plus predicted altar chest pearls total at least 12.</p>
+        <div class="stat-grid">
+          <div class="stat-card"><strong>6,001</strong><span>fixed candidates</span></div>
+          <div class="stat-card"><strong>1,157</strong><span>added vs old list</span></div>
+          <div class="stat-card"><strong>1,072</strong><span>removed from old list</span></div>
+          <div class="stat-card"><strong>4,844</strong><span>kept in both lists</span></div>
+        </div>
       </section>
 
       <section class="article-section">
@@ -78,9 +84,11 @@
       </section>
 
       <section class="article-section">
-        <h2>Credits</h2>
+        <h2>Notes</h2>
         <ul>
-          <li>All fixes, article and lists were made by Ma Ehy. Cubiomes was used only for fortress piece and spawner search, BDS used fo validation check.</li>
+          <li>The sister check follows the existing convention: high32 0..65535 is searched for a full seed whose target stronghold matches the base-seed target.</li>
+          <li>The distance filter can use either the closest Nether fortress piece or the closest blaze spawner. Both are measured from the portal room coordinates divided by 8.</li>
+          <li>Exact enchanted-book contents are not shown because they do not affect pseudo-12 pearl viability.</li>
         </ul>
       </section>
     </main>
@@ -130,7 +138,6 @@ function rowToSeed(row) {
     radius: n(row.pearl_radius), fort: n(row.fortress_distance), spawner: n(row.blaze_spawner_distance), origin: n(row.origin_distance),
     portal: [n(row.portal_x), n(row.portal_y_coord), n(row.portal_z)],
     stronghold: [n(row.stronghold_x), n(row.stronghold_z)],
-    chestsText: row.chests || '',
     sourceStatus: row.source_status || ''
   };
 }
@@ -153,7 +160,7 @@ async function copyText(text) {
 }
 function tableTemplate(key) { return `
   <div class="seed-filter-row">
-    <label>Search <input class="seed-search-input" data-role="search" type="search" placeholder="base, sister, /tp or chest"></label>
+    <label>Search <input class="seed-search-input" data-role="search" type="search" placeholder="base, sister, /tp or coords"></label>
     <label>Order by <select class="seed-sort-select" data-role="sort"><option value="base">Base seed</option><option value="eyes">Eye count</option><option value="total">Total</option><option value="fort">Fortress piece distance</option><option value="spawner">Blaze spawner distance</option><option value="radius">Pearl radius</option><option value="origin">0,0 distance</option></select></label>
     <label>Min eyes <select class="seed-sort-select" data-role="minEyes">${[4,5,6,7,8,9,10,11].map(v=>`<option value="${v}">${v}</option>`).join('')}</select></label>
     <label>Max eyes <select class="seed-sort-select" data-role="maxEyes">${[4,5,6,7,8,9,10,11].map(v=>`<option value="${v}" ${v===11?'selected':''}>${v}</option>`).join('')}</select></label>
@@ -167,7 +174,7 @@ function tableTemplate(key) { return `
     <label><span class="weight-heading"><span>Max 0,0 distance</span><strong data-role="maxOriginValue">2200</strong></span><input data-role="maxOrigin" type="range" min="0" max="2200" value="2200"></label>
   </div>
   <div class="seed-table-meta"><span data-role="count">Loading…</span><span data-role="pageStatus"></span><button class="blocky-btn compact-btn" data-role="downloadFiltered">Download filtered CSV</button></div>
-  <div class="seed-table-wrap"><table class="seed-table"><thead><tr><th>Base seed</th><th>Verified sister</th><th>Eyes</th><th>Pearls</th><th>Total</th><th>Radius</th><th data-role="distanceHeading">Fort piece</th><th>Y</th><th>0,0 dist</th><th>Chests</th></tr></thead><tbody data-role="rows"><tr><td colspan="10">Loading…</td></tr></tbody></table></div>
+  <div class="seed-table-wrap"><table class="seed-table"><thead><tr><th>Base seed</th><th>Verified sister</th><th>Eyes</th><th>Pearls</th><th>Total</th><th>Radius</th><th data-role="distanceHeading">Fort piece</th><th>Y</th><th>0,0 dist</th></tr></thead><tbody data-role="rows"><tr><td colspan="9">Loading…</td></tr></tbody></table></div>
   <div class="seed-pager"><button class="blocky-btn compact-btn" data-role="prev">← Prev</button><button class="blocky-btn compact-btn" data-role="next">Next →</button></div>`; }
 function passesFilters(seed, state) {
   const q = state.search.value.trim().toLowerCase();
@@ -179,7 +186,7 @@ function passesFilters(seed, state) {
   if ((seed.portal?.[1] ?? -999) < Number(state.minY.value)) return false;
   if (metric(seed,'origin') > Number(state.maxOrigin.value)) return false;
   if (!q) return true;
-  return [seed.base, seed.verifiedSisterSeed, portalTp(seed), seed.chestsText, seed.stronghold?.join(','), seed.portal?.join(',')].join(' ').toLowerCase().includes(q);
+  return [seed.base, seed.verifiedSisterSeed, portalTp(seed), seed.stronghold?.join(','), seed.portal?.join(',')].join(' ').toLowerCase().includes(q);
 }
 function sortSeeds(list, mode) {
   const val = s => mode === 'base' ? Number(s.base) : (mode === 'eyes' || mode === 'total' ? -metric(s, mode) : metric(s, mode));
@@ -203,10 +210,8 @@ function render(state) {
     const noSister = isNoSister(seed);
     const baseCell = noSister ? `<span class="no-sister-seed" title="No sister seed found in high32 0..65535">${htmlEscape(seed.base)}</span>` : htmlEscape(seed.base);
     const sisterCell = seed.verifiedSisterSeed ? `<button type="button" class="verified-sister-btn" data-tp="${attrEscape(seed.verifiedPortalTp || portalTp(seed))}">${htmlEscape(seed.verifiedSisterSeed)}</button>` : '—';
-    const chests = seed.chestsText || '';
-    const shortChests = chests.length > 48 ? `${chests.slice(0,48)}…` : chests;
-    return `<tr${noSister ? ' class="no-sister-row"' : ''}><td>${baseCell}</td><td>${sisterCell}</td><td>${seed.eyes ?? '—'}</td><td>${seed.pearls ?? '—'}</td><td>${seed.total ?? '—'}</td><td>${numberCell(metric(seed,'radius'))}</td><td>${numberCell(metric(seed,distanceKey))}</td><td>${seed.portal?.[1] ?? '—'}</td><td>${numberCell(metric(seed,'origin'),0)}</td><td title="${attrEscape(chests)}">${htmlEscape(shortChests)}</td></tr>`;
-  }).join('') : '<tr><td colspan="10">No matching bases.</td></tr>';
+    return `<tr${noSister ? ' class="no-sister-row"' : ''}><td>${baseCell}</td><td>${sisterCell}</td><td>${seed.eyes ?? '—'}</td><td>${seed.pearls ?? '—'}</td><td>${seed.total ?? '—'}</td><td>${numberCell(metric(seed,'radius'))}</td><td>${numberCell(metric(seed,distanceKey))}</td><td>${seed.portal?.[1] ?? '—'}</td><td>${numberCell(metric(seed,'origin'),0)}</td></tr>`;
+  }).join('') : '<tr><td colspan="9">No matching bases.</td></tr>';
   const noSisterTotal = state.data.filter(isNoSister).length;
   state.count.textContent = `${filtered.length.toLocaleString()} shown · ${state.data.length.toLocaleString()} total · ${noSisterTotal.toLocaleString()} no sister found in high32 0..65535`;
   state.pageStatus.textContent = `Page ${state.page + 1} / ${pages}`;
@@ -236,8 +241,8 @@ function initTable(container, data) {
     setTimeout(() => { b.textContent = old; b.classList.remove('copied'); }, 1100);
   });
   state.downloadFiltered.addEventListener('click', () => {
-    const header = ['rank','base_seed','verified_sister_seed','verified_sister_high32','verified_portal_tp','no_sister_found_high32_0_65535','eyes','pearls','total','pearl_radius','fortress_distance','blaze_spawner_distance','portal_y','origin_distance','portal_tp','portal_x','portal_y_coord','portal_z','stronghold_x','stronghold_z','chests','source_status'];
-    const rows = currentRows(state).map((s, i) => [i+1, s.base, s.verifiedSisterSeed ?? '', s.verifiedSisterHigh32 ?? '', s.verifiedPortalTp ?? '', isNoSister(s) ? 'yes' : 'no', s.eyes ?? '', s.pearls ?? '', s.total ?? '', metric(s,'radius') ?? '', metric(s,'fort') ?? '', metric(s,'spawner') ?? '', s.portal?.[1] ?? '', metric(s,'origin') ?? '', portalTp(s), s.portal?.[0] ?? '', s.portal?.[1] ?? '', s.portal?.[2] ?? '', s.stronghold?.[0] ?? '', s.stronghold?.[1] ?? '', s.chestsText ?? '', s.sourceStatus ?? '']);
+    const header = ['rank','base_seed','verified_sister_seed','verified_sister_high32','verified_portal_tp','no_sister_found_high32_0_65535','eyes','pearls','total','pearl_radius','fortress_distance','blaze_spawner_distance','portal_y','origin_distance','portal_tp','portal_x','portal_y_coord','portal_z','stronghold_x','stronghold_z','source_status'];
+    const rows = currentRows(state).map((s, i) => [i+1, s.base, s.verifiedSisterSeed ?? '', s.verifiedSisterHigh32 ?? '', s.verifiedPortalTp ?? '', isNoSister(s) ? 'yes' : 'no', s.eyes ?? '', s.pearls ?? '', s.total ?? '', metric(s,'radius') ?? '', metric(s,'fort') ?? '', metric(s,'spawner') ?? '', s.portal?.[1] ?? '', metric(s,'origin') ?? '', portalTp(s), s.portal?.[0] ?? '', s.portal?.[1] ?? '', s.portal?.[2] ?? '', s.stronghold?.[0] ?? '', s.stronghold?.[1] ?? '', s.sourceStatus ?? '']);
     downloadCsv(`new-pseudo12-${container.dataset.seedTable}-filtered.csv`, header, rows);
   });
   render(state);
