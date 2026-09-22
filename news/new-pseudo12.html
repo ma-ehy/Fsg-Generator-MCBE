@@ -46,23 +46,17 @@
       <section class="article-section">
         <h2>What Changed</h2>
         <p>This is a corrected pseudo-12 list built from the fixed stronghold eye count and fixed altar chest pearl prediction. The previous published list had known issues with portal eye counts, altar loot seed accounting and enchanted-book RNG consumption.</p>
-        <p>The fixed scan keeps the same practical definition: a base seed is listed when corrected portal eyes plus predicted altar chest pearls total at least 12.</p>
-        <div class="stat-grid">
-          <div class="stat-card"><strong>6,001</strong><span>fixed candidates</span></div>
-          <div class="stat-card"><strong>1,157</strong><span>added vs old list</span></div>
-          <div class="stat-card"><strong>1,072</strong><span>removed from old list</span></div>
-          <div class="stat-card"><strong>4,844</strong><span>kept in both lists</span></div>
-        </div>
+        <p>The fixed scan keeps the same practical definition: a base seed is listed when corrected portal eyes plus predicted altar chest pearls total at least 12. The new list was 100% accurate from empirical testing.</p>
       </section>
 
       <section class="article-section">
         <h2>Comparison With the Old List</h2>
-        <p>The old article listed <strong>5,916</strong> candidates. The corrected list has <strong>6,001</strong>, a net change of <strong>+85</strong>.</p>
+        <p>The old list listed <strong>5,916</strong> candidates. The corrected list has <strong>6,001</strong>, a change of <strong>+85</strong>.</p>
         <ul>
           <li><strong>1,072</strong> old candidates were removed (18.12% of the old list).</li>
           <li><strong>1,157</strong> new candidates were added (19.28% of the corrected list).</li>
           <li><strong>70</strong> candidates stayed in both lists but had corrected values.</li>
-          <li><strong>1,549</strong> corrected candidates have no sister found in high32 0..65535 (25.81% of the corrected list).</li>
+          <li><strong>1,549</strong> total candidates have no sister found in high32 0..65535 (25.81% of the corrected list).</li>
         </ul>
       </section>
 
@@ -73,7 +67,6 @@
           <a class="blocky-btn compact-btn" href="new-pseudo12-data/new-pseudo12-added.csv" download>Download added-only CSV</a>
           <a class="blocky-btn compact-btn" href="new-pseudo12-data/new-pseudo12-changed.csv" download>Download changed-values CSV</a>
         </div>
-        <p class="muted-note">These are the only data files used by this page. The two interactive tables read directly from the CSV downloads.</p>
       </section>
 
       <section class="article-section">
@@ -84,12 +77,8 @@
       </section>
 
       <section class="article-section">
-        <h2>Notes</h2>
-        <ul>
-          <li>The sister check follows the existing convention: high32 0..65535 is searched for a full seed whose target stronghold matches the base-seed target.</li>
-          <li>The distance filter can use either the closest Nether fortress piece or the closest blaze spawner. Both are measured from the portal room coordinates divided by 8.</li>
-          <li>Exact enchanted-book contents are not shown because they do not affect pseudo-12 pearl viability.</li>
-        </ul>
+        <h2>Credits</h2>
+        <p>All lists, fixes and article were made by Ma Ehy. Cubiomes was used for fortress proximity calculation. BDS was used for testing.</p>
       </section>
     </main>
   </div>
