@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Ma Ehy">
+  <meta name="description" content="The 4th ever naturally lit stronghold village end portal and how it was found.">
+  <title>Closest Lit Portal to 0 0 Ever Found</title>
+  <link rel="icon" type="image/x-icon" href="../../styles/favicons/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles/main.css">
+  <style>
+    body::before { background-image: url('../../styles/images/lockout-panorama.jpg'); }
+    .new12-lead { font-size: 1.2rem !important; }
+    .new12-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
+    .new12-fact { padding: 14px 16px; background: rgba(0,0,0,.28); border: 1px solid rgba(255,255,255,.16); border-radius: 9px; }
+    .new12-fact strong { display: block; color: #fff; font-family: 'Roboto Mono', monospace; font-size: 1.05rem; overflow-wrap: anywhere; }
+    .new12-fact span, .new12-note { color: #cfcfcf; }
+    .new12-seed { overflow-wrap: anywhere; }
+    .new12-command { padding: 12px; background: rgba(0,0,0,.36); border: 1px solid rgba(255,255,255,.16); overflow-wrap: anywhere; }
+    .new12-table { width: 100%; border-collapse: collapse; font-family: 'Roboto Mono', monospace; font-size: .95rem; }
+    .new12-table th, .new12-table td { padding: 10px; border-bottom: 1px solid rgba(255,255,255,.16); text-align: left; }
+    .new12-table th { color: #fff; }
+    .new12-table-wrap { overflow-x: auto; }
+    @media (max-width: 700px) { .new12-facts { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <main class="article-shell">
+      <a class="article-back" href="../index.html">← News</a>
+      <h1>Closest Lit Portal to 0 0 Ever Found</h1>
+
+      <section class="article-section">
+        <p class="new12-lead">A new Minecraft Bedrock seed has been found to have a naturally active End portal beneath a taiga village. At about <strong>743.5 horizontal blocks from the world origin</strong>, it is the closest naturally lit End portal to (0, 0) that we know of. It is also the fourth known low-32-bit seed family in our village-associated lit-portal record.</p>
+        <div class="new12-facts">
+          <div class="new12-fact"><strong class="new12-seed">632644047444210</strong><span>Seed</span></div>
+          <div class="new12-fact"><strong>/tp @s 47 -17 742</strong><span>Portal center</span></div>
+          <div class="new12-fact"><strong>1.21.2</strong><span>Version</span></div>
+        </div>
+      </section>
+
+      <section class="article-section">
+        <h2>How I found it</h2>
+        <p>The search began with a mathematical scan of all <code>2<sup>32</sup></code> population-RNG seeds for possible 12-eye runs at indices <code>0-32768</code>. Combining those hits with stronghold geometry and a portal-center radius of 1,500 blocks produced <strong>1,105 candidate low-32-bit families</strong> in 1.21.2.</p>
+        
+        <p>One promising family was <code>-340289294</code>. This is because while I found over a thousand candidates, I only checked about 60, because it is very unlikely for RNG shifts to get over 7000+. This seed was at the edge, with a required offset of +579, which I assume is why it was skipped by Cracked Magnet when he made the potential 12 eyes list. Once I decided to go with this seed due to high change rate in RNG offsets around the needed amount from an initial scan of all the reasonable seeds that weren't already in the Cracked's list, I selected full 64-bit sister seeds only when Cubiomes found the target stronghold and a taiga village biome. Then each sister was generated and checked in BDS 1.21.2 + harness to make check as fast possible. Upon first seeds, both index 1338 and 1340 happened, both 1 off to the required 1339 index that would trigger the lit portal. This made me keep persisting checking thousands more seeds.</p>
+        
+        <p>The hit was the 4603rd distinct sister logged across the two scans. This makes the lit portal exceptionally rare even within sister, much more than the Cat and Furnace family, but obviously I could have gotten a bit unlucky.</p>
+      </section>
+
+      <section class="article-section">
+        <h2>What happens next?</h2>
+        <p>It's hardly possible that this seed family can be better than furnace seed, but it certainly can be better than cat seed. Since it's in 1.21.2 the portal is lit 100% of times, and the obsidian + diamonds in blacksmith chest above could make it for a more consistent seed than the other SSG alternatives.</p>
+        <p>The problem is, obviously, that a seed with a close spawn must be found, and with such a rare lit portal, this could not be possible. However, since the portal is so close to 0 0, the odds to beat do not seem too unlikely. Only a very small fraction of the potential sisters have been checked, after all.</p>
+      </section>
+
+      <section class="article-section">
+        <h2>Credits</h2>
+        <p>The research and finding was made by Ma Ehy.</p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
