@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Ma Ehy">
+  <meta name="description" content="Research and findings for the new lit portal base in 1.19-1.21.114">
+  <title>Potential New SSG Base</title>
+  <link rel="icon" type="image/x-icon" href="../styles/favicons/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+  <style>
+    body::before { background-image: url('../styles/images/lockout-panorama.jpg'); }
+    .base-lead { font-size: 1.2rem !important; }
+    .base-facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:18px 0; }
+    .base-fact { padding:14px 16px; background:rgba(0,0,0,.28); border:1px solid rgba(255,255,255,.16); border-radius:9px; }
+    .base-fact strong { display:block; color:#fff; font-family:'Roboto Mono',monospace; overflow-wrap:anywhere; }
+    .base-fact span, .base-note { color:#cfcfcf; }
+    .example-link { color:#73cfff; transition:color .15s ease; }
+    .example-link:hover, .example-link:focus { color:#ff4d4d; }
+    @media (max-width:700px) { .base-facts { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <main class="article-shell">
+      <a class="article-back" href="index.html">← News</a>
+      <h1>Potential New SSG Base</h1>
+
+      <section class="article-section">
+        <h2>Introduction</h2>
+        <p class="base-lead">As explained in the previous article, a new naturally lit base family was recently found by Ma Ehy. It is the closest to 0 0 ever found, but the chances of a seed being lit are quite low. Thanks to the fact that altar chests change across seeds, and that in 1.19 the stronghold is at Y18 instead of -18 (found by Verdant and confirmed by Reve), this seed has serious potential of being a new SSG seed. Below is the newly discovered knowledge, and where to go next.</p>
+      </section>
+      <section class="article-section">
+        <h2>Versions</h2>
+        <p>The village-influenced portal RNG behavior exists across the Bedrock 1.19-1.21.114 era, which is expecially good since we now have many shots to find potentially better seeds than furnace across, specifically, 4 different versions:</p>
+        <ul>
+          <li>1.18.30 - 1.19.22: same spawn and lits as 1.21.2, but higher strongholds Y.</li>
+          <li>1.19.30 - 1.21.31: more common to be lit, but less likely to spawn at good coords. Same eye count as 1.19</li>
+          <li>1.21.40 - 1.21.51: independent lit portals, spawns like previous versions, unknown lit chance</li>
+          <li>1.21.60 - 1.21.114: better spawns on average, less likely for the portal to be lit, independent lit portals.</li>
+        </ul>
+      </section>
+
+      <section class="article-section">
+        <h2>Discoveries</h2>
+        <p>Currently, a list of all spawns + taiga village (the village type that has potential lit portal) was compiled for both pre and after 1.21.60 by Ma Ehy. Only a small % of seeds were checked on both versions, but even so, some decently good seeds were found already, making this at least the #2 fastest base ever found, with potential to be #1.</p>
+
+        <p>Out of the fairly limited current search, the best seed found was -7081122403845695246 by Verdanttttt. This seed is already much better than cat seed, while being very far from the absolute potential of this base, as can be seed in <a class="example-link" href="https://youtu.be/JI9JksUFIkA">this</a> example run.</p>
+      </section>
+
+      <section class="article-section">
+        <h2>Need for Help</h2>
+        <p>The remaining search requires generating and checking over a milion worlds with BDSes. Good multi-core PCs can materially speed up the work by running several isolated instances in parallel.</p>
+        <p>If you want to help, DM ma_ehy on Discord. Please include your CPU model, core/thread count and available RAM.</p>
+      </section>
+
+      <section class="article-section">
+        <h2>Credits</h2>
+        <p>Tooling and coordination by Ma Ehy. Seedfinding by Ma Ehy, Verdanttttt, Reve, Kihonneko72, Oreo, Nosty. Research by Ma Ehy, June, Reve, LHS, Keima, Khalooody.
+        
+      </section>
+    </main>
+  </div>
+</body>
+</html>
